@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`css` (
   `modified_by_id` INT NULL,
   `created_date` DATETIME NULL,
   `modified_date` DATETIME NULL,
-  `style_snippet` VARCHAR(45) NULL,
+  `style_snippet` LONGTEXT NULL,
   PRIMARY KEY (`css_id`),
   UNIQUE INDEX `css_id_UNIQUE` (`css_id` ASC))
 ENGINE = InnoDB;
@@ -123,7 +123,6 @@ DROP TABLE IF EXISTS `mydb`.`content_area` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`content_area` (
   `content_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
-  `content` VARCHAR(1000) NULL,
   `div_name` VARCHAR(45) NULL,
   `in_article_id` INT NULL,
   `page_order_pos` INT NULL,
@@ -137,7 +136,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`content_area` (
   UNIQUE INDEX `content_id_UNIQUE` (`content_id` ASC),
   INDEX `ca_created_by_idx` (`created_by_id` ASC),
   INDEX `ca_mod_by_idx` (`modified_by_id` ASC),
-  INDEX `active_css_idx` (`active_css` ASC),
   CONSTRAINT `ca_created_by`
     FOREIGN KEY (`created_by_id`)
     REFERENCES `mydb`.`user` (`user_id`)
@@ -146,11 +144,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`content_area` (
   CONSTRAINT `ca_mod_by`
     FOREIGN KEY (`modified_by_id`)
     REFERENCES `mydb`.`user` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `active_css`
-    FOREIGN KEY (`active_css`)
-    REFERENCES `mydb`.`css` (`css_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -174,26 +167,22 @@ CREATE TABLE IF NOT EXISTS `mydb`.`article` (
   `active_css` INT NULL,
   `all_pages` TINYINT(1) NULL,
   `content_area_id` INT NULL,
+  `the_content` LONGTEXT NULL,
   PRIMARY KEY (`article_id`),
   UNIQUE INDEX `article_id_UNIQUE` (`article_id` ASC),
-  INDEX `art_created_by_idx` (`created_by_id` ASC, `content_area_id` ASC),
+  INDEX `art_created_by_idx` (`created_by_id` ASC),
   INDEX `art_mod_by_idx` (`modified_by_id` ASC),
-  INDEX `active_css_idx` (`active_css` ASC),
   INDEX `page_id_idx` (`page_id` ASC),
   INDEX `content_id_idx` (`content_area_id` ASC),
+  UNIQUE INDEX `created_date_UNIQUE` (`created_date` ASC),
   CONSTRAINT `art_created_by`
-    FOREIGN KEY (`created_by_id` , `content_area_id`)
-    REFERENCES `mydb`.`user` (`user_id` , `user_id`)
+    FOREIGN KEY (`created_by_id`)
+    REFERENCES `mydb`.`user` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `art_mod_by`
     FOREIGN KEY (`modified_by_id`)
     REFERENCES `mydb`.`user` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `active_css`
-    FOREIGN KEY (`active_css`)
-    REFERENCES `mydb`.`css` (`css_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `page_id`
