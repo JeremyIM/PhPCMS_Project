@@ -4,11 +4,21 @@ require_once '../Data/dbConn.php';
 
 class PageClass
 {
+    //PROPERTIES
     private $pageId;
     private $pageTitle;
     private $pageWebName;
+
+    private $desc;
+    private $creator;
+    private $modBy;
+    private $createDate;
+    private $modDate;
+
     private $activeCSS;
 
+
+    //CONSTRUCTOR
     public function __construct($title_in, $webName_in)
     {
         $this->pageTitle = $title_in;
@@ -29,6 +39,26 @@ class PageClass
     {
         return $this->pageWebName;
     }
+    public function getDesc()
+    {
+        return $this->desc;
+    }
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+    public function getModBy()
+    {
+        return $this->modBy;
+    }
+    public function getCreateDate()
+    {
+        return $this->createDate;
+    }
+    public function getModDate()
+    {
+        return $this->modDate;
+    }
     public function getCSS()
     {
         return $this->activeCSS;
@@ -48,12 +78,32 @@ class PageClass
     {
         $this->pageWebName = $webName_in;
     }
+    public function setDesc($desc_in)
+    {
+        $this->desc = $desc_in;
+    }
+    public function setCreator($creator_in)
+    {
+        $this->creator = $creator_in;
+    }
+    public function setModBy($modBy_in)
+    {
+        $this->modBy = $modBy_in;
+    }
+    public function setCreateDate($cDate_in)
+    {
+        $this->createDate = $cDate_in;
+    }
+    public function setModDate($mDate_in)
+    {
+        $this->modDate = $mDate_in;
+    }
     public function setCSS($css_in)
     {
         $this->activeCSS = $css_in;
     }//enbd SETTERS
 
-
+    //CRUD FUNCTIONS
 
 }//end page class
 ?>
