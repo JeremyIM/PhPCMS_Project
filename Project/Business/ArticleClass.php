@@ -1,6 +1,6 @@
 <?php
 
-require_once '../Data/dbConn.php';
+require_once '../Database/dbConn.php';
 
 class ArticleClass
 {
@@ -20,7 +20,7 @@ class ArticleClass
     private $modDate;
 
     //CONSTRUCTOR
-    public function __construct($webName_in, $title_in)
+    public function __construct($webName_in, $title_in, $content_in)
     {
         $this->articleWebName = $webName_in;
         $this->articleTitle = $title_in;

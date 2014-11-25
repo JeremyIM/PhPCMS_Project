@@ -1,6 +1,6 @@
 <?php
 
-require_once '../Data/dbConn.php';
+require_once '../Database/dbConn.php';
 
 class PageClass
 {
