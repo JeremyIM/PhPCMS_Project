@@ -171,7 +171,7 @@ class DataAccessMySQLi extends dataAccess
     }
 
     //Content area fetches
-    public function fetchContentArea($row)
+    public function fetchContentAreaId($row)
     {
         return $row['content_id'];
     }
