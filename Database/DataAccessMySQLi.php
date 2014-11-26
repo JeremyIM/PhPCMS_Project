@@ -136,7 +136,61 @@ class DataAccessMySQLi extends dataAccess
         return $row['active_css'];
     }
 
+    //article fetches
+    public function fetchArticleID($row)
+    {
+        return $row['article_id'];
+    }
+    public function fetchArticleName($row)
+    {
+        return $row['name'];
+    }
+    public function fetchArticleTitle($row)
+    {
+        return $row['title'];
+    }
+    public function fetchArticleDesc($row)
+    {
+        return $row['description'];
+    }
+    public function fetchArticleAllPages($row)
+    {
+        return $row['all_pages'];
+    }
+    public function fetchArticlePage($row)
+    {
+        return $row['page_id'];
+    }
+    public function fetchArticleContentArea($row)
+    {
+        return $row['content_area_id'];
+    }
+    public function fetchArticleContent($row)
+    {
+        return $row['the_content'];
+    }
 
+    //Content area fetches
+    public function fetchContentArea($row)
+    {
+        return $row['content_id'];
+    }
+    public function fetchContentAreaName($row)
+    {
+        return $row['name'];
+    }
+    public function fetchContentAreaDivName($row)
+    {
+        return $row['div_name'];
+    }
+    public function fetchContentAreaPageOrder($row)
+    {
+        return $row['page_order_pos'];
+    }
+    public function fetchContentDesc($row)
+    {
+        return $row['description'];
+    }
 
 
 
