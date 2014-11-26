@@ -9,7 +9,7 @@ class DataAccessMySQLi extends dataAccess
     private $result;
 
     public function getDBConn()
-    //FLAG this needs to be changed, connecting as root security FLAW!
+        //FLAG this needs to be changed, connecting as root security FLAW!
     {
         $this->dbConnection = @new mysqli("localhost","root", "inet2005","mydb");
         if (!$this->dbConnection)
@@ -47,7 +47,7 @@ class DataAccessMySQLi extends dataAccess
     }//end getArticle
 
 
-    public function getContent()
+    public function getContentArea()
     {
         $this->result =@$this->dbConnection->query("SELECT * FROM content_area");
         if(!$this->result)
@@ -57,6 +57,19 @@ class DataAccessMySQLi extends dataAccess
         }
 
     }//end getContent
+
+    public function getCss()
+    {
+        $this->result =@$this->dbConnection->query("SELECT * FROM css");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+
+    }//end getContent
+    
+    
 
     public function getSinglePage($pageIDin)
     {
