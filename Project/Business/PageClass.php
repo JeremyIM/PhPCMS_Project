@@ -103,9 +103,28 @@ class PageClass
         $this->activeCSS = $css_in;
     }//enbd SETTERS
 
+
     //CRUD FUNCTIONS
     public function retrievePages()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        //$myDataAccess->getPages();
+
+        while($row = $myDataAccess->getPages())
+        {
+            $currentPage = new self($myDataAccess->fetchPageName($row), $myDataAccess->fetchPageWebName($row));
+            $currentPage->pageId = $myDataAccess->fetchPagePageId($row);
+            $currentPage->desc = $myDataAccess->fetchPageDescription($row);
+            $currentPage->activeCSS = $myDataAccess->fetchPageActiveCss($row);
+            $arrayOfPageObjects[] = $currentPage;
+        }
+
+        $myDataAccess->closeDBConn();
+
+        return $arrayOfPageObjects;
+    }
 
     public function savePage()
     {}

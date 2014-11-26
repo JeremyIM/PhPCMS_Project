@@ -101,7 +101,25 @@ class ContentAreaClass
 
     //CRUD FUNCTIONS
     public function retrieveDivs()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        //$myDataAccess->getPages();
+
+        while($row = $myDataAccess->getContentArea())
+        {
+            $currentDiv = new self($myDataAccess->fetchContentAreaName($row), $myDataAccess->fetchContentAreaDivName($row));
+            $currentDiv->contentId = $myDataAccess->fetchContentAreaId($row);
+            $currentDiv->pgOrder = $myDataAccess->fetchContentAreaPageOrder($row);
+            $currentDiv->desc = $myDataAccess->fetchContentAreaDesc($row);
+            $arrayOfDivObjects[] = $currentDiv;
+        }
+
+        $myDataAccess->closeDBConn();
+
+        return $arrayOfDivObjects;
+    }
 
     public function saveDiv()
     {}

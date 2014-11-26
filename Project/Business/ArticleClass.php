@@ -127,8 +127,28 @@ class ArticleClass
     }//end SETTERS
 
     //CRUD FUNCTIONS
-    public function retrievePArticles()
-    {}
+    public function retrieveArticles()
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        //$myDataAccess->getPages();
+
+        while($row = $myDataAccess->getArticles())
+        {
+            $currentArticle = new self($myDataAccess->fetchArticleName($row), $myDataAccess->fetchArticleTitle($row), $myDataAccess->fetchArticleContent($row));
+            $currentArticle->articleId = $myDataAccess->fetchArticleID($row);
+            $currentArticle->desc = $myDataAccess->fetchArticleDesc($row);
+            $currentArticle->allPages = $myDataAccess->fetchArticleAllPages($row);
+            $currentArticle->pageOn = $myDataAccess->fetchArticlePage($row);
+            $currentArticle->divContainer = $myDataAccess->fetchArticleContentArea($row);
+            $arrayOfArticleObjects[] = $currentArticle;
+        }
+
+        $myDataAccess->closeDBConn();
+
+        return $arrayOfArticleObjects;
+    }
 
     public function saveArticle()
     {}

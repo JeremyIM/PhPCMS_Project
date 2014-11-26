@@ -82,7 +82,25 @@ class CssClass
 
     //CRUD FUNCTIONS
     public function retrieveTemplates()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        //$myDataAccess->getPages();
+
+        while($row = $myDataAccess->getCss())
+        {
+            $currentCss = new self($myDataAccess->fetchCssName($row), $myDataAccess->fetchCssStyleSnippet($row));
+            $currentCss->desc = $myDataAccess->fetchCssDescription($row);
+            $currentCss->active = $myDataAccess->fetchCssActiveStatus($row);
+
+            $arrayOfCssObjects[] = $currentCss;
+        }
+
+        $myDataAccess->closeDBConn();
+
+        return $arrayOfCssObjects;
+    }
 
     public function saveTemplate()
     {}
