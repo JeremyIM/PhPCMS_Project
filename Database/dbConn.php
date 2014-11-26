@@ -64,7 +64,7 @@ abstract class dataAccess
     public abstract function fetchArticleContent($row);
 
     //Content area fetches
-    public abstract function fetchContentArea($row);
+    public abstract function fetchContentAreaId($row);
     public abstract function fetchContentAreaName($row);
     public abstract function fetchContentAreaDivName($row);
     public abstract function fetchContentAreaPageOrder($row);
