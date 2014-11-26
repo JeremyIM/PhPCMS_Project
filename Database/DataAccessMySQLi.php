@@ -58,6 +58,27 @@ class DataAccessMySQLi extends dataAccess
 
     }//end getContent
 
+    public function getSinglePage($pageIDin)
+    {
+        $this->result =@$this->dbConnection->query("SELECT * FROM mydb.page WHERE page_id='$pageIDin'");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
+
+    public function getAllArticle($pageIDin,$contentIDin)
+    {
+        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE page_id='$pageIDin' AND content_area_id='$contentIDin'");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
+
+
 
 
 }//end class DataAccessMySQLi

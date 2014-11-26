@@ -27,6 +27,10 @@ abstract class dataAccess
 
     public abstract function getContent();
 
+    public abstract function getSinglePage($pageIDin);
+
+    public abstract function getAllArticle($pageIDin,$contentIDin);
+
 
 
 
