@@ -31,6 +31,27 @@ abstract class dataAccess
 
     public abstract function getAllArticle($pageIDin,$contentIDin);
 
+    public abstract function fetchCssID($row);
+
+    public abstract function fetchCssName($row);
+
+    public abstract function fetchCssDescription($row);
+
+    public abstract function fetchCssActiveStatus($row);
+
+    public abstract function fetchCssStyleSnippet($row);
+
+    public abstract function fetchPagePageId($row);
+
+    public abstract function fetchPageName($row);
+
+    public abstract function fetchPageWebName($row);
+
+    public abstract function fetchPageDescription($row);
+
+    public abstract function fetchPageActiveCss($row);
+
+
 
 
 
