@@ -127,6 +127,17 @@ class ArticleClass
     }//end SETTERS
 
     //CRUD FUNCTIONS
+    public function retrievePArticles()
+    {}
+
+    public function saveArticle()
+    {}
+
+    public function deleteArticle()
+    {}
+
+    public function updateArticle()
+    {}
 
 }//end page class
 ?>

@@ -100,6 +100,17 @@ class ContentAreaClass
     }//end SETTERS
 
     //CRUD FUNCTIONS
+    public function retrieveDivs()
+    {}
+
+    public function saveDiv()
+    {}
+
+    public function deleteDiv()
+    {}
+
+    public function updateDiv()
+    {}
 
 }//end page class
 ?>

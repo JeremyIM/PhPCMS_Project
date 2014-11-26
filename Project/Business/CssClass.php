@@ -80,5 +80,16 @@ class CssClass
         $this->theContent = $content_in;
     }
 
-    //CRUDS
+    //CRUD FUNCTIONS
+    public function retrieveTemplates()
+    {}
+
+    public function saveTemplate()
+    {}
+
+    public function deleteTemplate()
+    {}
+
+    public function updateTemplate()
+    {}
 }

@@ -104,6 +104,17 @@ class PageClass
     }//enbd SETTERS
 
     //CRUD FUNCTIONS
+    public function retrievePages()
+    {}
+
+    public function savePage()
+    {}
+
+    public function deletePage()
+    {}
+
+    public function updatePage()
+    {}
 
 }//end page class
 ?>
