@@ -1,8 +1,9 @@
 <?php
 
 require_once '../Database/dbConn.php';
+require_once 'testInterface.php';
 
-class PageClass
+class PageClass implements iBusinessObject
 {
     //PROPERTIES
     private $pageId;
@@ -105,14 +106,14 @@ class PageClass
 
 
     //CRUD FUNCTIONS
-    public function retrievePages()
+    public static function retrievePages()
     {
         $myDataAccess = DataAccessMySQLi::getInstance();
         $myDataAccess->getDBConn();
 
-        //$myDataAccess->getPages();
+        $myDataAccess->getPages();
 
-        while($row = $myDataAccess->getPages())
+        while($row = $myDataAccess->fetchPages())
         {
             $currentPage = new self($myDataAccess->fetchPageName($row), $myDataAccess->fetchPageWebName($row));
             $currentPage->pageId = $myDataAccess->fetchPagePageId($row);
@@ -134,6 +135,27 @@ class PageClass
 
     public function updatePage()
     {}
+
+    public function getSinglePage($pageIdIn)
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $myDataAccess->getSinglePage($pageIdIn);
+
+        while($row = $myDataAccess->fetchPages())
+        {
+            $currentPage = new self($myDataAccess->fetchPageName($row), $myDataAccess->fetchPageWebName($row));
+            $currentPage->pageId = $myDataAccess->fetchPagePageId($row);
+            $currentPage->desc = $myDataAccess->fetchPageDescription($row);
+            $currentPage->activeCSS = $myDataAccess->fetchPageActiveCss($row);
+          //  $arrayOfPageObjects[] = $currentPage;
+        }
+        $myDataAccess->closeDBConn();
+        return $currentPage;
+
+
+    }
 
 }//end page class
 ?>

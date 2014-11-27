@@ -27,6 +27,8 @@ abstract class dataAccess
 
     public abstract function getContentArea();
 
+    public abstract function getCss();
+
     public abstract function getSinglePage($pageIDin);
 
     public abstract function getAllArticle($pageIDin,$contentIDin);
@@ -68,7 +70,7 @@ abstract class dataAccess
     public abstract function fetchContentAreaName($row);
     public abstract function fetchContentAreaDivName($row);
     public abstract function fetchContentAreaPageOrder($row);
-    public abstract function fetchContentDesc($row);
+    public abstract function fetchContentAreaDesc($row);
 
 
 
