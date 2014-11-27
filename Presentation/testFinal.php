@@ -42,7 +42,7 @@
             foreach ($pageArray as $page)
             {
                 echo "<li>";
-                echo "<a href='index.php?page=$page->getWebName()'> $page->getWebName()</a>";
+                echo "<a href='index.php?page=" .$page->getId() . "'> " . $page->getWebName() ."</a>";
                 echo "</li>";
             }
             ?>
@@ -55,20 +55,25 @@
         // get them in ORDER
         // every page gets all content areas (they may be empty)
         // so I do not need to tie to current page
+        $areaArray = ContentAreaClass::retrieveDivs();
+
         foreach ($areaArray as $area)
         {
             // all of our content areas are DIVs
-            echo "<div id='$area->getAlias()'>";
+            echo "<div id='" . $area->getDivName() . "'>";
 
             // obtain/receive all articles ($articleArray)
             // for the current page (or for all pages)
             // and for the current area
             // in REVERSE ORDER of creation date
+            $articleArray = ArticleClass::getAnArticle($area->getId());
             foreach ($articleArray as $article)
             {
-                echo "<article id='$article->getAlias()'>";
+                echo "<article id='" . $article->getTitle() . "'>";
 
-                echo $article->getContent();
+              //  echo "<article id='$article->getAlias()'>";
+
+                echo $article->getDesc();
 
                 echo "</article>";
             }

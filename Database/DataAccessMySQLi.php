@@ -58,10 +58,22 @@ class DataAccessMySQLi extends dataAccess
             die('Could not retrieve pages from the Database: ' .
                 $this->dbConnection->error);
         }
-        return $this->result->fetch_array();
 
     }//end getArticle
 
+    public function fetchArticles()
+    {
+
+        if(!$this->result)
+        {
+            die('No records in the result set: ' .
+                $this->dbConnection->error);
+        }
+        return $this->result->fetch_array();
+
+    }
+
+////////////////////////////////////////////////////
 
     public function getContentArea()
     {
@@ -71,9 +83,20 @@ class DataAccessMySQLi extends dataAccess
             die('Could not retrieve pages from the Database: ' .
                 $this->dbConnection->error);
         }
-        return $this->result->fetch_array();
 
-    }//end getContent
+    }//end getPages
+
+    public function fetchContentArea()
+    {
+
+            if(!$this->result)
+            {
+                die('No records in the result set: ' .
+                    $this->dbConnection->error);
+            }
+            return $this->result->fetch_array();
+
+    }
 
     ///////////////////////////////////////////////////
 
@@ -215,6 +238,16 @@ class DataAccessMySQLi extends dataAccess
     public function getAllArticle($pageIDin,$contentIDin)
     {
         $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE page_id='$pageIDin' AND content_area_id='$contentIDin'");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
+
+    public function getAnArticle($contentIDin)
+    {
+        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE content_area_id='$contentIDin'");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .

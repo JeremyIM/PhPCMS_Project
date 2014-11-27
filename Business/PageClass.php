@@ -1,9 +1,8 @@
 <?php
 
 require_once '../Database/dbConn.php';
-require_once 'testInterface.php';
 
-class PageClass implements iBusinessObject
+class PageClass
 {
     //PROPERTIES
     private $pageId;

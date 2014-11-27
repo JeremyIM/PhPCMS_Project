@@ -105,9 +105,9 @@ class ContentAreaClass
         $myDataAccess = DataAccessMySQLi::getInstance();
         $myDataAccess->getDBConn();
 
-        //$myDataAccess->getPages();
+        $myDataAccess->getContentArea();
 
-        while($row = $myDataAccess->getContentArea())
+        while($row = $myDataAccess->fetchContentArea())
         {
             $currentDiv = new self($myDataAccess->fetchContentAreaName($row), $myDataAccess->fetchContentAreaDivName($row));
             $currentDiv->contentId = $myDataAccess->fetchContentAreaId($row);
