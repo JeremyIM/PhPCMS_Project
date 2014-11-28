@@ -160,12 +160,12 @@ class ArticleClass
     public function updateArticle()
     {}
 
-    public function getAnArticle($contentIdIn)
+    public function getAnArticle($pageIdIn, $contentIdIn)
     {
         $myDataAccess = DataAccessMySQLi::getInstance();
         $myDataAccess->getDBConn();
 
-        $myDataAccess->getAnArticle($contentIdIn);
+        $myDataAccess->getAnArticle($pageIdIn, $contentIdIn);
 
         while($row = $myDataAccess->fetchArticles())
         {

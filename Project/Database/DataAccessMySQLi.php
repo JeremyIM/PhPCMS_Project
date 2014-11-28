@@ -245,9 +245,9 @@ class DataAccessMySQLi extends dataAccess
         }
     }
 
-    public function getAnArticle($contentIDin)
+    public function getAnArticle($pageIdIn, $contentIDin)
     {
-        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE content_area_id='$contentIDin'");
+        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE (page_id='$pageIdIn' or all_pages=1) and content_area_id='$contentIDin'");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
