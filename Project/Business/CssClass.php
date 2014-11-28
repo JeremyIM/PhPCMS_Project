@@ -91,6 +91,7 @@ class CssClass
         while($row = $myDataAccess->fetchCss())
         {
             $currentCss = new self($myDataAccess->fetchCssName($row), $myDataAccess->fetchCssStyleSnippet($row));
+            $currentCss->cssId = $myDataAccess->fetchCssID($row);
             $currentCss->desc = $myDataAccess->fetchCssDescription($row);
             $currentCss->active = $myDataAccess->fetchCssActiveStatus($row);
 

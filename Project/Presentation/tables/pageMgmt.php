@@ -20,15 +20,15 @@
             <td><?php echo $page->getID(); ?></td>
             <td><?php echo $page->getPageTitle(); ?></td>
             <td>
-                <form action="updateActor.php" method="post">
+                <form action="" method="post">
                     <input type="text" id="editId" name="editId" value="<?php echo $page->getID(); ?>" hidden />
-                    <input type="text" id="editId" name="editFN" value="<?php echo $page->getPageTitle(); ?>" hidden />
+                    <input type="text" id="editId" name="editTitle" value="<?php echo $page->getPageTitle(); ?>" hidden />
                     <input type="Submit" id="edit" name="edit" value="Edit" />
 
                 </form>
             </td>
             <td>
-                <form action="deleteActor.php" method="post">
+                <form action="" method="post">
                     <input type="text" id="delId" name="delId" value="<?php echo $page->getID(); ?>" hidden />
                     <input type="Submit" id="del" name="del" value="Delete" />
 
