@@ -24,6 +24,7 @@ class ArticleClass
     {
         $this->articleWebName = $webName_in;
         $this->articleTitle = $title_in;
+        $this->theContent = $content_in;
     }//end CONSTRUCTOR
 
     //GETTERS
@@ -132,9 +133,9 @@ class ArticleClass
         $myDataAccess = DataAccessMySQLi::getInstance();
         $myDataAccess->getDBConn();
 
-        //$myDataAccess->getPages();
+        $myDataAccess->getArticles();
 
-        while($row = $myDataAccess->getArticles())
+        while($row = $myDataAccess->fetchArticles())
         {
             $currentArticle = new self($myDataAccess->fetchArticleName($row), $myDataAccess->fetchArticleTitle($row), $myDataAccess->fetchArticleContent($row));
             $currentArticle->articleId = $myDataAccess->fetchArticleID($row);
@@ -158,6 +159,28 @@ class ArticleClass
 
     public function updateArticle()
     {}
+
+    public function getAnArticle($contentIdIn)
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $myDataAccess->getAnArticle($contentIdIn);
+
+        while($row = $myDataAccess->fetchArticles())
+        {
+            $currentArticle = new self($myDataAccess->fetchArticleName($row), $myDataAccess->fetchArticleTitle($row), $myDataAccess->fetchArticleContent($row));
+            $currentArticle->articleId = $myDataAccess->fetchArticleID($row);
+            $currentArticle->desc = $myDataAccess->fetchArticleDesc($row);
+            $currentArticle->allPages = $myDataAccess->fetchArticleAllPages($row);
+            $currentArticle->pageOn = $myDataAccess->fetchArticlePage($row);
+            $currentArticle->divContainer = $myDataAccess->fetchArticleContentArea($row);
+            $arrayOfArticleObjects[] = $currentArticle;
+        }
+        $myDataAccess->closeDBConn();
+        return $arrayOfArticleObjects;
+    }
+
 
 }//end page class
 ?>

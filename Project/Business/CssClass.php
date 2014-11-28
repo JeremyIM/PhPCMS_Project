@@ -86,9 +86,9 @@ class CssClass
         $myDataAccess = DataAccessMySQLi::getInstance();
         $myDataAccess->getDBConn();
 
-        //$myDataAccess->getPages();
+        $myDataAccess->getCss();
 
-        while($row = $myDataAccess->getCss())
+        while($row = $myDataAccess->fetchCss())
         {
             $currentCss = new self($myDataAccess->fetchCssName($row), $myDataAccess->fetchCssStyleSnippet($row));
             $currentCss->desc = $myDataAccess->fetchCssDescription($row);
@@ -100,6 +100,25 @@ class CssClass
         $myDataAccess->closeDBConn();
 
         return $arrayOfCssObjects;
+    }
+
+    public function retrieveSingleTemplates($cssIdIn)
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $myDataAccess->getSingleCss($cssIdIn);
+
+        while($row = $myDataAccess->fetchCss())
+        {
+            $currentCss = new self($myDataAccess->fetchCssName($row), $myDataAccess->fetchCssStyleSnippet($row));
+            $currentCss->desc = $myDataAccess->fetchCssDescription($row);
+            $currentCss->active = $myDataAccess->fetchCssActiveStatus($row);
+        }
+
+        $myDataAccess->closeDBConn();
+
+        return $currentCss;
     }
 
     public function saveTemplate()

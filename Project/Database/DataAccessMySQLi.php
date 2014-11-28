@@ -24,7 +24,7 @@ class DataAccessMySQLi extends dataAccess
 
         $this->dbConnection->close();
     }
-
+/////////////////////////////////////////////////////////////
     public function getPages()
     {
         $this->result =@$this->dbConnection->query("SELECT * FROM mydb.page");
@@ -33,9 +33,22 @@ class DataAccessMySQLi extends dataAccess
             die('Could not retrieve pages from the Database: ' .
                 $this->dbConnection->error);
         }
-        return $this->result->fetch_array();
 
     }//end getPages
+
+    public function fetchPages()
+    {
+        if(!$this->result)
+        {
+            die('No records in the result set: ' .
+                $this->dbConnection->error);
+        }
+        return $this->result->fetch_array();
+    }
+
+    //////////////////////////////////////////////////////////////////////
+
+
 
     public function getArticles()
     {
@@ -45,10 +58,22 @@ class DataAccessMySQLi extends dataAccess
             die('Could not retrieve pages from the Database: ' .
                 $this->dbConnection->error);
         }
-        return $this->result->fetch_array();
 
     }//end getArticle
 
+    public function fetchArticles()
+    {
+
+        if(!$this->result)
+        {
+            die('No records in the result set: ' .
+                $this->dbConnection->error);
+        }
+        return $this->result->fetch_array();
+
+    }
+
+////////////////////////////////////////////////////
 
     public function getContentArea()
     {
@@ -58,9 +83,22 @@ class DataAccessMySQLi extends dataAccess
             die('Could not retrieve pages from the Database: ' .
                 $this->dbConnection->error);
         }
+
+    }//end getPages
+
+    public function fetchContentArea()
+    {
+
+        if(!$this->result)
+        {
+            die('No records in the result set: ' .
+                $this->dbConnection->error);
+        }
         return $this->result->fetch_array();
 
-    }//end getContent
+    }
+
+    ///////////////////////////////////////////////////
 
     public function getCss()
     {
@@ -70,11 +108,23 @@ class DataAccessMySQLi extends dataAccess
             die('Could not retrieve pages from the Database: ' .
                 $this->dbConnection->error);
         }
-        return $this->result->fetch_array();
 
     }//end getContent
 
-     //fetches
+    public function fetchCss()
+    {
+        if(!$this->result)
+        {
+            die('No records in the result set: ' .
+                $this->dbConnection->error);
+        }
+        return $this->result->fetch_array();
+    }
+
+
+    ///////////////////////////////////////////////////////////////
+
+    //fetches
     public function fetchCssID($row)
     {
         return $row['css_id'];
@@ -116,57 +166,57 @@ class DataAccessMySQLi extends dataAccess
     {
         return $row['active_css'];//article fetches
     }
-        public function fetchArticleID($row)
+    public function fetchArticleID($row)
     {
         return $row['article_id'];
     }
-        public function fetchArticleName($row)
+    public function fetchArticleName($row)
     {
         return $row['name'];
     }
-        public function fetchArticleTitle($row)
+    public function fetchArticleTitle($row)
     {
         return $row['title'];
     }
-        public function fetchArticleDesc($row)
+    public function fetchArticleDesc($row)
     {
         return $row['description'];
     }
-        public function fetchArticleAllPages($row)
+    public function fetchArticleAllPages($row)
     {
         return $row['all_pages'];
     }
-        public function fetchArticlePage($row)
+    public function fetchArticlePage($row)
     {
         return $row['page_id'];
     }
-        public function fetchArticleContentArea($row)
+    public function fetchArticleContentArea($row)
     {
         return $row['content_area_id'];
     }
-        public function fetchArticleContent($row)
+    public function fetchArticleContent($row)
     {
         return $row['the_content'];
     }
 
-        //Content area fetches
-        public function fetchContentAreaId($row)
+    //Content area fetches
+    public function fetchContentAreaId($row)
     {
         return $row['content_id'];
     }
-        public function fetchContentAreaName($row)
+    public function fetchContentAreaName($row)
     {
         return $row['name'];
     }
-        public function fetchContentAreaDivName($row)
+    public function fetchContentAreaDivName($row)
     {
         return $row['div_name'];
     }
-        public function fetchContentAreaPageOrder($row)
+    public function fetchContentAreaPageOrder($row)
     {
         return $row['page_order_pos'];
     }
-        public function fetchContentAreaDesc($row)
+    public function fetchContentAreaDesc($row)
     {
         return $row['description'];
     }
@@ -195,5 +245,24 @@ class DataAccessMySQLi extends dataAccess
         }
     }
 
+    public function getAnArticle($contentIDin)
+    {
+        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE content_area_id='$contentIDin'");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
+
+    public function getSingleCss($cssIdIn)
+    {
+        $this->result =@$this->dbConnection->query("SELECT * FROM css WHERE css_id='$cssIdIn'");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
 
 }//end class DataAccessMySQLi
