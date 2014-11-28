@@ -24,6 +24,7 @@ class ArticleClass
     {
         $this->articleWebName = $webName_in;
         $this->articleTitle = $title_in;
+        $this->theContent = $content_in;
     }//end CONSTRUCTOR
 
     //GETTERS

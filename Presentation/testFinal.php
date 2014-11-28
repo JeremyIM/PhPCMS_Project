@@ -9,9 +9,17 @@
     require_once '../Business/CssClass.php';
 
 
+
+
     $pageArray = PageClass::retrievePages();
-  //  $cssArray = CssClass::retrieveTemplates();
+    $currentTemplate = CssClass::retrieveSingleTemplates(1);
     $singlePage = PageClass::getSinglePage(1);
+
+    if(isset($_GET['page']))
+    {
+        $singlePage = PageClass::getSinglePage($_GET['page']);
+        $currentTemplate = CssClass::retrieveSingleTemplates($_GET['page']);
+    }
         // WARNING: PSEUDO_CODE ONLY
         // this may be a presentation page in 3-tier or a view in MVC
         // I am doing a bit too much echoing HTML (li tags, etc.) but wanted to simplify
@@ -25,7 +33,7 @@
     ?>
     <title><?php echo  $singlePage->getPageTitle(); ?></title>
     <style type="text/css">
-        <?php// echo $currentTemplate->getContent(); ?>
+        <?php echo $currentTemplate->getContent(); ?>
     </style>
     </head>
     <body>
@@ -42,7 +50,7 @@
             foreach ($pageArray as $page)
             {
                 echo "<li>";
-                echo "<a href='index.php?page=" .$page->getId() . "'> " . $page->getWebName() ."</a>";
+                echo "<a href='testFinal.php?page=" .$page->getId() . "'> " . $page->getWebName() ."</a>";
                 echo "</li>";
             }
             ?>
@@ -73,8 +81,10 @@
 
               //  echo "<article id='$article->getAlias()'>";
 
-                echo $article->getDesc();
-
+                echo $article->getTitle();
+                echo "<p>";
+                echo $article->getContent();
+                echo "</p>";
                 echo "</article>";
             }
 

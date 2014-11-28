@@ -25,6 +25,7 @@
 
                 echo "<p>";
                 echo $page->getDesc();
+
                 echo "</p>";
 
             endforeach;

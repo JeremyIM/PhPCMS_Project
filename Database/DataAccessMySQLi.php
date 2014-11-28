@@ -255,5 +255,14 @@ class DataAccessMySQLi extends dataAccess
         }
     }
 
+    public function getSingleCss($cssIdIn)
+    {
+        $this->result =@$this->dbConnection->query("SELECT * FROM css WHERE css_id='$cssIdIn'");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
 
 }//end class DataAccessMySQLi
