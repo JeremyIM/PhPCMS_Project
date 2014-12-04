@@ -5,7 +5,7 @@
         <td>Article Id</td>
         <td>Article Name</td>
         <td colspan="2">
-            <form action="../Presentation/editorPortal.php" method="post">
+            <form action="editorPortal.php" method="post">
                 <input type="text" name="addArticle" value="addArticle" hidden />
                 <input type="Submit" id="add" name="add" value="Add Article" />
 

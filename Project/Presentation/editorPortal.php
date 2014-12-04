@@ -25,25 +25,21 @@
     <ul>
         <li>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <input type="text" name="pages" value="pages" hidden />
                 <input type="submit" name="pageMgmtBtn" value="Page Management" />
             </form>
         </li>
         <li>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <input type="text" name="articles" value="articles" hidden />
                 <input type="submit" name="articleMgmtBtn" value="Article Management" />
             </form>
         </li>
         <li>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <input type="text" name="divs" value="divs" hidden />
                 <input type="submit" name="divMgmtBtn" value="Content Area Management" />
             </form>
         </li>
         <li>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <input type="text" name="css" value="css" hidden />
                 <input type="submit" name="cssMgmtBtn" value="CSS Template Management" />
             </form>
         </li>
@@ -54,33 +50,59 @@
 
     <?php
     //check to see which button was clicked and then display the appropriate mgmt interface
-    if(isset($_POST['pages']))
+
+    //////////////////////////////////////////
+    //            Page MGMT Block          //
+    ////////////////////////////////////////
+    if(isset($_POST['pageMgmtBtn']))
     {
-        include_once '../Presentation/tables/pageMgmt.php';
+        include_once 'tables/pageMgmt.php';
     }
-    else if(isset($_POST['articles']))
+    //////////////////////////////////////////
+    //          Article MGMT Block         //
+    ////////////////////////////////////////
+    if(isset($_POST['articleMgmtBtn']))
     {
         //load the articles management table
-        include_once '../Presentation/tables/articleMgmt.php';
+        include_once 'tables/articleMgmt.php';
     }
-    else if(isset($_POST['divs']))
+    if(isset($_POST['addArticle']))
+    {
+        //load empty form + pointer to insert routine
+        include_once 'tables/article.php';
+    }
+    if(isset($_POST['editArticle']))
+    {
+        //load pre-populated form + pointer to update routine
+        include_once 'tables/article.php';
+    }
+    if(isset($_POST['addedArticle']))
+    {
+        //load insert routine + success/fail message
+        include_once 'tables/addArticle.php';
+    }
+    if(isset($_POST['editedArticle']))
+    {
+        //load update routine + success/fail message
+        include_once 'tables/editArticle.php';
+    }
+    //////////////////////////////////////////
+    //            Div MGMT Block           //
+    ////////////////////////////////////////
+    if(isset($_POST['divMgmtBtn']))
     {
         //load the divs management table\
-        include_once '../Presentation/tables/divMgmt.php';
+        include_once 'tables/divMgmt.php';
     }
-    else if(isset($_POST['css']))
+    //////////////////////////////////////////
+    //         Template MGMT Block         //
+    ////////////////////////////////////////
+    if(isset($_POST['cssMgmtBtn']))
     {
         //load the templates management table
-        include_once '../Presentation/tables/cssMgmt.php';
+        include_once 'tables/cssMgmt.php';
     }
-    else if(isset($_POST['addArticle']))
-    {
-        include_once '../Presentation/tables/addArticle.php';
-    }
-    else if(isset($_POST['editArticleId']))
-    {
-        include_once '../Presentation/tables/editArticle.php';
-    }
+
     ?>
 
     <?php
