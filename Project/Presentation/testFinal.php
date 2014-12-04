@@ -74,7 +74,7 @@ if(isset($_GET['page']))
         // for the current page (or for all pages)
         // and for the current area
         // in REVERSE ORDER of creation date
-        $articleArray = ArticleClass::getAnArticle($_GET['page'], $area->getId());
+        $articleArray = ArticleClass::getAreaArticles($_GET['page'], $area->getId());
         foreach ($articleArray as $article)
         {
             echo "<article id='" . $article->getTitle() . "'>";

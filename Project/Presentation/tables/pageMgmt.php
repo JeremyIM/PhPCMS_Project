@@ -4,7 +4,13 @@
     <tr>
         <td>Page Id</td>
         <td>Page Name</td>
-        <td></td>
+        <td colspan="2">
+            <form action="../Pages.php" method="post">
+                <input type="text" name="addPage" value="addPage" hidden />
+                <input type="Submit" id="add" name="add" value="Add Page" />
+
+            </form>
+        </td>
     </tr>
     </thead>
     <tbody>

@@ -160,12 +160,12 @@ class ArticleClass
     public function updateArticle()
     {}
 
-    public function getAnArticle($pageIdIn, $contentIdIn)
+    public function getAreaArticles($pageIdIn, $contentIdIn)
     {
         $myDataAccess = DataAccessMySQLi::getInstance();
         $myDataAccess->getDBConn();
 
-        $myDataAccess->getAnArticle($pageIdIn, $contentIdIn);
+        $myDataAccess->getAreaArticles($pageIdIn, $contentIdIn);
 
         while($row = $myDataAccess->fetchArticles())
         {
@@ -180,6 +180,30 @@ class ArticleClass
         $myDataAccess->closeDBConn();
         return $arrayOfArticleObjects;
     }
+
+    public function getSingleArticle($articleIdIn)
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $myDataAccess->getSingleArticle($articleIdIn);
+
+        $row = $myDataAccess->fetchArticles();
+
+        $currentArticle = new self($myDataAccess->fetchArticleName($row), $myDataAccess->fetchArticleTitle($row), $myDataAccess->fetchArticleContent($row));
+        $currentArticle->articleId = $myDataAccess->fetchArticleID($row);
+        $currentArticle->desc = $myDataAccess->fetchArticleDesc($row);
+        $currentArticle->allPages = $myDataAccess->fetchArticleAllPages($row);
+        $currentArticle->pageOn = $myDataAccess->fetchArticlePage($row);
+        $currentArticle->divContainer = $myDataAccess->fetchArticleContentArea($row);
+
+        $myDataAccess->closeDBConn();
+
+        return $currentArticle;
+
+
+    }
+
 
 
 }//end page class

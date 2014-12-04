@@ -4,7 +4,13 @@
         <tr>
             <td>Content Area Id</td>
             <td>Content Area Name</td>
-            <td></td>
+            <td colspan="2">
+                <form action="../Divs.php" method="post">
+                    <input type="text" name="addDiv" value="addDiv" hidden />
+                    <input type="Submit" id="add" name="add" value="Add Content Area" />
+
+                </form>
+            </td>
         </tr>
     </thead>
 

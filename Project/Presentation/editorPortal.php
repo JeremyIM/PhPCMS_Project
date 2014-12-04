@@ -73,6 +73,14 @@
         //load the templates management table
         include_once '../Presentation/tables/cssMgmt.php';
     }
+    else if(isset($_POST['addArticle']))
+    {
+        include_once '../Presentation/tables/addArticle.php';
+    }
+    else if(isset($_POST['editArticleId']))
+    {
+        include_once '../Presentation/tables/editArticle.php';
+    }
     ?>
 
     <?php

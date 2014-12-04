@@ -31,7 +31,7 @@ abstract class dataAccess
 
     public abstract function getSinglePage($pageIDin);
 
-    public abstract function getAllArticle($pageIDin,$contentIDin);
+    public abstract function getAreaArticles($pageIDin,$contentIDin);
 
     //CSS fetches
     public abstract function fetchCssID($row);

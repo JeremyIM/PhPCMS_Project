@@ -235,9 +235,9 @@ class DataAccessMySQLi extends dataAccess
         }
     }
 
-    public function getAllArticle($pageIDin,$contentIDin)
+    public function getAreaArticles($pageIdIn, $contentIDin)
     {
-        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE page_id='$pageIDin' AND content_area_id='$contentIDin'");
+        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE (page_id='$pageIdIn' or all_pages=1) and content_area_id='$contentIDin'");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
@@ -245,9 +245,9 @@ class DataAccessMySQLi extends dataAccess
         }
     }
 
-    public function getAnArticle($pageIdIn, $contentIDin)
+    public function getSingleArticle($articleIdIn)
     {
-        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE (page_id='$pageIdIn' or all_pages=1) and content_area_id='$contentIDin'");
+        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE article_id='$articleIdIn'");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .

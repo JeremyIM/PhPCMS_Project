@@ -4,7 +4,13 @@
     <tr>
         <td>Template Id</td>
         <td>Template Name</td>
-        <td></td>
+        <td colspan="2">
+            <form action="../Css.php" method="post">
+                <input type="text" name="addCss" value="addCss" hidden />
+                <input type="Submit" id="add" name="add" value="Add Template" />
+
+            </form>
+        </td>
     </tr>
     </thead>
 
