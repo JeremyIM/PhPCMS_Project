@@ -127,13 +127,45 @@ class PageClass
     }
 
     public function savePage()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->insertPage($this->pageTitle
+            ,$this->pageWebName
+            ,$this->desc
+            ,$this->activeCSS);
+
+        $myDataAccess->closeDBConn();
+
+        return $rowsAffected . " row(s) Affected.";
+    }
 
     public function deletePage()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->deletePage($this->pageId);
+
+        return $rowsAffected . " row(s) affected";
+    }
 
     public function updatePage()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->updatePage($this->pageId
+            ,$this->pageTitle
+            ,$this->pageWebName
+            ,$this->desc
+            ,$this->activeCSS);
+
+        $myDataAccess->closeDBConn();
+
+        return $rowsAffected . " row(s) Affected.";
+    }
 
     public function getSinglePage($pageIdIn)
     {
@@ -142,14 +174,13 @@ class PageClass
 
         $myDataAccess->getSinglePage($pageIdIn);
 
-        while($row = $myDataAccess->fetchPages())
-        {
-            $currentPage = new self($myDataAccess->fetchPageName($row), $myDataAccess->fetchPageWebName($row));
-            $currentPage->pageId = $myDataAccess->fetchPagePageId($row);
-            $currentPage->desc = $myDataAccess->fetchPageDescription($row);
-            $currentPage->activeCSS = $myDataAccess->fetchPageActiveCss($row);
-          //  $arrayOfPageObjects[] = $currentPage;
-        }
+        $row = $myDataAccess->fetchPages();
+
+        $currentPage = new self($myDataAccess->fetchPageName($row), $myDataAccess->fetchPageWebName($row));
+        $currentPage->pageId = $myDataAccess->fetchPagePageId($row);
+        $currentPage->desc = $myDataAccess->fetchPageDescription($row);
+        $currentPage->activeCSS = $myDataAccess->fetchPageActiveCss($row);
+
         $myDataAccess->closeDBConn();
         return $currentPage;
 

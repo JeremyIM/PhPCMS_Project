@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e8cbe570-d829-4333-b3ec-1e13be8679c3" name="Default" comment="dbConn was setup with DataAccessMySQLi required. &#10;Some basic sql statements were inputted, including both&#10;database connection open and db close.&#10;&#10;*note - Right now the DB is connecting as root. &#10;        this needs to be addressed in the future&#10;   &#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Presentation/adminPortal.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Presentation/tables/articleMgmt.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Presentation/authorPortal.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Presentation/tables/cssMgmt.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Presentation/tables/divMgmt.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Presentation/editorPortal.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Presentation/tables/pageMgmt.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database/DataAccessMySQLi.php" afterPath="$PROJECT_DIR$/Database/DataAccessMySQLi.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Business/PageClass.php" afterPath="$PROJECT_DIR$/Business/PageClass.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Presentation/testFinal.php" afterPath="$PROJECT_DIR$/Presentation/testFinal.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Presentation/testink.php" afterPath="$PROJECT_DIR$/Presentation/testink.php" />
+    </list>
+    <ignored path="inet2005group-jb.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="inet2005group-jb" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="29" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="165">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dbConn.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Database/dbConn.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="0" selection-start="285" selection-end="285" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="1275">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PageClass.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Business/PageClass.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="152" column="9" selection-start="3547" selection-end="3547" vertical-scroll-proportion="0.0" vertical-offset="2280" max-vertical-offset="2475">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testink.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Presentation/testink.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="13" selection-start="885" selection-end="916" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="735">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testFinal.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Presentation/testFinal.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="76" column="51" selection-start="2337" selection-end="2350" vertical-scroll-proportion="0.3942993" vertical-offset="914" max-vertical-offset="1470">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CssClass.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Business/CssClass.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="87" column="0" selection-start="2004" selection-end="2004" vertical-scroll-proportion="0.0" vertical-offset="1305" max-vertical-offset="2055">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Actor.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/code/inet2005jmo/Lab5/Business/Actor.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="64" column="0" selection-start="1565" selection-end="1565" vertical-scroll-proportion="0.0" vertical-offset="1372" max-vertical-offset="2025">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataAccessMySQLi.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Database/DataAccessMySQLi.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="0" selection-start="1137" selection-end="1137" vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="4110">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataAccessMySQLi.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/code/inet2005jmo/Lab5/Data/DataAccessMySQLi.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="30" selection-start="1436" selection-end="1622" vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="1860">
+              <folding>
+                <marker date="1416815761048" expanded="true" signature="765:804" placeholder="SELECT * FRO..actor..." />
+                <marker date="1416815761048" expanded="true" signature="1105:1208" placeholder="SELECT * FRO..actor..." />
+                <marker date="1416815761048" expanded="true" signature="2114:2140" placeholder="SELECT actor..actor..." />
+                <marker date="1416815761048" expanded="true" signature="2250:2357" placeholder="INSERT INTO ..." />
+                <marker date="1416815761048" expanded="true" signature="2529:2576" placeholder="SELECT * FRO..actor..." />
+                <marker date="1416815761048" expanded="true" signature="2855:2900" placeholder="DELETE FROM ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/testink.html" />
+        <option value="$PROJECT_DIR$/test.php" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/testink.php" />
+        <option value="$PROJECT_DIR$/Database/dbConn.php" />
+        <option value="$PROJECT_DIR$/Database/DataAccessMySQLi.php" />
+        <option value="$PROJECT_DIR$/Business/CssClass.php" />
+        <option value="$PROJECT_DIR$/Business/PageClass.php" />
+        <option value="$PROJECT_DIR$/Presentation/testink.php" />
+        <option value="$PROJECT_DIR$/Presentation/testFinal.php" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpDebugGeneral" xdebug_force_break_when_no_path_mapping="false" xdebug_force_break_when_outside_project="false" />
+  <component name="PhpServers">
+    <option name="servers">
+      <server host="localhost" name="localhost" port="8080" />
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="Native 5.4" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-2" />
+    <option name="y" value="25" />
+    <option name="width" value="1444" />
+    <option name="height" value="854" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inet2005group-jb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inet2005group-jb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inet2005group-jb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inet2005group-jb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inet2005group-jb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Presentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inet2005group-jb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inet2005group-jb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inet2005group-jb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inet2005group-jb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Business" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="options.lastSelected" value="vcs.Git" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="last_opened_file_path" value="$USER_HOME$/code/inet2005jmo/Lab5" />
+    <property name="restartRequiresConfirmation" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Presentation" />
+      <recent name="$PROJECT_DIR$/Database" />
+    </key>
+  </component>
+  <component name="RunManager" selected="PHP Built-in Web Server.buildIn">
+    <configuration default="true" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="false" name="buildIn" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server" document_root="$PROJECT_DIR$" port="8080">
+      <CommandLine workingDirectory="$PROJECT_DIR$" />
+      <RunnerSettings RunnerId="PhpRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="PHP Built-in Web Server.buildIn" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8cbe570-d829-4333-b3ec-1e13be8679c3" name="Default" comment="" />
+      <created>1416852578579</created>
+      <updated>1416852578579</updated>
+    </task>
+    <task id="LOCAL-00001" summary="This is pretty much  ateset">
+      <created>1416853006065</created>
+      <updated>1416853006065</updated>
+    </task>
+    <task id="LOCAL-00002" summary="This is pretty much  ateset">
+      <created>1416853493707</created>
+      <updated>1416853493707</updated>
+    </task>
+    <task id="LOCAL-00003" summary="This is pretty much a FINAL test of git. Werk!">
+      <created>1416853889467</created>
+      <updated>1416853889467</updated>
+    </task>
+    <task id="LOCAL-00004" summary="dbConn was setup with DataAccessMySQLi required. &#10;Some basic sql statements were inputted, including both&#10;database connection open and db close.&#10;&#10;*note - Right now the DB is connecting as root. &#10;        this needs to be addressed in the future&#10;   &#10;">
+      <created>1416872112477</created>
+      <updated>1416872112477</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-2" y="25" width="1444" height="854" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1502146" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32789117" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989071" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32905984" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+    <MESSAGE value="This is pretty much  ateset" />
+    <MESSAGE value="This is pretty much a FINAL test of git. Werk!" />
+    <MESSAGE value="dbConn was setup with DataAccessMySQLi required. &#10;Some basic sql statements were inputted, including both&#10;database connection open and db close.&#10;&#10;*note - Right now the DB is connecting as root. &#10;        this needs to be addressed in the future&#10;   &#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="dbConn was setup with DataAccessMySQLi required. &#10;Some basic sql statements were inputted, including both&#10;database connection open and db close.&#10;&#10;*note - Right now the DB is connecting as root. &#10;        this needs to be addressed in the future&#10;   &#10;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="8" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="29" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="165">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database/dbConn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="285" selection-end="285" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="1275">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Business/PageClass.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="152" column="9" selection-start="3547" selection-end="3547" vertical-scroll-proportion="0.0" vertical-offset="2280" max-vertical-offset="2475">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Presentation/testink.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="13" selection-start="885" selection-end="916" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="735">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Presentation/testFinal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="8" selection-start="1268" selection-end="1268" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1470">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Business/CssClass.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="0" selection-start="2004" selection-end="2004" vertical-scroll-proportion="0.0" vertical-offset="1305" max-vertical-offset="2055">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/code/inet2005jmo/Lab5/Business/Actor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="0" selection-start="1565" selection-end="1565" vertical-scroll-proportion="0.0" vertical-offset="1372" max-vertical-offset="2025">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database/DataAccessMySQLi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="0" selection-start="1137" selection-end="1137" vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="4110">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/code/inet2005jmo/Lab5/Data/DataAccessMySQLi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="30" selection-start="1436" selection-end="1622" vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="1860">
+          <folding>
+            <marker date="1416815761048" expanded="true" signature="765:804" placeholder="SELECT * FRO..actor..." />
+            <marker date="1416815761048" expanded="true" signature="1105:1208" placeholder="SELECT * FRO..actor..." />
+            <marker date="1416815761048" expanded="true" signature="2114:2140" placeholder="SELECT actor..actor..." />
+            <marker date="1416815761048" expanded="true" signature="2250:2357" placeholder="INSERT INTO ..." />
+            <marker date="1416815761048" expanded="true" signature="2529:2576" placeholder="SELECT * FRO..actor..." />
+            <marker date="1416815761048" expanded="true" signature="2855:2900" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="29" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="165">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database/dbConn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="4" selection-start="649" selection-end="712" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="1275">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Presentation/testink.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="0" selection-start="550" selection-end="550" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/code/inet2005jmo/Lab5/Data/aDataAccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="9" selection-start="577" selection-end="577" vertical-scroll-proportion="0.0" vertical-offset="239" max-vertical-offset="810" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/code/inet2005jmo/Lab5/Business/Actor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="0" selection-start="1565" selection-end="1565" vertical-scroll-proportion="0.0" vertical-offset="960" max-vertical-offset="2025">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database/DataAccessMySQLi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="0" selection-start="2148" selection-end="2148" vertical-scroll-proportion="0.0" vertical-offset="1260" max-vertical-offset="3075">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/code/inet2005jmo/Lab5/Data/DataAccessMySQLi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="0" selection-start="1901" selection-end="1901" vertical-scroll-proportion="0.0" vertical-offset="1140" max-vertical-offset="1860">
+          <folding>
+            <marker date="1416815761048" expanded="true" signature="765:804" placeholder="SELECT * FRO..actor..." />
+            <marker date="1416815761048" expanded="true" signature="1105:1208" placeholder="SELECT * FRO..actor..." />
+            <marker date="1416815761048" expanded="true" signature="2114:2140" placeholder="SELECT actor..actor..." />
+            <marker date="1416815761048" expanded="true" signature="2250:2357" placeholder="INSERT INTO ..." />
+            <marker date="1416815761048" expanded="true" signature="2529:2576" placeholder="SELECT * FRO..actor..." />
+            <marker date="1416815761048" expanded="true" signature="2855:2900" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="29" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="165">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/code/inet2005jmo/Lab5/Business/iBusinessObject.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="535" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/code/inet2005jmo/Lab5/Data/aDataAccess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="9" selection-start="577" selection-end="577" vertical-scroll-proportion="0.3298611" vertical-offset="0" max-vertical-offset="864" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/code/inet2005jmo/Lab5/Data/DataAccessMySQLi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="30" selection-start="1436" selection-end="1622" vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="1860">
+          <folding>
+            <marker date="1416815761048" expanded="true" signature="765:804" placeholder="SELECT * FRO..actor..." />
+            <marker date="1416815761048" expanded="true" signature="1105:1208" placeholder="SELECT * FRO..actor..." />
+            <marker date="1416815761048" expanded="true" signature="2114:2140" placeholder="SELECT actor..actor..." />
+            <marker date="1416815761048" expanded="true" signature="2250:2357" placeholder="INSERT INTO ..." />
+            <marker date="1416815761048" expanded="true" signature="2529:2576" placeholder="SELECT * FRO..actor..." />
+            <marker date="1416815761048" expanded="true" signature="2855:2900" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/code/inet2005jmo/Lab5/Business/Actor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="0" selection-start="1565" selection-end="1565" vertical-scroll-proportion="0.0" vertical-offset="1372" max-vertical-offset="2025">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Business/CssClass.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="0" selection-start="2004" selection-end="2004" vertical-scroll-proportion="0.0" vertical-offset="1305" max-vertical-offset="2055">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database/DataAccessMySQLi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="0" selection-start="1137" selection-end="1137" vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="4110">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database/dbConn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="285" selection-end="285" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="1275">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Business/PageClass.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="152" column="9" selection-start="3547" selection-end="3547" vertical-scroll-proportion="0.0" vertical-offset="2280" max-vertical-offset="2475">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Presentation/testink.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="13" selection-start="885" selection-end="916" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="735">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Presentation/testFinal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="51" selection-start="2337" selection-end="2350" vertical-scroll-proportion="0.3942993" vertical-offset="914" max-vertical-offset="1470">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+

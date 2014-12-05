@@ -1,97 +1,97 @@
 <!DOCTYPE html>
 <html>
-    <?php
-    require_once '../Database/dbConn.php';
-    require_once '../Database/DataAccessMySQLi.php';
-    require_once '../Business/PageClass.php';
-    require_once '../Business/ArticleClass.php';
-    require_once '../Business/ContentAreaClass.php';
-    require_once '../Business/CssClass.php';
+<?php
+require_once '../Database/dbConn.php';
+require_once '../Database/DataAccessMySQLi.php';
+require_once '../Business/PageClass.php';
+require_once '../Business/ArticleClass.php';
+require_once '../Business/ContentAreaClass.php';
+require_once '../Business/CssClass.php';
 
 
 
 
-    $pageArray = PageClass::retrievePages();
-    $currentTemplate = CssClass::retrieveSingleTemplates(1);
-    $singlePage = PageClass::getSinglePage(1);
+$pageArray = PageClass::retrievePages();
+$currentTemplate = CssClass::retrieveSingleTemplates(1);
+$singlePage = PageClass::getSinglePage(1);
 
-    if(isset($_GET['page']))
-    {
-        $singlePage = PageClass::getSinglePage($_GET['page']);
-        $currentTemplate = CssClass::retrieveSingleTemplates($_GET['page']);
-    }
-        // WARNING: PSEUDO_CODE ONLY
-        // this may be a presentation page in 3-tier or a view in MVC
-        // I am doing a bit too much echoing HTML (li tags, etc.) but wanted to simplify
+if(isset($_GET['page']))
+{
+    $singlePage = PageClass::getSinglePage($_GET['page']);
+    $currentTemplate = CssClass::retrieveSingleTemplates($_GET['page']);
+}
+// WARNING: PSEUDO_CODE ONLY
+// this may be a presentation page in 3-tier or a view in MVC
+// I am doing a bit too much echoing HTML (li tags, etc.) but wanted to simplify
 
-		// FIND OUT WHAT PAGE WE ARE ON
-        // obtain/receive the current page ($currentPage)
-        // using GET from the nav or if none then default page
+// FIND OUT WHAT PAGE WE ARE ON
+// obtain/receive the current page ($currentPage)
+// using GET from the nav or if none then default page
 
-		// FIND OUT WHAT STYLE TEMPLATE WE ARE USING
-        // obtain/receive the active style/template ($currentTemplate)
-    ?>
-    <title><?php echo  $singlePage->getPageTitle(); ?></title>
-    <style type="text/css">
-        <?php echo $currentTemplate->getContent(); ?>
-    </style>
-    </head>
-    <body>
-    <header>
-        <h1><?php echo  $singlePage->getWebName(); ?></h1>
-    </header>
-    <nav>
-        <ul>
-            <?php
-            // BUILD OUR NAV
-            // obtain/receive all page objects ($pageArray)
-            // use GET in the links of each page to tell us which page they w ant
-
-            foreach ($pageArray as $page)
-            {
-                echo "<li>";
-                echo "<a href='testFinal.php?page=" .$page->getId() . "'> " . $page->getWebName() ."</a>";
-                echo "</li>";
-            }
-            ?>
-        </ul>
-    </nav>
-    <section>
+// FIND OUT WHAT STYLE TEMPLATE WE ARE USING
+// obtain/receive the active style/template ($currentTemplate)
+?>
+<title><?php echo  $singlePage->getPageTitle(); ?></title>
+<style type="text/css">
+    <?php echo $currentTemplate->getContent(); ?>
+</style>
+</head>
+<body>
+<header>
+    <h1><?php echo  $singlePage->getWebName(); ?></h1>
+</header>
+<nav>
+    <ul>
         <?php
-        // BUILD OUR PAGE CONTENT
-        // obtain/receive all content areas ($areaArray)
-        // get them in ORDER
-        // every page gets all content areas (they may be empty)
-        // so I do not need to tie to current page
-        $areaArray = ContentAreaClass::retrieveDivs();
+        // BUILD OUR NAV
+        // obtain/receive all page objects ($pageArray)
+        // use GET in the links of each page to tell us which page they w ant
 
-        foreach ($areaArray as $area)
+        foreach ($pageArray as $page)
         {
-            // all of our content areas are DIVs
-            echo "<div id='" . $area->getDivName() . "'>";
+            echo "<li>";
+            echo "<a href='testFinal.php?page=" .$page->getId() . "'> " . $page->getWebName() ."</a>";
+            echo "</li>";
+        }
+        ?>
+    </ul>
+</nav>
+<section>
+    <?php
+    // BUILD OUR PAGE CONTENT
+    // obtain/receive all content areas ($areaArray)
+    // get them in ORDER
+    // every page gets all content areas (they may be empty)
+    // so I do not need to tie to current page
+    $areaArray = ContentAreaClass::retrieveDivs();
 
-            // obtain/receive all articles ($articleArray)
-            // for the current page (or for all pages)
-            // and for the current area
-            // in REVERSE ORDER of creation date
-            $articleArray = ArticleClass::getAnArticle($area->getId());
-            foreach ($articleArray as $article)
-            {
-                echo "<article id='" . $article->getTitle() . "'>";
+    foreach ($areaArray as $area)
+    {
+        // all of our content areas are DIVs
+        echo "<div id='" . $area->getDivName() . "'>";
 
-              //  echo "<article id='$article->getAlias()'>";
+        // obtain/receive all articles ($articleArray)
+        // for the current page (or for all pages)
+        // and for the current area
+        // in REVERSE ORDER of creation date
+        $articleArray = ArticleClass::getAreaArticles($_GET['page'], $area->getId());
+        foreach ($articleArray as $article)
+        {
+            echo "<article id='" . $article->getTitle() . "'>";
 
-                echo $article->getTitle();
-                echo "<p>";
-                echo $article->getContent();
-                echo "</p>";
-                echo "</article>";
-            }
+            //  echo "<article id='$article->getAlias()'>";
 
-            echo "</div>";
+            echo $article->getTitle();
+            echo "<p>";
+            echo $article->getContent();
+            echo "</p>";
+            echo "</article>";
         }
 
-        ?>
-    </section>
-    </body>
+        echo "</div>";
+    }
+
+    ?>
+</section>
+</body>
 </html>

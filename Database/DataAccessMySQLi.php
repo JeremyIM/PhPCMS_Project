@@ -46,7 +46,53 @@ class DataAccessMySQLi extends dataAccess
         return $this->result->fetch_array();
     }
 
- //////////////////////////////////////////////////////////////////////
+    public function insertPage($nameIn, $webNameIn,$descIn, $cssIn)
+    {
+        $sqlInsert = "INSERT INTO mydb.page (page_name, web_name, description, active_css) VALUES('$nameIn', '$webNameIn', '$descIn', '$cssIn')";
+
+
+        $this->result =@$this->dbConnection->query($sqlInsert);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function updatePage($idIn, $nameIn, $webNameIn, $descIn, $cssIn)
+    {
+        $updateSql = "UPDATE mydb.page SET ";
+        $updateSql .= "page_name='" . $nameIn . "',";
+        $updateSql .= "web_name='" . $webNameIn . "',";
+        $updateSql .= "description='" . $descIn . "',";
+        $updateSql .= "active_css='" . $cssIn;
+        $updateSql .= "' WHERE page_id=" . $idIn;
+
+        $this->result =@$this->dbConnection->query($updateSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function deletePage($idIn)
+    {
+        $deleteSql = "DELETE from page WHERE page_id='$idIn'";
+
+        $this->result =@$this->dbConnection->query($deleteSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+
+    }
+
+    //////////////////////////////////////////////////////////////////////
 
 
 
@@ -73,6 +119,70 @@ class DataAccessMySQLi extends dataAccess
 
     }
 
+    public function insertArticle($nameIn, $titleIn, $descIn, $pageIn, $allIn, $divIn, $contentIn)
+    {
+        $sqlInsert = "INSERT INTO article (name, title, description,";
+        if($allIn == 0)
+            $sqlInsert .= "page_id, ";
+        $sqlInsert .= "all_pages, content_area_id, the_content) VALUES('";
+        $sqlInsert .=$nameIn ."', '";
+        $sqlInsert .= $titleIn . "', '";
+        $sqlInsert .= $descIn . "', '";
+        if($allIn == 0)
+            $sqlInsert .= $pageIn . "', '";
+        $sqlInsert .= $allIn . "' , '";
+        $sqlInsert .= $divIn . "', '" ;
+        $sqlInsert .= $contentIn . "')";
+
+        $this->result =@$this->dbConnection->query($sqlInsert);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function updateArticle($idIn, $nameIn, $titleIn, $descIn, $pageIn, $allIn, $divIn, $contentIn)
+    {
+        $updateSql = "UPDATE article SET ";
+        $updateSql .= "name='" . $nameIn . "',";
+        $updateSql .= "title='" . $titleIn . "',";
+        $updateSql .= "description='" . $descIn . "',";
+
+        if($allIn == 0)
+            $updateSql .= "page_id='" . $pageIn . "',";
+
+        $updateSql .= "all_pages='" . $allIn . "',";
+        $updateSql .= "content_area_id='" . $divIn . "',";
+        $updateSql .= "the_content='" . $contentIn . "' ";
+        $updateSql .= "WHERE article_id=" . $idIn;
+
+        $this->result =@$this->dbConnection->query($updateSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function deleteArticle($idIn)
+    {
+        $deleteSql = "DELETE from article WHERE article_id='$idIn'";
+
+        $this->result =@$this->dbConnection->query($deleteSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+
+    }
+
+
+
 ////////////////////////////////////////////////////
 
     public function getContentArea()
@@ -89,12 +199,58 @@ class DataAccessMySQLi extends dataAccess
     public function fetchContentArea()
     {
 
-            if(!$this->result)
-            {
-                die('No records in the result set: ' .
-                    $this->dbConnection->error);
-            }
-            return $this->result->fetch_array();
+        if(!$this->result)
+        {
+            die('No records in the result set: ' .
+                $this->dbConnection->error);
+        }
+        return $this->result->fetch_array();
+
+    }
+
+    public function insertDiv($nameIn, $divNameIn, $orderIn, $descIn)
+    {
+        $sqlInsert = "INSERT INTO content_area (name, div_name, page_order_pos, description) VALUES('$nameIn', '$divNameIn', '$orderIn', '$descIn')";
+
+
+        $this->result =@$this->dbConnection->query($sqlInsert);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function updateDiv($idIn, $nameIn, $divNameIn, $descIn, $orderIn)
+    {
+        $updateSql = "UPDATE content_area SET ";
+        $updateSql .= "name='" . $nameIn . "',";
+        $updateSql .= "div_name='" . $divNameIn . "',";
+        $updateSql .= "description='" . $descIn . "',";
+        $updateSql .= "page_order_pos='" . $orderIn;
+        $updateSql .= "' WHERE content_id=" . $idIn;
+
+        $this->result =@$this->dbConnection->query($updateSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function deleteDiv($idIn)
+    {
+        $deleteSql = "DELETE from content_area WHERE content_id='$idIn'";
+
+        $this->result =@$this->dbConnection->query($deleteSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
 
     }
 
@@ -122,9 +278,9 @@ class DataAccessMySQLi extends dataAccess
     }
 
 
- ///////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////
 
-     //fetches
+    //fetches
     public function fetchCssID($row)
     {
         return $row['css_id'];
@@ -166,57 +322,57 @@ class DataAccessMySQLi extends dataAccess
     {
         return $row['active_css'];//article fetches
     }
-        public function fetchArticleID($row)
+    public function fetchArticleID($row)
     {
         return $row['article_id'];
     }
-        public function fetchArticleName($row)
+    public function fetchArticleName($row)
     {
         return $row['name'];
     }
-        public function fetchArticleTitle($row)
+    public function fetchArticleTitle($row)
     {
         return $row['title'];
     }
-        public function fetchArticleDesc($row)
+    public function fetchArticleDesc($row)
     {
         return $row['description'];
     }
-        public function fetchArticleAllPages($row)
+    public function fetchArticleAllPages($row)
     {
         return $row['all_pages'];
     }
-        public function fetchArticlePage($row)
+    public function fetchArticlePage($row)
     {
         return $row['page_id'];
     }
-        public function fetchArticleContentArea($row)
+    public function fetchArticleContentArea($row)
     {
         return $row['content_area_id'];
     }
-        public function fetchArticleContent($row)
+    public function fetchArticleContent($row)
     {
         return $row['the_content'];
     }
 
-        //Content area fetches
-        public function fetchContentAreaId($row)
+    //Content area fetches
+    public function fetchContentAreaId($row)
     {
         return $row['content_id'];
     }
-        public function fetchContentAreaName($row)
+    public function fetchContentAreaName($row)
     {
         return $row['name'];
     }
-        public function fetchContentAreaDivName($row)
+    public function fetchContentAreaDivName($row)
     {
         return $row['div_name'];
     }
-        public function fetchContentAreaPageOrder($row)
+    public function fetchContentAreaPageOrder($row)
     {
         return $row['page_order_pos'];
     }
-        public function fetchContentAreaDesc($row)
+    public function fetchContentAreaDesc($row)
     {
         return $row['description'];
     }
@@ -227,7 +383,7 @@ class DataAccessMySQLi extends dataAccess
     //add'l selects
     public function getSinglePage($pageIDin)
     {
-        $this->result =@$this->dbConnection->query("SELECT * FROM mydb.page WHERE page_id='$pageIDin'");
+        $this->result =@$this->dbConnection->query("SELECT * FROM page WHERE page_id='$pageIDin'");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
@@ -235,9 +391,9 @@ class DataAccessMySQLi extends dataAccess
         }
     }
 
-    public function getAllArticle($pageIDin,$contentIDin)
+    public function getAreaArticles($pageIdIn, $contentIDin)
     {
-        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE page_id='$pageIDin' AND content_area_id='$contentIDin'");
+        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE (page_id='$pageIdIn' or all_pages=1) and content_area_id='$contentIDin'");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
@@ -245,9 +401,9 @@ class DataAccessMySQLi extends dataAccess
         }
     }
 
-    public function getAnArticle($contentIDin)
+    public function getSingleArticle($articleIdIn)
     {
-        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE content_area_id='$contentIDin'");
+        $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE article_id='$articleIdIn'");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
@@ -264,5 +420,143 @@ class DataAccessMySQLi extends dataAccess
                 $this->dbConnection->error);
         }
     }
+
+    public function getSingleDiv($divIdIn)
+    {
+        $this->result =@$this->dbConnection->query("SELECT * FROM content_area WHERE content_id='$divIdIn'");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
+/////////// ** USER SQL QUERIES ** ///////////////////
+
+
+    // GET + FETCH
+
+    public function getUsers()
+    {
+        $this->result =@$this->dbConnection->query("SELECT * FROM user");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+
+    }//end getPages
+
+    public function fetchUsers()
+    {
+        if(!$this->result)
+        {
+            die('No records in the result set: ' .
+                $this->dbConnection->error);
+        }
+        return $this->result->fetch_array();
+    }
+
+    public function getSingleUser($userID_in)
+    {
+        $this->result =@$this->dbConnection->query("SELECT * FROM user WHERE user_id='$userID_in'");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
+
+    public function updateUser($idIn, $usernameIn, $FnameIn, $LnameIn, $wordPassIn) //$modID) // This needs to be added when logins are better setup
+    {
+        $updateSql = "UPDATE user SET ";
+        $updateSql .= "username='" .$usernameIn  . "',";
+        $updateSql .= "first_name='" . $FnameIn . "',";
+        $updateSql .= "last_name='" . $LnameIn . "',";
+        $updateSql .= "password='" . $wordPassIn. "',";
+        $updateSql .= "last_modified_date=NOW()";
+        $updateSql .= "WHERE user_id=" . $idIn;
+
+        $this->result =@$this->dbConnection->query($updateSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function insertUser($usernameIn,$userFnameIn,$userLnameIn,$userPassword) //Creator ID still needs to be added!
+    {
+    $this->result =@$this->dbConnection->query("INSERT INTO user (username,first_name,last_name,password,created_date)
+                                    VALUES ('$usernameIn','$userFnameIn','$userLnameIn','$userPassword', NOW())");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function deleteUser($idIn)
+    {
+        $deleteSql = "DELETE from user WHERE user_id='$idIn'";
+
+        $this->result =@$this->dbConnection->query($deleteSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+
+    }
+
+    public function fetchUUserID($row)
+    {
+        return $row['user_id'];
+    }
+
+    public function fetchUUserName($row)
+    {
+        return $row['username'];
+    }
+
+    public function fetchUUserFName($row)
+    {
+        return $row['first_name'];
+    }
+
+    public function fetchUUserLName($row)
+    {
+        return $row['last_name'];
+    }
+
+    public function fetchUWordPass($row)
+    {
+        return $row['password'];
+    }
+
+    public function fetchUCreator($row)
+    {
+        return $row['created_by_id'];
+    }
+
+    public function fetchUCreateDate($row)
+    {
+        return $row['created_date'];
+    }
+
+    public function fetchUModified($row)
+    {
+        return $row['modified_by_id'];
+    }
+
+    public function fetchUModDate($row)
+    {
+        return $row['last_modified_date'];
+    }
+
+
+
 
 }//end class DataAccessMySQLi

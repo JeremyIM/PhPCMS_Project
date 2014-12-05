@@ -121,14 +121,70 @@ class ContentAreaClass
         return $arrayOfDivObjects;
     }
 
+    public function getSingleDiv($divIdIn)
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $myDataAccess->getSingleDiv($divIdIn);
+
+        $row = $myDataAccess->fetchContentArea();
+
+        $currentDiv = new self($myDataAccess->fetchArticleName($row), $myDataAccess->fetchArticleTitle($row), $myDataAccess->fetchArticleContent($row));
+        $currentDiv->contentId = $myDataAccess->fetchContentAreaId($row);
+        $currentDiv->contentName = $myDataAccess->fetchContentAreaName($row);
+        $currentDiv->divName = $myDataAccess->fetchContentAreaDivName($row);
+        $currentDiv->pgOrder = $myDataAccess->fetchContentAreaPageOrder($row);
+        $currentDiv->desc = $myDataAccess->fetchContentAreaDesc($row);
+
+
+        $myDataAccess->closeDBConn();
+
+        return $currentDiv;
+    }
+
     public function saveDiv()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->insertDiv($this->contentName
+            ,$this->divName
+            ,$this->pgOrder
+            ,$this->desc);
+
+        $myDataAccess->closeDBConn();
+
+        return $rowsAffected . " row(s) Affected.";
+    }
 
     public function deleteDiv()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->deleteDiv($this->contentId);
+
+        return $rowsAffected . " row(s) affected";
+    }
 
     public function updateDiv()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->updateDiv($this->contentId
+            ,$this->contentName
+            ,$this->divName
+            ,$this->desc
+            ,$this->pgOrder);
+
+        $myDataAccess->closeDBConn();
+
+        return $rowsAffected . " row(s) affected.";
+    }
+
+
 
 }//end page class
 ?>

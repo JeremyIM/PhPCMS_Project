@@ -31,7 +31,7 @@ abstract class dataAccess
 
     public abstract function getSinglePage($pageIDin);
 
-    public abstract function getAllArticle($pageIDin,$contentIDin);
+    public abstract function getAreaArticles($pageIDin,$contentIDin);
 
     //CSS fetches
     public abstract function fetchCssID($row);
@@ -71,6 +71,23 @@ abstract class dataAccess
     public abstract function fetchContentAreaDivName($row);
     public abstract function fetchContentAreaPageOrder($row);
     public abstract function fetchContentAreaDesc($row);
+
+    //User fetches
+    public abstract function getUsers();
+    public abstract function fetchUsers();
+    public abstract function fetchUUserID($row);
+    public abstract function fetchUUserName($row);
+    public abstract function fetchUUserFName($row);
+    public abstract function fetchUUserLName($row);
+    public abstract function fetchUWordPass($row);
+    public abstract function fetchUCreator($row);
+    public abstract function fetchUCreateDate($row);
+
+    public abstract function fetchUModified($row);
+    public abstract  function fetchUModDate($row);
+
+    public abstract function getSingleUser($userID_in);
+    public abstract function insertUser($username,$userFnameIn,$userLnameIn,$userPassword);
 
 
 
