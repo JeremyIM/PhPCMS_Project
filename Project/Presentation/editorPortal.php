@@ -66,34 +66,34 @@
         //load the articles management table
         include_once 'tables/articleMgmt.php';
     }
-    if(isset($_POST['addArticle'])) //pre insert
+    elseif(isset($_POST['addArticle'])) //pre insert
     {
         //load empty form + pointer to insert routine
         include_once 'tables/article/article.php';
     }
-    if(isset($_POST['editArticle'])) //pre update
+    elseif(isset($_POST['editArticle'])) //pre update
     {
         //load pre-populated form + pointer to update routine
         include_once 'tables/article/article.php';
     }
-    if(isset($_POST['delArticle']))
+    elseif(isset($_POST['delArticle']))
     {
         //load delete confirmation page
         include_once 'tables/article/deleteArticle.php';
     }
 
     //post effect
-    if(isset($_POST['addedArticle'])) //post inserting
+    elseif(isset($_POST['addedArticle'])) //post inserting
     {
         //load insert routine + success/fail message
         include_once 'tables/article/addArticle.php';
     }
-    if(isset($_POST['editedArticle'])) //post editing
+    elseif(isset($_POST['editedArticle'])) //post editing
     {
         //load update routine + success/fail message
         include_once 'tables/article/editArticle.php';
     }
-    if(isset($_POST['deletedArticle']))
+    elseif(isset($_POST['deletedArticle']))
     {
         //delete selected article
         require_once '../Business/ArticleClass.php';
@@ -112,6 +112,44 @@
     {
         //load the divs management table\
         include_once 'tables/divMgmt.php';
+    }
+
+    elseif(isset($_POST['editDiv']))
+    {
+        //load the divs management table\
+        include_once 'tables/div/div.php';
+    }
+    elseif(isset($_POST['addDiv']))
+    {
+        //load the divs management table\
+        include_once 'tables/div/div.php';
+    }
+    elseif(isset($_POST['delDiv']))
+    {
+        //load delete confirmation page
+        include_once 'tables/div/deleteDiv.php';
+    }
+
+    //post effect
+    elseif(isset($_POST['addedDiv'])) //post inserting
+    {
+        //load insert routine + success/fail message
+        include_once 'tables/div/addDiv.php';
+    }
+    elseif(isset($_POST['editedDiv'])) //post editing
+    {
+        //load update routine + success/fail message
+        include_once 'tables/div/editDiv.php';
+    }
+    elseif(isset($_POST['deletedDiv']))
+    {
+        //delete selected article
+        require_once '../Business/ContentAreaClass.php';
+        $currentDiv = ContentAreaClass::getSingleDiv($_POST['delDivId']);
+
+        $result = $currentDiv->deleteDiv();
+        echo $result;
+
     }
     //////////////////////////////////////////
     //         Template MGMT Block         //

@@ -162,6 +162,52 @@ class DataAccessMySQLi extends dataAccess
 
     }
 
+    public function insertDiv($nameIn, $divNameIn, $orderIn, $descIn)
+    {
+        $sqlInsert = "INSERT INTO content_area (name, div_name, page_order_pos, description) VALUES('$nameIn', '$divNameIn', '$orderIn', '$descIn')";
+
+
+        $this->result =@$this->dbConnection->query($sqlInsert);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function updateDiv($idIn, $nameIn, $divNameIn, $descIn, $orderIn)
+    {
+        $updateSql = "UPDATE content_area SET ";
+        $updateSql .= "name='" . $nameIn . "',";
+        $updateSql .= "div_name='" . $divNameIn . "',";
+        $updateSql .= "description='" . $descIn . "',";
+        $updateSql .= "page_order_pos='" . $orderIn;
+        $updateSql .= "' WHERE content_id=" . $idIn;
+
+        $this->result =@$this->dbConnection->query($updateSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function deleteDiv($idIn)
+    {
+        $deleteSql = "DELETE from content_area WHERE content_id='$idIn'";
+
+        $this->result =@$this->dbConnection->query($deleteSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+
+    }
+
     ///////////////////////////////////////////////////
 
     public function getCss()
@@ -322,6 +368,16 @@ class DataAccessMySQLi extends dataAccess
     public function getSingleCss($cssIdIn)
     {
         $this->result =@$this->dbConnection->query("SELECT * FROM css WHERE css_id='$cssIdIn'");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
+
+    public function getSingleDiv($divIdIn)
+    {
+        $this->result =@$this->dbConnection->query("SELECT * FROM content_area WHERE content_id='$divIdIn'");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .

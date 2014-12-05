@@ -1,7 +1,7 @@
 <?php //TODO: add conditional for header (add/edit) ?>
 
 <h3>Edit Article:</h3>
-<form action="" method="post">
+<form action="editorPortal.php" method="post">
 
 
     <?php
@@ -14,9 +14,6 @@
     $arrayOfPages = PageClass::retrievePages();
     $arrayOfDivs = ContentAreaClass::retrieveDivs();
 
-    $apValue = $currentArticle->getAllPages();
-    $pgValue = $currentArticle->getPageOnId();
-    $divValue = $currentArticle->getDivContainer();
 
     //TODO: add code to preset pageOn and divIn selected option values (add vs edit?)
 

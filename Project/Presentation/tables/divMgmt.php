@@ -5,9 +5,8 @@
             <td>Content Area Id</td>
             <td>Content Area Name</td>
             <td colspan="2">
-                <form action="../Divs.php" method="post">
-                    <input type="text" name="addDiv" value="addDiv" hidden />
-                    <input type="Submit" id="add" name="add" value="Add Content Area" />
+                <form action="editorPortal.php" method="post">
+                    <input type="Submit" id="addDiv" name="addDiv" value="Add Content Area" />
 
                 </form>
             </td>
@@ -27,17 +26,16 @@
             <td><?php echo $div->getId(); ?></td>
             <td><?php echo $div->getName(); ?></td>
             <td>
-                <form action="" method="post">
-                    <input type="text" id="editId" name="editId" value="<?php echo $div->getId(); ?>" hidden />
-                    <input type="text" id="editId" name="editName" value="<?php echo $div->getName(); ?>" hidden />
-                    <input type="Submit" id="edit" name="edit" value="Edit" />
+                <form action="editorPortal.php" method="post">
+                    <input type="text" id="editDivId" name="editDivId" value="<?php echo $div->getId(); ?>" hidden />
+                    <input type="Submit" id="editDiv" name="editDiv" value="Edit" />
 
                 </form>
             </td>
             <td>
-                <form action="" method="post">
-                    <input type="text" id="delId" name="delId" value="<?php echo $div->getId(); ?>" hidden />
-                    <input type="Submit" id="del" name="del" value="Delete" />
+                <form action="editorPortal.php" method="post">
+                    <input type="text" id="delDivId" name="delDivId" value="<?php echo $div->getId(); ?>" hidden />
+                    <input type="Submit" id="delDiv" name="delDiv" value="Delete" />
 
                 </form>
             </td>
