@@ -1,3 +1,5 @@
+<?php //TODO: Add Global Css Setting from Portal ?>
+
 <h3>CSS Templates:</h3>
 <table>
     <thead>
