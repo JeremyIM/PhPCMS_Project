@@ -82,13 +82,13 @@ elseif(isset($_POST['editedUser'])) //post editing
     //load update routine + success/fail message
     include_once 'tables/user/editUser.php';
 }
-elseif(isset($_POST['deletedArticle']))
+elseif(isset($_POST['deletedUser']))
 {
     //delete selected article
-    require_once '../Business/ArticleClass.php';
-    $currentArticle = ArticleClass::getSingleArticle($_POST['delArticleId']);
+    require_once '../Business/UserClass.php';
+    $currentUser = UserClass::getSingleUser($_POST['delUserId']);
 
-    $result = $currentArticle->deleteArticle();
+    $result = $currentUser->deleteUser();
     echo $result;
 
 }

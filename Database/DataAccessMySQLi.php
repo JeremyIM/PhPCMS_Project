@@ -487,8 +487,10 @@ class DataAccessMySQLi extends dataAccess
 
     public function insertUser($usernameIn,$userFnameIn,$userLnameIn,$userPassword) //Creator ID still needs to be added!
     {
-    $this->result =@$this->dbConnection->query("INSERT INTO user (username,first_name,last_name,password,created_date)
-                                    VALUES ('$usernameIn','$userFnameIn','$userLnameIn','$userPassword', NOW())");
+        $this->result =@$this->dbConnection->query("SELECT user_id FROM user");
+        $rowcount=(mysqli_num_rows($this->result)+1);
+         $this->result =@$this->dbConnection->query("INSERT INTO user (user_id,username,first_name,last_name,password,created_date)
+                                            VALUES ('$rowcount','$usernameIn','$userFnameIn','$userLnameIn','$userPassword', NOW())");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
