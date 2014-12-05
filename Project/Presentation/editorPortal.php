@@ -69,29 +69,29 @@
     if(isset($_POST['addArticle'])) //pre insert
     {
         //load empty form + pointer to insert routine
-        include_once 'tables/article.php';
+        include_once 'tables/article/article.php';
     }
     if(isset($_POST['editArticle'])) //pre update
     {
         //load pre-populated form + pointer to update routine
-        include_once 'tables/article.php';
+        include_once 'tables/article/article.php';
     }
     if(isset($_POST['delArticle']))
     {
         //load delete confirmation page
-        include_once 'tables/deleteArticle.php';
+        include_once 'tables/article/deleteArticle.php';
     }
 
     //post effect
     if(isset($_POST['addedArticle'])) //post inserting
     {
         //load insert routine + success/fail message
-        include_once 'tables/addArticle.php';
+        include_once 'tables/article/addArticle.php';
     }
     if(isset($_POST['editedArticle'])) //post editing
     {
         //load update routine + success/fail message
-        include_once 'tables/editArticle.php';
+        include_once 'tables/article/editArticle.php';
     }
     if(isset($_POST['deletedArticle']))
     {
