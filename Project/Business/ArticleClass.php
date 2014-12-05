@@ -152,7 +152,38 @@ class ArticleClass
     }
 
     public function saveArticle()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->insertArticle($this->articleWebName
+            ,$this->articleTitle
+            ,$this->desc
+            ,$this->pageOn
+            ,$this->allPages
+            ,$this->divContainer
+            ,$this->theContent);
+
+        $myDataAccess->closeDBConn();
+
+        return $rowsAffected . " row(s) Affected.";
+    }
+    public function saveGlobalArticle()
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->insertGlobalArticle($this->articleWebName
+            ,$this->articleTitle
+            ,$this->desc
+            ,$this->allPages
+            ,$this->divContainer
+            ,$this->theContent);
+
+        $myDataAccess->closeDBConn();
+
+        return $rowsAffected . " row(s) Affected.";
+    }
 
     public function deleteArticle()
     {}

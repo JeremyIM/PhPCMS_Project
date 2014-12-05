@@ -14,6 +14,10 @@
     $arrayOfPages = PageClass::retrievePages();
     $arrayOfDivs = ContentAreaClass::retrieveDivs();
 
+    $apValue = $currentArticle->getAllPages();
+    $pgValue = $currentArticle->getPageOnId();
+    $divValue = $currentArticle->getDivContainer();
+
     //TODO: add code to preset pageOn and divIn selected option values (add vs edit?)
 
     ?>
@@ -21,7 +25,7 @@
     <table>
         <tr>
             <td>Article Title: </td>
-            <td><input type="text" id="aTitle" name="atitle" value="<?php echo $currentArticle->getTitle(); ?>" /></td>
+            <td><input type="text" id="aTitle" name="aTitle" value="<?php echo $currentArticle->getTitle(); ?>" /></td>
         </tr>
         <tr>
             <td>Webname: </td>

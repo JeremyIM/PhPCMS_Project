@@ -73,6 +73,30 @@ class DataAccessMySQLi extends dataAccess
 
     }
 
+    public function insertArticle($nameIn, $titleIn, $descIn, $pageIn, $allIn, $divIn, $contentIn)
+    {
+        $this->result =@$this->dbConnection->query("INSERT INTO article (name, title, description, page_id, all_pages, content_area_id, the_content) VALUES('$nameIn', '$titleIn', '$descIn', '$pageIn', '$allIn' , '$divIn', '$contentIn')");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function insertGlobalArticle($nameIn, $titleIn, $descIn, $allIn, $divIn, $contentIn)
+    {
+        $this->result =@$this->dbConnection->query("INSERT INTO article (name, title, description, all_pages, content_area_id, the_content) VALUES('$nameIn', '$titleIn', '$descIn', '$allIn' , '$divIn', '$contentIn')");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+
+
 ////////////////////////////////////////////////////
 
     public function getContentArea()
@@ -264,5 +288,7 @@ class DataAccessMySQLi extends dataAccess
                 $this->dbConnection->error);
         }
     }
+
+
 
 }//end class DataAccessMySQLi
