@@ -168,25 +168,16 @@ class ArticleClass
 
         return $rowsAffected . " row(s) Affected.";
     }
-    public function saveGlobalArticle()
+
+    public function deleteArticle()
     {
         $myDataAccess = DataAccessMySQLi::getInstance();
         $myDataAccess->getDBConn();
 
-        $rowsAffected = $myDataAccess->insertGlobalArticle($this->articleWebName
-            ,$this->articleTitle
-            ,$this->desc
-            ,$this->allPages
-            ,$this->divContainer
-            ,$this->theContent);
+        $rowsAffected = $myDataAccess->deleteArticle($this->articleId);
 
-        $myDataAccess->closeDBConn();
-
-        return $rowsAffected . " row(s) Affected.";
+        return $rowsAffected . "row(s) affected";
     }
-
-    public function deleteArticle()
-    {}
 
     public function updateArticle()
     {

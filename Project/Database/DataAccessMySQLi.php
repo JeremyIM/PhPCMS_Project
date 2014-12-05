@@ -121,6 +121,20 @@ class DataAccessMySQLi extends dataAccess
         return $this->dbConnection->affected_rows;
     }
 
+    public function deleteArticle($idIn)
+    {
+        $deleteSql = "DELETE from article WHERE article_id='$idIn'";
+
+        $this->result =@$this->dbConnection->query($deleteSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+
+    }
+
 
 
 ////////////////////////////////////////////////////

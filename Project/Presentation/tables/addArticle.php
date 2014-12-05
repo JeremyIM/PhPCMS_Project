@@ -8,10 +8,8 @@ $newArticle->setDesc($_POST['aDesc']);
 $newArticle->setDivContainer($_POST['aDivIn']);
 
 if($_POST[aPageOn] == "all_pages")
-{
     $newArticle->setAllPagesBool(1);
-    //$result = $newArticle->saveGlobalArticle();
-}
+
 else //specific page selected from drop down
 {
     $newArticle->setAllPagesBool(0);

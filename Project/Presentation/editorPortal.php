@@ -76,6 +76,13 @@
         //load pre-populated form + pointer to update routine
         include_once 'tables/article.php';
     }
+    if(isset($_POST['delArticle']))
+    {
+        //load delete confirmation page
+        include_once 'tables/deleteArticle.php';
+    }
+
+    //post effect
     if(isset($_POST['addedArticle'])) //post inserting
     {
         //load insert routine + success/fail message
@@ -86,10 +93,17 @@
         //load update routine + success/fail message
         include_once 'tables/editArticle.php';
     }
-    if(isset($_POST['delArticle']))
+    if(isset($_POST['deletedArticle']))
     {
+        //delete selected article
+        require_once '../Business/ArticleClass.php';
+        $currentArticle = ArticleClass::getSingleArticle($_POST['delArticleId']);
+
+        $result = $currentArticle->deleteArticle();
+        echo $result;
 
     }
+
 
     //////////////////////////////////////////
     //            Div MGMT Block           //
