@@ -277,6 +277,52 @@ class DataAccessMySQLi extends dataAccess
         return $this->result->fetch_array();
     }
 
+    public function insertCss($nameIn,$descIn, $activeIn, $contentIn)
+    {
+        $sqlInsert = "INSERT INTO css (name, description, active_status, style_snippet) VALUES('$nameIn', '$descIn', '$activeIn', '$contentIn')";
+
+
+        $this->result =@$this->dbConnection->query($sqlInsert);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function updateCss($idIn, $nameIn, $descIn, $activeIn, $contentIn)
+    {
+        $updateSql = "UPDATE css SET ";
+        $updateSql .= "name='" . $nameIn . "',";
+        $updateSql .= "description='" . $descIn . "',";
+        $updateSql .= "active_status='" . $activeIn . "',";
+        $updateSql .= "style_snippet='" . $contentIn;
+        $updateSql .= "' WHERE css_id=" . $idIn;
+
+        $this->result =@$this->dbConnection->query($updateSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function deleteCss($idIn)
+    {
+        $deleteSql = "DELETE from css WHERE css_id='$idIn'";
+
+        $this->result =@$this->dbConnection->query($deleteSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+
+    }
+
 
     ///////////////////////////////////////////////////////////////
 

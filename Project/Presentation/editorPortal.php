@@ -197,6 +197,43 @@
         include_once 'tables/cssMgmt.php';
     }
 
+    elseif(isset($_POST['editCss']))
+    {
+        //load the divs management table\
+        include_once 'tables/css/css.php';
+    }
+    elseif(isset($_POST['addCss']))
+    {
+        //load the divs management table\
+        include_once 'tables/css/css.php';
+    }
+    elseif(isset($_POST['delCss']))
+    {
+        //load delete confirmation page
+        include_once 'tables/css/deleteCss.php';
+    }
+
+    //post effect
+    elseif(isset($_POST['addedCss'])) //post inserting
+    {
+        //load insert routine + success/fail message
+        include_once 'tables/css/addCss.php';
+    }
+    elseif(isset($_POST['editedCss'])) //post editing
+    {
+        //load update routine + success/fail message
+        include_once 'tables/css/editCss.php';
+    }
+    elseif(isset($_POST['deletedCss']))
+    {
+        //delete selected article
+        require_once '../Business/CssClass.php';
+        $currentCss = CssClass::getSingleTemplate($_POST['delCssId']);
+
+        $result = $currentCss->deleteTemplate();
+        echo $result;
+    }
+
     ?>
 
     <?php

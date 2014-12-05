@@ -5,9 +5,8 @@
         <td>Template Id</td>
         <td>Template Name</td>
         <td colspan="2">
-            <form action="../Css.php" method="post">
-                <input type="text" name="addCss" value="addCss" hidden />
-                <input type="Submit" id="add" name="add" value="Add Template" />
+            <form action="editorPortal.php" method="post">
+                <input type="Submit" id="addCss" name="addCss" value="Add Template" />
 
             </form>
         </td>
@@ -27,17 +26,16 @@
             <td><?php echo $css->getId(); ?></td>
             <td><?php echo $css->getName(); ?></td>
             <td>
-                <form action="" method="post">
-                    <input type="text" id="editId" name="editId" value="<?php echo $css->getId(); ?>" hidden />
-                    <input type="text" id="editId" name="editName" value="<?php echo $css->getName(); ?>" hidden />
-                    <input type="Submit" id="edit" name="edit" value="Edit" />
+                <form action="editorPortal.php" method="post">
+                    <input type="text" id="editCssId" name="editCssId" value="<?php echo $css->getId(); ?>" hidden />
+                    <input type="Submit" id="editCss" name="editCss" value="Edit" />
 
                 </form>
             </td>
             <td>
-                <form action="" method="post">
-                    <input type="text" id="delId" name="delId" value="<?php echo $css->getId(); ?>" hidden />
-                    <input type="Submit" id="del" name="del" value="Delete" />
+                <form action="editorPortal.php" method="post">
+                    <input type="text" id="delCssId" name="delCssId" value="<?php echo $css->getId(); ?>" hidden />
+                    <input type="Submit" id="delCss" name="delCss" value="Delete" />
 
                 </form>
             </td>
