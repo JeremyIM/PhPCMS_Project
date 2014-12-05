@@ -1,0 +1,56 @@
+SELECT * FROM mydb.page;
+SELECT * FROM css;
+SELECT * FROM content_area;
+SELECT * FROM article;
+
+	-- begin insertion insanity
+
+	INSERT INTO mydb.page (page_name,web_name,description)
+	VALUES('page1','demoPage1','Dummy webpage for testing');
+ INSERT INTO mydb.page (page_name,web_name,description)
+	VALUES('page2','demoPage2','Dummy webpage for EXTRA testing');
+ INSERT INTO mydb.page (page_name,web_name,description)
+	VALUES('page3','demoPage3','Dummy webpage for FINAL testing');
+ INSERT INTO mydb.page (page_name,web_name,description)
+	VALUES('page4','demoPage4','Final FINAL dummy page for testing!');
+
+-- insert statements for CSS sample data
+
+INSERT INTO css(name,description,active_status,style_snippet)
+	VALUES('cssTemplate1','A brief description NO STYLE TAG','1','body{background-color: #b0c4de;}');
+INSERT INTO css(name,description,active_status,style_snippet)
+	VALUES('cssTemplate1','A brief FINAL description WITH STYLE TAG','1','<STYLE>body{background-color: GREEN;}</STYLE>');
+INSERT INTO css(name,description,active_status,style_snippet)
+	VALUES('cssTemplate1','A different brief description NO STYLE TAG','1','body{background-color: #FF0000;}');
+INSERT INTO css(name,description,active_status,style_snippet)
+	VALUES('cssTemplate1','A SERIOUSLY brief FINAL description WITH STYLE TAG','1','<STYLE>body{background-color: INDGIO;}</STYLE>');
+
+-- Creation script for sample content area
+
+INSERT INTO content_area (name,div_name,page_order_pos,description)
+VALUES ('Header','header','1','the header section');
+
+INSERT INTO content_area (name,div_name,page_order_pos,description)
+VALUES ('Navigation Bar','navbar','2','The navbar section');
+
+INSERT INTO content_area (name,div_name,page_order_pos,description)
+VALUES ('MainContentArea','header','3','content area mumbo jumbo');
+
+INSERT INTO content_area (name,div_name,page_order_pos,description)
+VALUES ('Footer','footer','4','Watch out it does not become a club foot!');
+
+-- Article mumbo jumbo
+
+INSERT INTO article (name,title,description,all_pages,content_area_id,the_content)
+VALUES ('Header','Header','Global Header','1','1','Dummy code, please replace');
+INSERT INTO article (name,title,description,all_pages,content_area_id,the_content)
+VALUES ('NavBar','Navbar','Global NavBar','1','2','FINAL Dummy code, please replace');
+INSERT INTO article (name,title,description,all_pages,content_area_id,the_content)
+VALUES ('firstPost','firstPost','A post test','1','3','SERIOUSLY LEGIT FINAL Dummy code, please replace');
+INSERT INTO article (name,title,description,all_pages,content_area_id,the_content)
+VALUES ('Footer','Footer','Global Footer','1','4','SERIOUSLY FINAL Dummy code, please replace');
+INSERT INTO article (name,title,description,all_pages,content_area_id,the_content)
+VALUES ('specificPost','aSpecificPost','Global Specfic Post','1','3','SERIOUSLY LEGIT FINAL Dummy code, please replace SERIOUSLY');
+
+
+
