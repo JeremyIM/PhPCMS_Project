@@ -189,7 +189,23 @@ class ArticleClass
     {}
 
     public function updateArticle()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->updateArticle($this->articleId
+            ,$this->articleWebName
+            ,$this->articleTitle
+            ,$this->desc
+            ,$this->pageOn
+            ,$this->allPages
+            ,$this->divContainer
+            ,$this->theContent);
+
+        $myDataAccess->closeDBConn();
+
+        return $rowsAffected . " row(s) Affected.";
+    }
 
     public function getAreaArticles($pageIdIn, $contentIdIn)
     {

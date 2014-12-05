@@ -67,8 +67,8 @@
             <?php endif; ?>
 
             <?php if(isset($_POST['editArticleId'])): ?>
-                <input type="text" id="editedArticleId" name="editedArticleId" value="<?php echo $_POST['editArticleId'] ?>" hidden />
-                <td colspan="2"><input type="Submit" id="editArticle" name="editArticle" value="Update Article" /></td>
+                <input type="text" id="editArticleId" name="editArticleId" value="<?php echo $_POST['editArticleId'] ?>" hidden />
+                <td colspan="2"><input type="Submit" id="editedArticle" name="editedArticle" value="Update Article" /></td>
             <?php endif; ?>
         </tr>
     </table>

@@ -10,18 +10,18 @@ $newArticle->setDivContainer($_POST['aDivIn']);
 if($_POST[aPageOn] == "all_pages")
 {
     $newArticle->setAllPagesBool(1);
-    $result = $newArticle->saveGlobalArticle();
+    //$result = $newArticle->saveGlobalArticle();
 }
-else
+else //specific page selected from drop down
 {
     $newArticle->setAllPagesBool(0);
     $newArticle->setPageOn($_POST['aPageOn']);
-    $result = $newArticle->saveArticle();
+
 }
+$result = $newArticle->saveArticle();
 
 //report success/failure
 echo $result;
-
 
 ?>
 

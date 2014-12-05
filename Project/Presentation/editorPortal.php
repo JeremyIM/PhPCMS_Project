@@ -66,26 +66,31 @@
         //load the articles management table
         include_once 'tables/articleMgmt.php';
     }
-    if(isset($_POST['addArticle']))
+    if(isset($_POST['addArticle'])) //pre insert
     {
         //load empty form + pointer to insert routine
         include_once 'tables/article.php';
     }
-    if(isset($_POST['editArticle']))
+    if(isset($_POST['editArticle'])) //pre update
     {
         //load pre-populated form + pointer to update routine
         include_once 'tables/article.php';
     }
-    if(isset($_POST['addedArticle']))
+    if(isset($_POST['addedArticle'])) //post inserting
     {
         //load insert routine + success/fail message
         include_once 'tables/addArticle.php';
     }
-    if(isset($_POST['editedArticle']))
+    if(isset($_POST['editedArticle'])) //post editing
     {
         //load update routine + success/fail message
         include_once 'tables/editArticle.php';
     }
+    if(isset($_POST['delArticle']))
+    {
+
+    }
+
     //////////////////////////////////////////
     //            Div MGMT Block           //
     ////////////////////////////////////////

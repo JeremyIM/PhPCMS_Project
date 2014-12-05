@@ -33,7 +33,7 @@
                 </form>
             </td>
             <td>
-                <form action="deleteArticle.php" method="post">
+                <form action="editorPortal.php" method="post">
                     <input type="text" id="delArticleId" name="delArticleId" value="<?php echo $article->getID(); ?>" hidden />
                     <input type="Submit" id="delArticle" name="delArticle" value="Delete" />
 

@@ -75,7 +75,20 @@ class DataAccessMySQLi extends dataAccess
 
     public function insertArticle($nameIn, $titleIn, $descIn, $pageIn, $allIn, $divIn, $contentIn)
     {
-        $this->result =@$this->dbConnection->query("INSERT INTO article (name, title, description, page_id, all_pages, content_area_id, the_content) VALUES('$nameIn', '$titleIn', '$descIn', '$pageIn', '$allIn' , '$divIn', '$contentIn')");
+        $sqlInsert = "INSERT INTO article (name, title, description,";
+        if($allIn == 0)
+            $sqlInsert .= "page_id, ";
+        $sqlInsert .= "all_pages, content_area_id, the_content) VALUES('";
+        $sqlInsert .=$nameIn ."', '";
+        $sqlInsert .= $titleIn . "', '";
+        $sqlInsert .= $descIn . "', '";
+        if($allIn == 0)
+            $sqlInsert .= $pageIn . "', '";
+        $sqlInsert .= $allIn . "' , '";
+        $sqlInsert .= $divIn . "', '" ;
+        $sqlInsert .= $contentIn . "')";
+
+        $this->result =@$this->dbConnection->query($sqlInsert);
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
@@ -84,9 +97,22 @@ class DataAccessMySQLi extends dataAccess
         return $this->dbConnection->affected_rows;
     }
 
-    public function insertGlobalArticle($nameIn, $titleIn, $descIn, $allIn, $divIn, $contentIn)
+    public function updateArticle($idIn, $nameIn, $titleIn, $descIn, $pageIn, $allIn, $divIn, $contentIn)
     {
-        $this->result =@$this->dbConnection->query("INSERT INTO article (name, title, description, all_pages, content_area_id, the_content) VALUES('$nameIn', '$titleIn', '$descIn', '$allIn' , '$divIn', '$contentIn')");
+        $updateSql = "UPDATE article SET ";
+        $updateSql .= "name='" . $nameIn . "',";
+        $updateSql .= "title='" . $titleIn . "',";
+        $updateSql .= "description='" . $descIn . "',";
+
+        if($allIn == 0)
+            $updateSql .= "page_id='" . $pageIn . "',";
+
+        $updateSql .= "all_pages='" . $allIn . "',";
+        $updateSql .= "content_area_id='" . $divIn . "',";
+        $updateSql .= "the_content='" . $contentIn . "' ";
+        $updateSql .= "WHERE article_id=" . $idIn;
+
+        $this->result =@$this->dbConnection->query($updateSql);
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
