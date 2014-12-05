@@ -46,6 +46,52 @@ class DataAccessMySQLi extends dataAccess
         return $this->result->fetch_array();
     }
 
+    public function insertPage($nameIn, $webNameIn,$descIn, $cssIn)
+    {
+        $sqlInsert = "INSERT INTO mydb.page (page_name, web_name, description, active_css) VALUES('$nameIn', '$webNameIn', '$descIn', '$cssIn')";
+
+
+        $this->result =@$this->dbConnection->query($sqlInsert);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function updatePage($idIn, $nameIn, $webNameIn, $descIn, $cssIn)
+    {
+        $updateSql = "UPDATE mydb.page SET ";
+        $updateSql .= "page_name='" . $nameIn . "',";
+        $updateSql .= "web_name='" . $webNameIn . "',";
+        $updateSql .= "description='" . $descIn . "',";
+        $updateSql .= "active_css='" . $cssIn;
+        $updateSql .= "' WHERE page_id=" . $idIn;
+
+        $this->result =@$this->dbConnection->query($updateSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function deletePage($idIn)
+    {
+        $deleteSql = "DELETE from page WHERE page_id='$idIn'";
+
+        $this->result =@$this->dbConnection->query($deleteSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+
+    }
+
     //////////////////////////////////////////////////////////////////////
 
 
@@ -337,7 +383,7 @@ class DataAccessMySQLi extends dataAccess
     //add'l selects
     public function getSinglePage($pageIDin)
     {
-        $this->result =@$this->dbConnection->query("SELECT * FROM mydb.page WHERE page_id='$pageIDin'");
+        $this->result =@$this->dbConnection->query("SELECT * FROM page WHERE page_id='$pageIDin'");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .

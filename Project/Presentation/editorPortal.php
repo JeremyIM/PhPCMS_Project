@@ -58,6 +58,43 @@
     {
         include_once 'tables/pageMgmt.php';
     }
+
+    elseif(isset($_POST['editPage']))
+    {
+        //load the divs management table\
+        include_once 'tables/page/page.php';
+    }
+    elseif(isset($_POST['addPage']))
+    {
+        //load the divs management table\
+        include_once 'tables/page/page.php';
+    }
+    elseif(isset($_POST['delPage']))
+    {
+        //load delete confirmation page
+        include_once 'tables/page/deletePage.php';
+    }
+
+    //post effect
+    elseif(isset($_POST['addedPage'])) //post inserting
+    {
+        //load insert routine + success/fail message
+        include_once 'tables/page/addPage.php';
+    }
+    elseif(isset($_POST['editedPage'])) //post editing
+    {
+        //load update routine + success/fail message
+        include_once 'tables/page/editPage.php';
+    }
+    elseif(isset($_POST['deletedPage']))
+    {
+        //delete selected article
+        require_once '../Business/PageClass.php';
+        $currentPage = PageClass::getSinglePage($_POST['delPageId']);
+
+        $result = $currentPage->deletePage();
+        echo $result;
+    }
     //////////////////////////////////////////
     //          Article MGMT Block         //
     ////////////////////////////////////////
