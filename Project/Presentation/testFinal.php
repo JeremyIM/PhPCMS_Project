@@ -12,13 +12,13 @@ require_once '../Business/CssClass.php';
 
 
 $pageArray = PageClass::retrievePages();
-$currentTemplate = CssClass::retrieveSingleTemplates(1);
+$currentTemplate = CssClass::getSingleTemplate(1);
 $singlePage = PageClass::getSinglePage(1);
 
 if(isset($_GET['page']))
 {
     $singlePage = PageClass::getSinglePage($_GET['page']);
-    $currentTemplate = CssClass::retrieveSingleTemplates($_GET['page']);
+    $currentTemplate = CssClass::getSingleTemplate($_GET['page']);
 }
 // WARNING: PSEUDO_CODE ONLY
 // this may be a presentation page in 3-tier or a view in MVC

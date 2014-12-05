@@ -1,3 +1,9 @@
+<?php //check to make sure user is logged in
+    //TODO: unlock once Login finished, and copy to every relevant page
+    require 'isLoggedIn.php';
+    checkIfLoggedIn();
+?>
+
 <html>
 <head>
     <title></title>
@@ -43,6 +49,13 @@
                 <input type="submit" name="cssMgmtBtn" value="CSS Template Management" />
             </form>
         </li>
+
+        <li>
+            <form method="post" action="logout.php">
+                <input type="submit" name="logout" value="logout" />
+            </form>
+        </li>
+
     </ul>
     <br />
     <br />
