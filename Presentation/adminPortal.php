@@ -37,6 +37,11 @@
             <input type="submit" name="userMgmtBtn" value="User Management " />
         </form>
     </li>
+    <li>
+        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <input type="submit" name="userPrivBtn" value="User Privileges " />
+        </form>
+    </li>
 </ul>
 <br />
 <br />
@@ -90,8 +95,15 @@ elseif(isset($_POST['deletedUser']))
 
     $result = $currentUser->deleteUser();
     echo $result;
-
 }
+if(isset($_POST['userPrivBtn']))
+{
+    //load the articles management table
+    include_once 'tables/userPrivMgmt.php';
+}
+
+
+
 ?>
 
 <?php
