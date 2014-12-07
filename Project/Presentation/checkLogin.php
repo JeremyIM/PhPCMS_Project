@@ -31,7 +31,7 @@ $pw = stripslashes($pw);
 //hash passwords TODO: change to meet REQ-008
 //$hashedPw = hash("sha1", $pw);
 
-//build sql + get result TODO: move to DataAccess via /Business/UserClass.php once created
+//build sql + get result
 $userObj = UserClass::checkLoginInfo($login, $pw);
 
 /*

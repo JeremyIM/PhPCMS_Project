@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <title>Editor Portal</title>
+    <title>Admin Portal</title>
     <style type="text/css">
         ul li {
             float: left;
@@ -44,7 +44,7 @@
 
     <li>
         <form method="post" action="logout.php">
-            <input type="submit" name="logout" value="logout" />
+            || <input type="submit" name="logout" value="logout" />
         </form>
     </li>
 </ul>

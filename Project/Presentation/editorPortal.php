@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title></title>
+    <title>Editor Portal</title>
     <style type="text/css">
         ul li {
             float: left;

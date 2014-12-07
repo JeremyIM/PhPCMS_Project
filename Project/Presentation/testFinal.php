@@ -43,17 +43,14 @@ if(isset($_GET['page']))
 <nav>
     <ul>
         <?php
-        // BUILD OUR NAV
-        // obtain/receive all page objects ($pageArray)
-        // use GET in the links of each page to tell us which page they w ant
 
-        foreach ($pageArray as $page)
-        {
-            echo "<li>";
-            echo "<a href='testFinal.php?page=" .$page->getId() . "'> " . $page->getWebName() ."</a>";
-            echo "</li>";
-        }
-        ?>
+        foreach ($pageArray as $page):?>
+            <li>
+                <a href="testFinal.php?page=" <?php echo $page->getId();?> />
+                    <?php echo $page->getWebName();?>
+                </a>
+            </li>
+        <?php endforeach;?>
     </ul>
 </nav>
 <section>
