@@ -88,6 +88,7 @@ abstract class dataAccess
 
     public abstract function getSingleUser($userID_in);
     public abstract function insertUser($username,$userFnameIn,$userLnameIn,$userPassword);
+    public abstract  function updateUserPriv($idIn,$permissionIn);
 
 
 

@@ -101,8 +101,16 @@ if(isset($_POST['userPrivBtn']))
     //load the articles management table
     include_once 'tables/userPrivMgmt.php';
 }
-
-
+elseif(isset($_POST['editUserPriv'])) //pre insert
+{
+    //load empty form + pointer to insert routine
+    include_once 'tables/userPriv/users.php';
+}
+elseif(isset($_POST['editedUserPriv'])) //pre insert
+{
+    //load empty form + pointer to insert routine
+    include_once 'tables/userPriv/editUsers.php';
+}
 
 ?>
 

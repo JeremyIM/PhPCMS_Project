@@ -53,6 +53,7 @@ class UserClass
             $currentUser->createDate = $myDataAccess->fetchUCreateDate($row);
             $currentUser->modBy = $myDataAccess->fetchUModified($row);
             $currentUser->modDate = $myDataAccess->fetchUModDate($row);
+            $currentUser->permisions=$myDataAccess->fetchUPermission($row);
 
             $arrayOfUsers[] = $currentUser;
         }
@@ -80,6 +81,7 @@ class UserClass
             $currentUser->createDate = $myDataAccess->fetchUCreateDate($row);
             $currentUser->modBy = $myDataAccess->fetchUModified($row);
             $currentUser->modDate = $myDataAccess->fetchUModDate($row);
+            $currentUser->permisions=$myDataAccess->fetchUPermission($row);
 
         $myDataAccess->closeDBConn();
         return $currentUser;
@@ -102,7 +104,21 @@ class UserClass
             ,$this->username
             ,$this->userFirstName
             ,$this->userLastName
-            ,$this->wordPass);
+            ,$this->wordPass
+            ,$this->permisions);
+
+        $myDataAccess->closeDBConn();
+
+        return $rowsAffected . " row(s) Affected.";
+    }
+
+    public function updateUserPriv()
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->updateUserPriv($this->userID
+            ,$this->permisions);
 
         $myDataAccess->closeDBConn();
 
@@ -118,7 +134,8 @@ class UserClass
              $this->username
             ,$this->userFirstName
             ,$this->userLastName
-            ,$this->wordPass);
+            ,$this->wordPass
+            ,$this->permisions);
 
         $myDataAccess->closeDBConn();
 
@@ -181,6 +198,11 @@ class UserClass
     {
         return $this->modDate;
     }
+
+    public function getPermission()
+    {
+        return $this->permisions;
+    }
 // SETTERS
 
     public function setId($id_in)
@@ -226,6 +248,11 @@ class UserClass
     public function setModDate($moddate_in)
     {
         $this->modDate = $moddate_in;
+    }
+
+    public function setPermission($permission_in)
+    {
+        $this->permisions = $permission_in;
     }
 
 

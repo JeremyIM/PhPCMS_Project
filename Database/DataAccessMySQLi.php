@@ -466,13 +466,30 @@ class DataAccessMySQLi extends dataAccess
         }
     }
 
-    public function updateUser($idIn, $usernameIn, $FnameIn, $LnameIn, $wordPassIn) //$modID) // This needs to be added when logins are better setup
+    public function updateUser($idIn, $usernameIn, $FnameIn, $LnameIn, $wordPassIn,$permissionIn) //$modID) // This needs to be added when logins are better setup
     {
         $updateSql = "UPDATE user SET ";
         $updateSql .= "username='" .$usernameIn  . "',";
         $updateSql .= "first_name='" . $FnameIn . "',";
         $updateSql .= "last_name='" . $LnameIn . "',";
         $updateSql .= "password='" . $wordPassIn. "',";
+        $updateSql .= "permissions_id='" . $permissionIn. "',";
+        $updateSql .= "last_modified_date=NOW()";
+        $updateSql .= "WHERE user_id=" . $idIn;
+
+        $this->result =@$this->dbConnection->query($updateSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function updateUserPriv($idIn,$permissionIn) //$modID) // This needs to be added when logins are better setup
+    {
+        $updateSql = "UPDATE user SET ";
+        $updateSql .= "permissions_id='" . $permissionIn. "',";
         $updateSql .= "last_modified_date=NOW()";
         $updateSql .= "WHERE user_id=" . $idIn;
 
@@ -556,6 +573,10 @@ class DataAccessMySQLi extends dataAccess
     public function fetchUModDate($row)
     {
         return $row['last_modified_date'];
+    }
+    public function fetchUPermission($row)
+    {
+        return $row['permissions_id'];
     }
 
 
