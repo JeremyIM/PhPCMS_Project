@@ -43,8 +43,7 @@ $count = mysqli_num_rows($result);
 
 mysqli_close('$db');
 */
-if ($userObj) //check that only 1 user was returned
-{
+if ($userObj->getId() > 0): //check that only 1 user was returned
     //set session variables
     $_SESSION['login'] = $login;
     $_SESSION['pw'] = $pw;
@@ -58,20 +57,15 @@ if ($userObj) //check that only 1 user was returned
         header("location:adminPortal.php");
     }
     //if uer is author
-}
-else
-{
-    //inform user
-    echo "Wrong UserName or Password! <br/>";
-    echo "<a href='login.html'>Back</a>";
-}
-
-ob_end_flush();
-
 ?>
-<form action="Logout.php" method="post">
+<form action="logout.php" method="post">
     <input type="Submit" name="logout" value="Logout" />
 </form>
+<?php
+else: //inform user ?>
+    <p>"Wrong UserName or Password!</p>
+     "<a href='login.html'>Back</a>";
+<?php endif;?>
 
 </body>
 </html>

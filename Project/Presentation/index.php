@@ -34,7 +34,6 @@ else
     <nav>
         <ul>
             <?php
-
             foreach ($pageArray as $page):?>
                 <li>
                     <a href="index.php?page=<?php echo $page->getId();?>">
@@ -42,6 +41,11 @@ else
                     </a>
                 </li>
             <?php endforeach;?>
+            <li>
+                <form action="authorEdit.php" method="post">
+                    <input type="Submit" id="addArticle" name="addArticle" value="Add Article" />
+                </form>
+            </li>
         </ul>
     </nav>
     <br />

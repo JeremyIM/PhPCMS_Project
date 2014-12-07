@@ -394,7 +394,10 @@ class DataAccessMySQLi extends dataAccess
 
     public function checkUserLogin($userIn, $pwIn)
     {
-        $this->result =@$this->dbConnection->query("SELECT * FROM user WHERE username='$userIn' AND password='$pwIn' LIMIT 1");
+        $sql = "SELECT * FROM user WHERE username='";
+        $sql.= $userIn . "' AND password='";
+        $sql.= $pwIn . "';";
+        $this->result =@$this->dbConnection->query($sql);
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .

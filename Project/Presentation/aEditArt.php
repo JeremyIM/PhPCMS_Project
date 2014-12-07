@@ -19,8 +19,11 @@ else //specific page selected from drop down
     $newArticle->setPageOn($_POST['aPageOn']);
     $pgNum = $newArticle->getPageOnId();
 }
+if(isset($_POST['editedArticle']))
+    $result = $newArticle->updateArticle();
+if(isset($_POST['addedArticle']))
+    $result = $newArticle->saveArticle();
 
-$result = $newArticle->updateArticle();
 //report success/failure
 echo $result;
 

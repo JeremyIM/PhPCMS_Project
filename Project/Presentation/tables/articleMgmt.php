@@ -7,7 +7,6 @@
         <td colspan="2">
             <form action="editorPortal.php" method="post">
                 <input type="Submit" id="addArticle" name="addArticle" value="Add Article" />
-
             </form>
         </td>
     </tr>

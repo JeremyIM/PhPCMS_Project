@@ -52,7 +52,7 @@
 
         <li>
             <form method="post" action="logout.php">
-                <input type="submit" name="logout" value="logout" />
+            || <input type="submit" name="logout" value="logout" />
             </form>
         </li>
 
@@ -246,31 +246,6 @@
         $result = $currentCss->deleteTemplate();
         echo $result;
     }
-
-    ?>
-
-    <?php
-
-    //if currentUser == Editor
-    //load editor management options
-    //manage pages
-        //Create new Page
-
-        //Update Existing Page
-
-        //Delete Page + Remove related Article's page_id
-
-    //manage content areas
-        //
-    //manage articles
-        //Create new Article
-
-        //Update Existing Article
-
-        //Delete Existing Article
-    //manage templates
-
-
     ?>
 
 

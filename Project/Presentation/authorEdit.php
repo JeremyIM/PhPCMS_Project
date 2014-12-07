@@ -6,16 +6,15 @@
     <body>
         <h3>Edit Article</h3>
         <?php
-        if(isset($_POST['editAuthorArticle']))
-        {
             require_once'../Business/ArticleClass.php';
             require_once'../Business/PageClass.php';
             require_once'../Business/ContentAreaClass.php';
+
             $currentArticle = ArticleClass::getSingleArticle($_POST['editArticleId']);
 
             $arrayOfPages = PageClass::retrievePages();
             $arrayOfDivs = ContentAreaClass::retrieveDivs();
-        }?>
+        ?>
         <form method="post" action="aEditArt.php">
             <table>
                 <tr>
