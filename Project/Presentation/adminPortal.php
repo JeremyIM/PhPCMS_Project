@@ -7,9 +7,6 @@
 *            //manage user permissions
 -->
 
-<?php require 'isLoggedin.php'; ?>
-
-
 <html>
 <head>
     <title>Editor Portal</title>
@@ -17,7 +14,6 @@
         ul li {
             float: left;
             padding-right: 1%;
-
             list-style-type: none;
         }
         table
@@ -32,7 +28,7 @@
 </head>
 
 <body>
-<h2>Welcome to the Editor Portal</h2>
+<h2>Welcome to the Admin Portal</h2>
 
 <ul>
     <li>
@@ -45,6 +41,12 @@
             <input type="submit" name="userPrivBtn" value="User Privileges " />
         </form>
     </li>
+
+    <li>
+        <form method="post" action="logout.php">
+            <input type="submit" name="logout" value="logout" />
+        </form>
+    </li>
 </ul>
 <br />
 <br />
@@ -52,7 +54,6 @@
 
 <?php
 //check to see which button was clicked and then display the appropriate mgmt interface
-
 //////////////////////////////////////////
 //            User MGMT Block          //
 ////////////////////////////////////////
@@ -76,9 +77,7 @@ elseif(isset($_POST['delUser']))
     //load delete confirmation page
     include_once 'tables/user/deleteUser.php';
 }
-
 //***********************************************//
-
 //post effect
 elseif(isset($_POST['addedUser'])) //post inserting
 {
@@ -95,7 +94,6 @@ elseif(isset($_POST['deletedUser']))
     //delete selected article
     require_once '../Business/UserClass.php';
     $currentUser = UserClass::getSingleUser($_POST['delUserId']);
-
     $result = $currentUser->deleteUser();
     echo $result;
 }
@@ -104,43 +102,7 @@ if(isset($_POST['userPrivBtn']))
     //load the articles management table
     include_once 'tables/userPrivMgmt.php';
 }
-elseif(isset($_POST['editUserPriv'])) //pre insert
-{
-    //load empty form + pointer to insert routine
-    include_once 'tables/userPriv/users.php';
-}
-elseif(isset($_POST['editedUserPriv'])) //pre insert
-{
-    //load empty form + pointer to insert routine
-    include_once 'tables/userPriv/editUsers.php';
-}
-
 ?>
-
-<?php
-
-//if currentUser == Editor
-//load editor management options
-//manage pages
-//Create new Page
-
-//Update Existing Page
-
-//Delete Page + Remove related Article's page_id
-
-//manage content areas
-//
-//manage articles
-//Create new Article
-
-//Update Existing Article
-
-//Delete Existing Article
-//manage templates
-
-
-?>
-
 
 </body>
 

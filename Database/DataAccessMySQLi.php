@@ -48,7 +48,7 @@ class DataAccessMySQLi extends dataAccess
 
     public function insertPage($nameIn, $webNameIn,$descIn, $cssIn)
     {
-        $sqlInsert = "INSERT INTO mydb.page (page_name, web_name, description, active_css) VALUES('$nameIn', '$webNameIn', '$descIn', '$cssIn')";
+        $sqlInsert = "INSERT INTO mydb.page (page_name, web_name, description, active_css, created_date) VALUES('$nameIn', '$webNameIn', '$descIn', '$cssIn', NOW())";
 
 
         $this->result =@$this->dbConnection->query($sqlInsert);
@@ -66,8 +66,9 @@ class DataAccessMySQLi extends dataAccess
         $updateSql .= "page_name='" . $nameIn . "',";
         $updateSql .= "web_name='" . $webNameIn . "',";
         $updateSql .= "description='" . $descIn . "',";
-        $updateSql .= "active_css='" . $cssIn;
-        $updateSql .= "' WHERE page_id=" . $idIn;
+        $updateSql .= "active_css='" . $cssIn . "',";
+        $updateSql .= "modified_date=NOW()";
+        $updateSql .= " WHERE page_id=" . $idIn;
 
         $this->result =@$this->dbConnection->query($updateSql);
         if(!$this->result)
@@ -124,7 +125,7 @@ class DataAccessMySQLi extends dataAccess
         $sqlInsert = "INSERT INTO article (name, title, description,";
         if($allIn == 0)
             $sqlInsert .= "page_id, ";
-        $sqlInsert .= "all_pages, content_area_id, the_content) VALUES('";
+        $sqlInsert .= "all_pages, content_area_id, the_content, created_date) VALUES('";
         $sqlInsert .=$nameIn ."', '";
         $sqlInsert .= $titleIn . "', '";
         $sqlInsert .= $descIn . "', '";
@@ -132,7 +133,9 @@ class DataAccessMySQLi extends dataAccess
             $sqlInsert .= $pageIn . "', '";
         $sqlInsert .= $allIn . "' , '";
         $sqlInsert .= $divIn . "', '" ;
-        $sqlInsert .= $contentIn . "')";
+        $sqlInsert .= $contentIn .  "', ";
+        $sqlInsert .= "NOW()" . ")";
+
 
         $this->result =@$this->dbConnection->query($sqlInsert);
         if(!$this->result)
@@ -150,12 +153,14 @@ class DataAccessMySQLi extends dataAccess
         $updateSql .= "title='" . $titleIn . "',";
         $updateSql .= "description='" . $descIn . "',";
 
+
         if($allIn == 0)
             $updateSql .= "page_id='" . $pageIn . "',";
 
         $updateSql .= "all_pages='" . $allIn . "',";
         $updateSql .= "content_area_id='" . $divIn . "',";
-        $updateSql .= "the_content='" . $contentIn . "' ";
+        $updateSql .= "the_content='" . $contentIn . "',";
+        $updateSql .= "modified_date=NOW()";
         $updateSql .= "WHERE article_id=" . $idIn;
 
         $this->result =@$this->dbConnection->query($updateSql);
@@ -210,7 +215,7 @@ class DataAccessMySQLi extends dataAccess
 
     public function insertDiv($nameIn, $divNameIn, $orderIn, $descIn)
     {
-        $sqlInsert = "INSERT INTO content_area (name, div_name, page_order_pos, description) VALUES('$nameIn', '$divNameIn', '$orderIn', '$descIn')";
+        $sqlInsert = "INSERT INTO content_area (name, div_name, page_order_pos, description, created_date) VALUES('$nameIn', '$divNameIn', '$orderIn', '$descIn', NOW())";
 
 
         $this->result =@$this->dbConnection->query($sqlInsert);
@@ -228,8 +233,9 @@ class DataAccessMySQLi extends dataAccess
         $updateSql .= "name='" . $nameIn . "',";
         $updateSql .= "div_name='" . $divNameIn . "',";
         $updateSql .= "description='" . $descIn . "',";
-        $updateSql .= "page_order_pos='" . $orderIn;
-        $updateSql .= "' WHERE content_id=" . $idIn;
+        $updateSql .= "page_order_pos='" . $orderIn ."',";
+        $updateSql .= "modified_date=NOW()";
+        $updateSql .= " WHERE content_id=" . $idIn;
 
         $this->result =@$this->dbConnection->query($updateSql);
         if(!$this->result)
@@ -277,6 +283,51 @@ class DataAccessMySQLi extends dataAccess
         return $this->result->fetch_array();
     }
 
+    public function insertCss($nameIn,$descIn, $activeIn, $contentIn)
+    {
+        $sqlInsert = "INSERT INTO css (name, description, active_status, style_snippet,created_date) VALUES('$nameIn', '$descIn', '$activeIn', '$contentIn',NOW())";
+
+
+        $this->result =@$this->dbConnection->query($sqlInsert);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+    public function updateCss($idIn, $nameIn, $descIn, $activeIn, $contentIn)
+    {
+        $updateSql = "UPDATE css SET ";
+        $updateSql .= "name='" . $nameIn . "',";
+        $updateSql .= "description='" . $descIn . "',";
+        $updateSql .= "active_status='" . $activeIn . "',";
+        $updateSql .= "style_snippet='" . $contentIn . "',";
+        $updateSql .= "modified_date=NOW()";
+        $updateSql .= " WHERE css_id=" . $idIn;
+
+        $this->result =@$this->dbConnection->query($updateSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
+    public function deleteCss($idIn)
+    {
+        $deleteSql = "DELETE from css WHERE css_id='$idIn'";
+
+        $this->result =@$this->dbConnection->query($deleteSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+
+    }
 
     ///////////////////////////////////////////////////////////////
 
@@ -529,6 +580,17 @@ class DataAccessMySQLi extends dataAccess
         return $this->dbConnection->affected_rows;
 
     }
+
+    public function checkUserLogin($userIn, $pwIn)
+    {
+        $this->result =@$this->dbConnection->query("SELECT * FROM user WHERE username='$userIn' AND password='$pwIn' LIMIT 1");
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
+
 
     public function fetchUUserID($row)
     {

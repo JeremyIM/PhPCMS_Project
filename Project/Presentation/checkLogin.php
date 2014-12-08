@@ -1,4 +1,4 @@
-`<?php
+<?php
 session_start(); //start session
 //call db functions
 
@@ -23,7 +23,6 @@ $pw = $_POST['pw'];
 //safety first
 $login = stripslashes($login);
 $pw = stripslashes($pw);
-
 
 //TODO: move to DataAccess
 //$login = mysqli_real_escape_string($db, $login);
@@ -50,11 +49,11 @@ if ($userObj) //check that only 1 user was returned
     $_SESSION['login'] = $login;
     $_SESSION['pw'] = $pw;
 
-    if((in_array($userObj->getPermission(), [2,3,6,7])))
+    if($userObj->getUsername() == "editor")
     {
         header("location:editorPortal.php");
     }
-    if(in_array($userObj->getPermission(), [4,5,6,7]))
+    if($userObj->getUsername() == "admin")
     {
         header("location:adminPortal.php");
     }
@@ -70,7 +69,7 @@ else
 ob_end_flush();
 
 ?>
-<form action="logout.php" method="post">
+<form action="Logout.php" method="post">
     <input type="Submit" name="logout" value="Logout" />
 </form>
 

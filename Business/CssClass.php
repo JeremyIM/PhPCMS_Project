@@ -103,31 +103,62 @@ class CssClass
         return $arrayOfCssObjects;
     }
 
-    public function retrieveSingleTemplates($cssIdIn)
+    public function getSingleTemplate($cssIdIn)
     {
         $myDataAccess = DataAccessMySQLi::getInstance();
         $myDataAccess->getDBConn();
 
         $myDataAccess->getSingleCss($cssIdIn);
 
-        while($row = $myDataAccess->fetchCss())
-        {
-            $currentCss = new self($myDataAccess->fetchCssName($row), $myDataAccess->fetchCssStyleSnippet($row));
-            $currentCss->desc = $myDataAccess->fetchCssDescription($row);
-            $currentCss->active = $myDataAccess->fetchCssActiveStatus($row);
-        }
+        $row = $myDataAccess->fetchCss();
+
+        $currentCss = new self($myDataAccess->fetchCssName($row), $myDataAccess->fetchCssStyleSnippet($row));
+        $currentCss->cssId = $myDataAccess->fetchCssID($row);
+        $currentCss->desc = $myDataAccess->fetchCssDescription($row);
+        $currentCss->active = $myDataAccess->fetchCssActiveStatus($row);
 
         $myDataAccess->closeDBConn();
-
         return $currentCss;
     }
 
     public function saveTemplate()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->insertCss($this->cssName
+            ,$this->desc
+            ,$this->active
+            ,$this->theContent);
+
+        $myDataAccess->closeDBConn();
+
+        return $rowsAffected . " row(s) Affected.";
+    }
 
     public function deleteTemplate()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->deleteCss($this->cssId);
+
+        return $rowsAffected . " row(s) affected";
+    }
 
     public function updateTemplate()
-    {}
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $rowsAffected = $myDataAccess->updateCss($this->cssId
+            ,$this->cssName
+            ,$this->desc
+            ,$this->active
+            ,$this->theContent);
+
+        $myDataAccess->closeDBConn();
+
+        return $rowsAffected . " row(s) Affected.";
+    }
 }
