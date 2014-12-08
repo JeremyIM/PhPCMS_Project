@@ -46,9 +46,9 @@ class DataAccessMySQLi extends dataAccess
         return $this->result->fetch_array();
     }
 
-    public function insertPage($nameIn, $webNameIn,$descIn, $cssIn)
+    public function insertPage($nameIn, $webNameIn,$descIn, $cssIn,$creatorIn)
     {
-        $sqlInsert = "INSERT INTO mydb.page (page_name, web_name, description, active_css, created_date) VALUES('$nameIn', '$webNameIn', '$descIn', '$cssIn', NOW())";
+        $sqlInsert = "INSERT INTO mydb.page (page_name, web_name, description, active_css, created_date,created_by_id) VALUES('$nameIn', '$webNameIn', '$descIn', '$cssIn', NOW(),'$creatorIn')";
 
 
         $this->result =@$this->dbConnection->query($sqlInsert);
@@ -60,13 +60,14 @@ class DataAccessMySQLi extends dataAccess
         return $this->dbConnection->affected_rows;
     }
 
-    public function updatePage($idIn, $nameIn, $webNameIn, $descIn, $cssIn)
+    public function updatePage($idIn, $nameIn, $webNameIn, $descIn, $cssIn, $creatorIn)
     {
         $updateSql = "UPDATE mydb.page SET ";
         $updateSql .= "page_name='" . $nameIn . "',";
         $updateSql .= "web_name='" . $webNameIn . "',";
         $updateSql .= "description='" . $descIn . "',";
         $updateSql .= "active_css='" . $cssIn . "',";
+        $updateSql .= "modified_by_id='" . $creatorIn . "',";
         $updateSql .= "modified_date=NOW()";
         $updateSql .= " WHERE page_id=" . $idIn;
 
@@ -120,12 +121,12 @@ class DataAccessMySQLi extends dataAccess
 
     }
 
-    public function insertArticle($nameIn, $titleIn, $descIn, $pageIn, $allIn, $divIn, $contentIn)
+    public function insertArticle($nameIn, $titleIn, $descIn, $pageIn, $allIn, $divIn, $contentIn, $creatorIn)
     {
         $sqlInsert = "INSERT INTO article (name, title, description,";
         if($allIn == 0)
             $sqlInsert .= "page_id, ";
-        $sqlInsert .= "all_pages, content_area_id, the_content, created_date) VALUES('";
+        $sqlInsert .= "all_pages, content_area_id, the_content, created_date, created_by_id) VALUES('";
         $sqlInsert .=$nameIn ."', '";
         $sqlInsert .= $titleIn . "', '";
         $sqlInsert .= $descIn . "', '";
@@ -134,7 +135,8 @@ class DataAccessMySQLi extends dataAccess
         $sqlInsert .= $allIn . "' , '";
         $sqlInsert .= $divIn . "', '" ;
         $sqlInsert .= $contentIn .  "', ";
-        $sqlInsert .= "NOW()" . ")";
+        $sqlInsert .= "NOW()" . ",'";
+        $sqlInsert .= $creatorIn . "')";
 
 
         $this->result =@$this->dbConnection->query($sqlInsert);
@@ -146,7 +148,7 @@ class DataAccessMySQLi extends dataAccess
         return $this->dbConnection->affected_rows;
     }
 
-    public function updateArticle($idIn, $nameIn, $titleIn, $descIn, $pageIn, $allIn, $divIn, $contentIn)
+    public function updateArticle($idIn, $nameIn, $titleIn, $descIn, $pageIn, $allIn, $divIn, $contentIn,$modID)
     {
         $updateSql = "UPDATE article SET ";
         $updateSql .= "name='" . $nameIn . "',";
@@ -160,7 +162,9 @@ class DataAccessMySQLi extends dataAccess
         $updateSql .= "all_pages='" . $allIn . "',";
         $updateSql .= "content_area_id='" . $divIn . "',";
         $updateSql .= "the_content='" . $contentIn . "',";
+        $updateSql .= "modified_by_id='" . $modID . "',";
         $updateSql .= "modified_date=NOW()";
+
         $updateSql .= "WHERE article_id=" . $idIn;
 
         $this->result =@$this->dbConnection->query($updateSql);
@@ -213,9 +217,9 @@ class DataAccessMySQLi extends dataAccess
 
     }
 
-    public function insertDiv($nameIn, $divNameIn, $orderIn, $descIn)
+    public function insertDiv($nameIn, $divNameIn, $orderIn, $descIn, $creatorIn)
     {
-        $sqlInsert = "INSERT INTO content_area (name, div_name, page_order_pos, description, created_date) VALUES('$nameIn', '$divNameIn', '$orderIn', '$descIn', NOW())";
+        $sqlInsert = "INSERT INTO content_area (name, div_name, page_order_pos, description, created_date, created_by_id) VALUES('$nameIn', '$divNameIn', '$orderIn', '$descIn', NOW(), '$creatorIn')";
 
 
         $this->result =@$this->dbConnection->query($sqlInsert);
@@ -227,13 +231,14 @@ class DataAccessMySQLi extends dataAccess
         return $this->dbConnection->affected_rows;
     }
 
-    public function updateDiv($idIn, $nameIn, $divNameIn, $descIn, $orderIn)
+    public function updateDiv($idIn, $nameIn, $divNameIn, $descIn, $orderIn,$modIn)
     {
         $updateSql = "UPDATE content_area SET ";
         $updateSql .= "name='" . $nameIn . "',";
         $updateSql .= "div_name='" . $divNameIn . "',";
         $updateSql .= "description='" . $descIn . "',";
         $updateSql .= "page_order_pos='" . $orderIn ."',";
+        $updateSql .= "modified_by_id='" . $modIn ."',";
         $updateSql .= "modified_date=NOW()";
         $updateSql .= " WHERE content_id=" . $idIn;
 
@@ -283,9 +288,9 @@ class DataAccessMySQLi extends dataAccess
         return $this->result->fetch_array();
     }
 
-    public function insertCss($nameIn,$descIn, $activeIn, $contentIn)
+    public function insertCss($nameIn,$descIn, $activeIn, $contentIn, $creatorIn)
     {
-        $sqlInsert = "INSERT INTO css (name, description, active_status, style_snippet,created_date) VALUES('$nameIn', '$descIn', '$activeIn', '$contentIn',NOW())";
+        $sqlInsert = "INSERT INTO css (name, description, active_status, style_snippet,created_date, created_by_id) VALUES('$nameIn', '$descIn', '$activeIn', '$contentIn',NOW(), '$creatorIn' )";
 
 
         $this->result =@$this->dbConnection->query($sqlInsert);
@@ -296,13 +301,14 @@ class DataAccessMySQLi extends dataAccess
         }
         return $this->dbConnection->affected_rows;
     }
-    public function updateCss($idIn, $nameIn, $descIn, $activeIn, $contentIn)
+    public function updateCss($idIn, $nameIn, $descIn, $activeIn, $contentIn,$modIn)
     {
         $updateSql = "UPDATE css SET ";
         $updateSql .= "name='" . $nameIn . "',";
         $updateSql .= "description='" . $descIn . "',";
         $updateSql .= "active_status='" . $activeIn . "',";
         $updateSql .= "style_snippet='" . $contentIn . "',";
+        $updateSql .= "modified_by_id='" . $modIn . "',";
         $updateSql .= "modified_date=NOW()";
         $updateSql .= " WHERE css_id=" . $idIn;
 
@@ -517,14 +523,15 @@ class DataAccessMySQLi extends dataAccess
         }
     }
 
-    public function updateUser($idIn, $usernameIn, $FnameIn, $LnameIn, $wordPassIn,$permissionIn) //$modID) // This needs to be added when logins are better setup
+    public function updateUser($idIn, $usernameIn, $FnameIn, $LnameIn, $wordPassIn,$modID) // This needs to be added when logins are better setup
     {
         $updateSql = "UPDATE user SET ";
         $updateSql .= "username='" .$usernameIn  . "',";
         $updateSql .= "first_name='" . $FnameIn . "',";
         $updateSql .= "last_name='" . $LnameIn . "',";
         $updateSql .= "password='" . $wordPassIn. "',";
-        $updateSql .= "permissions_id='" . $permissionIn. "',";
+
+        $updateSql .= "modified_by_id='" . $modID. "',";
         $updateSql .= "last_modified_date=NOW()";
         $updateSql .= "WHERE user_id=" . $idIn;
 
@@ -537,10 +544,11 @@ class DataAccessMySQLi extends dataAccess
         return $this->dbConnection->affected_rows;
     }
 
-    public function updateUserPriv($idIn,$permissionIn) //$modID) // This needs to be added when logins are better setup
+    public function updateUserPriv($idIn,$permissionIn,$modID) // This needs to be added when logins are better setup
     {
         $updateSql = "UPDATE user SET ";
         $updateSql .= "permissions_id='" . $permissionIn. "',";
+        $updateSql .= "modified_by_id='" . $modID. "',";
         $updateSql .= "last_modified_date=NOW()";
         $updateSql .= "WHERE user_id=" . $idIn;
 
@@ -553,12 +561,12 @@ class DataAccessMySQLi extends dataAccess
         return $this->dbConnection->affected_rows;
     }
 
-    public function insertUser($usernameIn,$userFnameIn,$userLnameIn,$userPassword) //Creator ID still needs to be added!
+    public function insertUser($usernameIn,$userFnameIn,$userLnameIn,$userPassword,$creatorIn) //Creator ID still needs to be added!
     {
         $this->result =@$this->dbConnection->query("SELECT user_id FROM user");
         $rowcount=(mysqli_num_rows($this->result)+1);
-         $this->result =@$this->dbConnection->query("INSERT INTO user (user_id,username,first_name,last_name,password,created_date)
-                                            VALUES ('$rowcount','$usernameIn','$userFnameIn','$userLnameIn','$userPassword', NOW())");
+         $this->result =@$this->dbConnection->query("INSERT INTO user (user_id,username,first_name,last_name,password,created_date,created_by_id)
+                                            VALUES ('$rowcount','$usernameIn','$userFnameIn','$userLnameIn','$userPassword', NOW(),'$creatorIn' )");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .

@@ -99,13 +99,13 @@ class UserClass
     {
         $myDataAccess = DataAccessMySQLi::getInstance();
         $myDataAccess->getDBConn();
-
+//TODO FLAG - CHECK THAT THIS WORKS
         $rowsAffected = $myDataAccess->updateUser($this->userID
             ,$this->username
             ,$this->userFirstName
             ,$this->userLastName
             ,$this->wordPass
-            ,$this->permisions);
+            ,$this->modBy);
 
         $myDataAccess->closeDBConn();
 
@@ -141,7 +141,8 @@ class UserClass
         $myDataAccess->getDBConn();
 
         $rowsAffected = $myDataAccess->updateUserPriv($this->userID
-            ,$this->permisions);
+            ,$this->permisions
+            ,$this->modBy);
 
         $myDataAccess->closeDBConn();
 
@@ -158,7 +159,7 @@ class UserClass
             ,$this->userFirstName
             ,$this->userLastName
             ,$this->wordPass
-            ,$this->permisions);
+            ,$this->creator);
 
         $myDataAccess->closeDBConn();
 

@@ -134,7 +134,8 @@ class PageClass
         $rowsAffected = $myDataAccess->insertPage($this->pageTitle
             ,$this->pageWebName
             ,$this->desc
-            ,$this->activeCSS);
+            ,$this->activeCSS
+            ,$this->creator);
 
         $myDataAccess->closeDBConn();
 
@@ -160,7 +161,8 @@ class PageClass
             ,$this->pageTitle
             ,$this->pageWebName
             ,$this->desc
-            ,$this->activeCSS);
+            ,$this->activeCSS
+            ,$this->modBy);
 
         $myDataAccess->closeDBConn();
 

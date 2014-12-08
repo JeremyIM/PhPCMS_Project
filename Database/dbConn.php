@@ -87,8 +87,8 @@ abstract class dataAccess
     public abstract  function fetchUModDate($row);
 
     public abstract function getSingleUser($userID_in);
-    public abstract function insertUser($username,$userFnameIn,$userLnameIn,$userPassword);
-    public abstract  function updateUserPriv($idIn,$permissionIn);
+    public abstract function insertUser($username,$userFnameIn,$userLnameIn,$userPassword,$creatorIn);
+    public abstract  function updateUserPriv($idIn,$permissionIn, $modID);
 
 
 

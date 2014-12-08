@@ -162,7 +162,8 @@ class ArticleClass
             ,$this->pageOn
             ,$this->allPages
             ,$this->divContainer
-            ,$this->theContent);
+            ,$this->theContent
+            ,$this->creator);
 
         $myDataAccess->closeDBConn();
 
@@ -191,7 +192,8 @@ class ArticleClass
             ,$this->pageOn
             ,$this->allPages
             ,$this->divContainer
-            ,$this->theContent);
+            ,$this->theContent
+            ,$this->modBy);
 
         $myDataAccess->closeDBConn();
 
