@@ -48,15 +48,18 @@ if ($userObj->getId() > 0): //check that only 1 user was returned
     $_SESSION['login'] = $login;
     $_SESSION['pw'] = $pw;
 
-    if($userObj->getUsername() == "editor")
+    if((in_array($userObj->getPermission(), [2])))
     {
         header("location:editorPortal.php");
     }
-    if($userObj->getUsername() == "admin")
+    if(in_array($userObj->getPermission(), [0]))
     {
         header("location:adminPortal.php");
     }
-    //if uer is author
+    if(in_array($userObj->getPermission(), [1]))
+    {
+        header("location:index.php");
+    }
 ?>
 <form action="logout.php" method="post">
     <input type="Submit" name="logout" value="Logout" />

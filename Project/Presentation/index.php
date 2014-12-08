@@ -79,6 +79,9 @@ else
                 <input type="text" id="editArticleId" name="editArticleId" value="<?php echo $article->getID(); ?>" hidden />
                 <input type="Submit" id="editAuthorArticle" name="editAuthorArticle" value="Edit" />
             </form>
+            <form action="logout.php" method="post">
+                <input type="Submit" id="logout" name="logout" value="Edit" />
+            </form>
 
             </article>
         <?php endforeach; ?>

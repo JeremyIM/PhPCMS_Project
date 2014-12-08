@@ -321,8 +321,10 @@ class DataAccessMySQLi extends dataAccess
         }
         return $this->dbConnection->affected_rows;
 
-    }/////////// ** USER SQL QUERIES ** ///////////////////
+    }
+    /////////// ** USER SQL QUERIES ** ///////////////////
     // GET + FETCH
+
     public function getUsers()
     {
         $this->result =@$this->dbConnection->query("SELECT * FROM user");
@@ -331,7 +333,9 @@ class DataAccessMySQLi extends dataAccess
             die('Could not retrieve pages from the Database: ' .
                 $this->dbConnection->error);
         }
+
     }//end getPages
+
     public function fetchUsers()
     {
         if(!$this->result)
@@ -341,6 +345,7 @@ class DataAccessMySQLi extends dataAccess
         }
         return $this->result->fetch_array();
     }
+
     public function getSingleUser($userID_in)
     {
         $this->result =@$this->dbConnection->query("SELECT * FROM user WHERE user_id='$userID_in'");
@@ -350,15 +355,18 @@ class DataAccessMySQLi extends dataAccess
                 $this->dbConnection->error);
         }
     }
-    public function updateUser($idIn, $usernameIn, $FnameIn, $LnameIn, $wordPassIn) //$modID) // This needs to be added when logins are better setup
+
+    public function updateUser($idIn, $usernameIn, $FnameIn, $LnameIn, $wordPassIn,$permissionIn) //$modID) // This needs to be added when logins are better setup
     {
         $updateSql = "UPDATE user SET ";
         $updateSql .= "username='" .$usernameIn  . "',";
         $updateSql .= "first_name='" . $FnameIn . "',";
         $updateSql .= "last_name='" . $LnameIn . "',";
         $updateSql .= "password='" . $wordPassIn. "',";
+        $updateSql .= "permissions_id='" . $permissionIn. "',";
         $updateSql .= "last_modified_date=NOW()";
         $updateSql .= "WHERE user_id=" . $idIn;
+
         $this->result =@$this->dbConnection->query($updateSql);
         if(!$this->result)
         {
@@ -367,6 +375,23 @@ class DataAccessMySQLi extends dataAccess
         }
         return $this->dbConnection->affected_rows;
     }
+
+    public function updateUserPriv($idIn,$permissionIn) //$modID) // This needs to be added when logins are better setup
+    {
+        $updateSql = "UPDATE user SET ";
+        $updateSql .= "permissions_id='" . $permissionIn. "',";
+        $updateSql .= "last_modified_date=NOW()";
+        $updateSql .= "WHERE user_id=" . $idIn;
+
+        $this->result =@$this->dbConnection->query($updateSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+        return $this->dbConnection->affected_rows;
+    }
+
     public function insertUser($usernameIn,$userFnameIn,$userLnameIn,$userPassword) //Creator ID still needs to be added!
     {
         $this->result =@$this->dbConnection->query("SELECT user_id FROM user");
@@ -380,9 +405,11 @@ class DataAccessMySQLi extends dataAccess
         }
         return $this->dbConnection->affected_rows;
     }
+
     public function deleteUser($idIn)
     {
         $deleteSql = "DELETE from user WHERE user_id='$idIn'";
+
         $this->result =@$this->dbConnection->query($deleteSql);
         if(!$this->result)
         {
@@ -390,13 +417,14 @@ class DataAccessMySQLi extends dataAccess
                 $this->dbConnection->error);
         }
         return $this->dbConnection->affected_rows;
+
     }
 
     public function checkUserLogin($userIn, $pwIn)
     {
         $sql = "SELECT * FROM user WHERE username='";
         $sql.= $userIn . "' AND password='";
-        $sql.= $pwIn . "';";
+        $sql.= $pwIn . "'";
         $this->result =@$this->dbConnection->query($sql);
         if(!$this->result)
         {
@@ -405,42 +433,53 @@ class DataAccessMySQLi extends dataAccess
         }
     }
 
-    //USER FETCHES
     public function fetchUUserID($row)
     {
         return $row['user_id'];
     }
+
     public function fetchUUserName($row)
     {
         return $row['username'];
     }
+
     public function fetchUUserFName($row)
     {
         return $row['first_name'];
     }
+
     public function fetchUUserLName($row)
     {
         return $row['last_name'];
     }
+
     public function fetchUWordPass($row)
     {
         return $row['password'];
     }
+
     public function fetchUCreator($row)
     {
         return $row['created_by_id'];
     }
+
     public function fetchUCreateDate($row)
     {
         return $row['created_date'];
     }
+
     public function fetchUModified($row)
     {
         return $row['modified_by_id'];
     }
+
     public function fetchUModDate($row)
     {
         return $row['last_modified_date'];
+    }
+    public function fetchUPermission($row)
+    {
+        return $row['permissions_id'];
     }
 
 

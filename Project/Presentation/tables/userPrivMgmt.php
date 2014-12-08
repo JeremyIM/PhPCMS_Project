@@ -1,4 +1,4 @@
-<h3>Pages:</h3>
+<h3>User Permissions:</h3>
 <table>
     <thead>
     <tr>
@@ -15,8 +15,12 @@
     <tbody>
     <?php
     require("../Business/UserClass.php");
+
     $arrayOfPages = UserClass::retrieveUsers();
+
     foreach($arrayOfPages as $page):
+        $var = $page->getPermission();
+
         ?>
         <tr>
             <td><?php echo $page->getID(); ?></td>
@@ -25,19 +29,19 @@
             <td><?php echo $page->getLastName(); ?></td>
 
             <td>
-                <form action="adminPortal.php" method="post">
-                    <input type="text" id="editUserId" name="editUserId" value="<?php echo $page->getID(); ?>" hidden /><input type="text" id="editId" name="editUserUsername" value="<?php echo $page->getUsername(); ?>" hidden />
-                    <input type="Submit" id="editUser" name="editUser" value="Edit" />
-
-                </form>
+                <input type="checkbox" disabled="disabled" id="userIsAdmin" name="userIsAdmin" <?php if(in_array($var, [4,5,6,7])){echo "checked";}?>  />
             </td>
             <td>
-                <form action="adminPortal.php" method="post">
-                    <input type="text" id="delUserID" name="delUserID" value="<?php echo $page->getID(); ?>" hidden />
-                    <input type="Submit" id="delUser" name="delUser" value="Delete" />
-
-                </form>
+                <input type="checkbox" disabled="disabled" id="userIsEditor" name="userIsEditor" <?php if(in_array($var, [2,3,6,7])){echo "checked";}?>/>
             </td>
+            <td>
+                <input type="checkbox" disabled="disabled" id="userIsAuthor" name="userIsAuthor"<?php if(in_array($var, [1,3,5,7])){echo "checked";}?>/>
+            </td>
+
+            <form action="adminPortal.php" method="post">
+                <input type="text" id="editUserPrivId" name="editUserPrivId" value="<?php echo $page->getID(); ?>" hidden />
+                <td colspan="2"><input type="Submit" id="editUserPriv" name="editUserPriv" value="Update User" /></td>
+            </form>
         </tr>
     <?php endforeach; ?>
     </tbody>

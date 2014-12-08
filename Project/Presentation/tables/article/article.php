@@ -40,6 +40,7 @@
                     <?php foreach ($arrayOfPages as $page):?>
                         <option value="<?php echo $page->getId(); ?>"><?php echo $page->getPageTitle(); ?></option>
                     <?php endforeach; ?>
+                    <option value="remove">Remove From All Pages</option>
                 </select>
             </td>
         </tr>

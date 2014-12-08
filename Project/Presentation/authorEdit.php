@@ -6,9 +6,9 @@
     <body>
         <h3>Edit Article</h3>
         <?php
-            require_once'../Business/ArticleClass.php';
-            require_once'../Business/PageClass.php';
-            require_once'../Business/ContentAreaClass.php';
+            require'../Business/ArticleClass.php';
+            require'../Business/PageClass.php';
+            require'../Business/ContentAreaClass.php';
 
             $currentArticle = ArticleClass::getSingleArticle($_POST['editArticleId']);
 
@@ -37,6 +37,7 @@
                             <?php foreach ($arrayOfPages as $page):?>
                                 <option value="<?php echo $page->getId(); ?>"><?php echo $page->getPageTitle(); ?></option>
                             <?php endforeach; ?>
+                            <option value="remove">Remove From All Pages</option>
                         </select>
                     </td>
                 </tr>

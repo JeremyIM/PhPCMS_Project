@@ -72,6 +72,21 @@ abstract class dataAccess
     public abstract function fetchContentAreaPageOrder($row);
     public abstract function fetchContentAreaDesc($row);
 
+    public abstract function getUsers();
+    public abstract function fetchUsers();
+    public abstract function fetchUUserID($row);
+    public abstract function fetchUUserName($row);
+    public abstract function fetchUUserFName($row);
+    public abstract function fetchUUserLName($row);
+    public abstract function fetchUWordPass($row);
+    public abstract function fetchUCreator($row);
+    public abstract function fetchUCreateDate($row);
+    public abstract function fetchUModified($row);
+    public abstract  function fetchUModDate($row);
+    public abstract function getSingleUser($userID_in);
+    public abstract function insertUser($username,$userFnameIn,$userLnameIn,$userPassword);
+    public abstract  function updateUserPriv($idIn,$permissionIn);
+
 
 
 
