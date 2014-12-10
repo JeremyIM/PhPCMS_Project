@@ -112,11 +112,12 @@ class UserClass
         return $rowsAffected . " row(s) Affected.";
     }
 
-    public function checkLoginInfo($userIn, $pwIn)
+    public function checkLoginInfo($userIn)
     {
         $myDataAccess = DataAccessMySQLi::getInstance();
         $myDataAccess->getDBConn();
-        $myDataAccess->checkUserLogin($userIn, $pwIn);
+        
+        $myDataAccess->checkUserLogin($userIn);
 
         $row = $myDataAccess->fetchUsers();
 
@@ -127,6 +128,7 @@ class UserClass
         $currentUser->wordPass = $myDataAccess->fetchUWordPass($row);
         $currentUser->creator = $myDataAccess->fetchUCreator($row);
         $currentUser->createDate = $myDataAccess->fetchUCreateDate($row);
+        $currentUser->wordPassSalt = $myDataAccess->fetchUSalt($row);
         $currentUser->modBy = $myDataAccess->fetchUModified($row);
         $currentUser->modDate = $myDataAccess->fetchUModDate($row);
         $currentUser->permisions = $myDataAccess->fetchUPermission($row);
@@ -134,6 +136,8 @@ class UserClass
 
         return $currentUser;
     }
+
+
 
     public function updateUserPriv()
     {
@@ -159,7 +163,8 @@ class UserClass
             ,$this->userFirstName
             ,$this->userLastName
             ,$this->wordPass
-            ,$this->creator);
+            ,$this->creator
+            ,$this->wordPassSalt);
 
         $myDataAccess->closeDBConn();
 
@@ -227,6 +232,11 @@ class UserClass
     {
         return $this->permisions;
     }
+    public function getWordPassSalt()
+    {
+        return $this->wordPassSalt;
+    }
+
 // SETTERS
 
     public function setId($id_in)
@@ -264,6 +274,11 @@ class UserClass
         $this->createDate = $creatDate_in;
     }
 
+    public function setWordpassSalt($salt_in)
+    {
+        $this->wordPassSalt = $salt_in;
+    }
+
     public function setModifier($modif_in)
     {
         $this->modBy = $modif_in;
@@ -277,6 +292,19 @@ class UserClass
     public function setPermission($permission_in)
     {
         $this->permisions = $permission_in;
+    }
+    public function generateSalt()
+    {
+        $cost = 10;
+
+        $salt = substr(sha1(mt_rand()),0,22);
+        $salt = sprintf("$2a$%02d$", $cost) . $salt;
+        return $salt;
+    }
+    public function generateHash($password, $salt)
+    {
+        $hash = crypt($password, $salt);
+        return $hash;
     }
 
 

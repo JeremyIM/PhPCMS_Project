@@ -23,6 +23,14 @@ $pw = $_POST['pw'];
 //safety first
 $login = stripslashes($login);
 $pw = stripslashes($pw);
+//get the salt for the user based off username
+
+$userObj = UserClass::checkLoginInfo($login);
+//hash that PW
+$test = UserClass::generateHash($pw, $userObj->getWordPassSalt());
+
+
+
 
 
 //TODO: move to DataAccess
@@ -33,7 +41,9 @@ $pw = stripslashes($pw);
 //$hashedPw = hash("sha1", $pw);
 
 //build sql + get result TODO: move to DataAccess via /Business/UserClass.php once created
-$userObj = UserClass::checkLoginInfo($login, $pw);
+
+
+
 
 /*
 
@@ -44,7 +54,9 @@ $count = mysqli_num_rows($result);
 
 mysqli_close('$db');
 */
-if ($userObj) //check that only 1 user was returned
+
+
+if ($test == $userObj->getWordPass()) //check that only 1 user was returned
 {
     //set session variables
     $_SESSION['login'] = $login;

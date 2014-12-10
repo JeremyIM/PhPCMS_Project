@@ -12,7 +12,10 @@ $newUser->setUsername($_POST['uUsername']);
 $newUser->setFistName($_POST['uFirstname']);
 $newUser->setLastName($_POST['uLastname']);
 $newUser->setModifier($userObj->getId());
-$newUser->setWordPass($_POST['uWordpass']);
+
+$newUser->setWordpassSalt($newUser->generateSalt());
+$newUser->setWordPass($newUser->generateHash($_POST['uWordpass'],$newUser->getWordPassSalt()));
+
 $result = $newUser->updateUser();
 
 //report success/failure

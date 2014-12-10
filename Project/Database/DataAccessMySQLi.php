@@ -5,24 +5,46 @@ require_once '../Database/dbConn.php';
 
 class DataAccessMySQLi extends dataAccess
 {
+    private $dbConnectionAdmin;
+    private $dbConnectionEditor;
+    private $dbConnectionAuthor;
     private $dbConnection;
     private $result;
 
     public function getDBConn()
         //FLAG this needs to be changed, connecting as root security FLAW!
     {
-        $this->dbConnection = @new mysqli("localhost","root", "inet2005","mydb");
-        if (!$this->dbConnection)
+        if($_SESSION['permission']=="admin")
+        {$this->dbConnectionAdmin = @new mysqli("localhost","Admin", "Admin2005","mydb");}
+        if($_SESSION['permission']=="editor")
+        {$this->dbConnectionEditor = @new mysqli("localhost","Editor", "Editor2005","mydb");}
+        if($_SESSION['permission']=="author")
+        {$this->dbConnectionAuthor = @new mysqli("localhost","Author", "Author2005","mydb");}
+        if(!isset($_SESSION['permission']))
+        {$this->dbConnection = @new mysqli("localhost","Browse", "Browse2005","mydb");}
+
+        if (!$this->dbConnectionAdmin && !$this->dbConnectionEditor && !$this->dbConnectionAuthor && !$this->dbConnection)
         {
             die('Could not connect to the Sakila Database: ' .
                 $this->dbConnection->connect_errno);
         }
     }
 
+
+
+
+
     public function closeDBConn()
     {
 
-        $this->dbConnection->close();
+        if($_SESSION['permission']=="admin")
+        {$this->dbConnectionAdmin->close();}
+        if($_SESSION['permission']=="editor")
+        {$this->dbConnectionEditor->close();}
+        if($_SESSION['permission']=="author")
+        {$this->dbConnectionAuthor->close();}
+        if(!isset($_SESSION['permission']))
+        {$this->dbConnection->close();}
     }
 /////////////////////////////////////////////////////////////
     public function getPages()
@@ -337,11 +359,11 @@ class DataAccessMySQLi extends dataAccess
 
     public function getUsers()
     {
-        $this->result =@$this->dbConnection->query("SELECT * FROM user");
+        $this->result =@$this->dbConnectionAdmin->query("SELECT * FROM user");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
-                $this->dbConnection->error);
+                $this->dbConnectionAdmin->error);
         }
 
     }//end getPages
@@ -351,22 +373,24 @@ class DataAccessMySQLi extends dataAccess
         if(!$this->result)
         {
             die('No records in the result set: ' .
-                $this->dbConnection->error);
+                $this->dbConnectionAdmin->error);
         }
         return $this->result->fetch_array();
     }
 
     public function getSingleUser($userID_in)
     {
-        $this->result =@$this->dbConnection->query("SELECT * FROM user WHERE user_id='$userID_in'");
+        $number = mysqli_real_escape_string($this->dbConnectionAdmin, $userID_in);
+        $this->result =@$this->dbConnectionAdmin->query("SELECT * FROM user WHERE user_id='$number'");
+
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
-                $this->dbConnection->error);
+                $this->dbConnectionAdmin->error);
         }
     }
 
-    public function updateUser($idIn, $usernameIn, $FnameIn, $LnameIn, $wordPassIn,$permissionIn, $modID) //$modID) // This needs to be added when logins are better setup
+    public function updateUser($idIn, $usernameIn, $FnameIn, $LnameIn, $wordPassIn,$permissionIn, $modID, $saltIn) //$modID) // This needs to be added when logins are better setup
     {
         $updateSql = "UPDATE user SET ";
         $updateSql .= "username='" .$usernameIn  . "',";
@@ -375,16 +399,17 @@ class DataAccessMySQLi extends dataAccess
         $updateSql .= "password='" . $wordPassIn. "',";
         $updateSql .= "permissions_id='" . $permissionIn. "',";
         $updateSql .= "modified_by_id='" . $modID. "',";
+        $updateSql .= "password_salt='" . $saltIn. "',";
         $updateSql .= "last_modified_date=NOW()";
         $updateSql .= "WHERE user_id=" . $idIn;
 
-        $this->result =@$this->dbConnection->query($updateSql);
+        $this->result =@$this->dbConnectionAdmin->query($updateSql);
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
-                $this->dbConnection->error);
+                $this->dbConnectionAdmin->error);
         }
-        return $this->dbConnection->affected_rows;
+        return $this->dbConnectionAdmin->affected_rows;
     }
 
     public function updateUserPriv($idIn,$permissionIn,$modID) // This needs to be added when logins are better setup
@@ -395,53 +420,64 @@ class DataAccessMySQLi extends dataAccess
         $updateSql .= "last_modified_date=NOW()";
         $updateSql .= "WHERE user_id=" . $idIn;
 
-        $this->result =@$this->dbConnection->query($updateSql);
+        $this->result =@$this->dbConnectionAdmin->query($updateSql);
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
-                $this->dbConnection->error);
+                $this->dbConnectionAdmin->error);
         }
-        return $this->dbConnection->affected_rows;
+        return $this->dbConnectionAdmin->affected_rows;
     }
 
-    public function insertUser($usernameIn,$userFnameIn,$userLnameIn,$userPassword,$creatorIn)
+    public function insertUser($usernameIn,$userFnameIn,$userLnameIn,$userPassword,$creatorIn,$saltIn) //Creator ID still needs to be added!
     {
-        $this->result =@$this->dbConnection->query("SELECT user_id FROM user");
+        $this->result =@$this->dbConnectionAdmin->query("SELECT user_id FROM user");
         $rowcount=(mysqli_num_rows($this->result)+1);
-        $this->result =@$this->dbConnection->query("INSERT INTO user (user_id,username,first_name,last_name,password,created_date,created_by_id)
-                                                    VALUES ('$rowcount','$usernameIn','$userFnameIn','$userLnameIn','$userPassword', NOW(),'$creatorIn' )");
-        if(!$this->result)
+
+        $sUsername = mysqli_real_escape_string($this->dbConnectionAdmin, stripslashes($usernameIn));
+        $sUserFname = mysqli_real_escape_string($this->dbConnectionAdmin, stripslashes($userFnameIn));
+        $sUseLrname = mysqli_real_escape_string($this->dbConnectionAdmin, stripslashes($userLnameIn));
+        $sUserPass = mysqli_real_escape_string($this->dbConnectionAdmin, stripslashes($userPassword));
+        $sUserCreator = mysqli_real_escape_string($this->dbConnectionAdmin, stripslashes($creatorIn));
+        $sUserSalt = mysqli_real_escape_string($this->dbConnectionAdmin, stripslashes($saltIn));
+
+        $sql = "INSERT INTO user (user_id,username,first_name,last_name,password,created_date,created_by_id,password_salt)
+                VALUES ('$rowcount','$sUsername','$sUserFname','$sUseLrname','$sUserPass', NOW(),'$sUserCreator','$sUserSalt' )";
+        if(!mysqli_query($this->dbConnectionAdmin, $sql))
         {
             die('Could not retrieve pages from the Database: ' .
-                $this->dbConnection->error);
+                $this->dbConnectionAdmin->error);
         }
-        return $this->dbConnection->affected_rows;
+        return $this->dbConnectionAdmin->affected_rows;
     }
 
     public function deleteUser($idIn)
     {
         $deleteSql = "DELETE from user WHERE user_id='$idIn'";
 
-        $this->result =@$this->dbConnection->query($deleteSql);
+        $this->result =@$this->dbConnectionAdmin->query($deleteSql);
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
-                $this->dbConnection->error);
+                $this->dbConnectionAdmin->error);
         }
-        return $this->dbConnection->affected_rows;
+        return $this->dbConnectionAdmin->affected_rows;
 
     }
 
-    public function checkUserLogin($userIn, $pwIn)
+    public function checkUserLogin($userIn)
     {
         $sql = "SELECT * FROM user WHERE username='";
-        $sql.= $userIn . "' AND password='";
-        $sql.= $pwIn . "'";
-        $this->result =@$this->dbConnection->query($sql);
+        $sql.= $userIn . "'";
+        if($_SESSION['permission']=="admin")
+        {$this->result =@$this->dbConnectionAdmin->query($sql);}
+        if(!isset($_SESSION['permission']))
+        { $this->result =@$this->dbConnection->query($sql);}
+
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
-                $this->dbConnection->error);
+                $this->dbConnectionAdmin->error);
         }
     }
 
@@ -492,6 +528,10 @@ class DataAccessMySQLi extends dataAccess
     public function fetchUPermission($row)
     {
         return $row['permissions_id'];
+    }
+    public function fetchUSalt($row)
+    {
+        return $row['password_salt'];
     }
 
 

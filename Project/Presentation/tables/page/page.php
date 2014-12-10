@@ -18,15 +18,15 @@
     <table>
         <tr>
             <td>Page Name: </td>
-            <td><input type="text" id="pName" name="pName" value="<?php echo $currentPage->getPageTitle(); ?>" /></td>
+            <td><input type="text" id="pName"placeholder="Alphanumeric max 10" pattern="[a-zA-Z0-9]{1,10}" required name="pName" value="<?php echo $currentPage->getPageTitle(); ?>" /></td>
         </tr>
         <tr>
             <td>Webname: </td>
-            <td><input type="text" id="pWebName" name="pWebName" value="<?php echo $currentPage->getWebName(); ?>" /></td>
+            <td><input type="text" id="pWebName" name="pWebName" placeholder="Alphanumeric max 10" pattern="[a-zA-Z0-9]{10}" value="<?php echo $currentPage->getWebName(); ?>" /></td>
         </tr>
         <tr>
             <td>Description: </td>
-            <td><textarea id="pDesc" name="pDesc"><?php echo $currentPage->getDesc(); ?></textarea></td>
+            <td><textarea id="pDesc"placeholder="Brief description, limit:140" pattern="[a-zA-Z0-9]{1,140}" name="pDesc"><?php echo $currentPage->getDesc(); ?></textarea></td>
         </tr>
         <tr>
             <td>Current Active Template: </td>

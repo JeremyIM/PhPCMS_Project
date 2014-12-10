@@ -8,16 +8,6 @@ class DataAccessMySQLi extends dataAccess
     private $dbConnection;
     private $result;
 
-    public function getDBConn()
-        //FLAG this needs to be changed, connecting as root security FLAW!
-    {
-        $this->dbConnection = @new mysqli("localhost","root", "inet2005","mydb");
-        if (!$this->dbConnection)
-        {
-            die('Could not connect to the Sakila Database: ' .
-                $this->dbConnection->connect_errno);
-        }
-    }
 
     public function closeDBConn()
     {
@@ -515,6 +505,7 @@ class DataAccessMySQLi extends dataAccess
 
     public function getSingleUser($userID_in)
     {
+
         $this->result =@$this->dbConnection->query("SELECT * FROM user WHERE user_id='$userID_in'");
         if(!$this->result)
         {
@@ -561,12 +552,12 @@ class DataAccessMySQLi extends dataAccess
         return $this->dbConnection->affected_rows;
     }
 
-    public function insertUser($usernameIn,$userFnameIn,$userLnameIn,$userPassword,$creatorIn) //Creator ID still needs to be added!
+    public function insertUser($usernameIn,$userFnameIn,$userLnameIn,$userPassword,$creatorIn, $saltIn) //Creator ID still needs to be added!
     {
         $this->result =@$this->dbConnection->query("SELECT user_id FROM user");
         $rowcount=(mysqli_num_rows($this->result)+1);
-         $this->result =@$this->dbConnection->query("INSERT INTO user (user_id,username,first_name,last_name,password,created_date,created_by_id)
-                                            VALUES ('$rowcount','$usernameIn','$userFnameIn','$userLnameIn','$userPassword', NOW(),'$creatorIn' )");
+         $this->result =@$this->dbConnection->query("INSERT INTO user (user_id,username,first_name,last_name,password,created_date,created_by_id,password_salt)
+                                            VALUES ('$rowcount','$usernameIn','$userFnameIn','$userLnameIn','$userPassword', NOW(),'$creatorIn','$saltIn' )");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
@@ -589,9 +580,9 @@ class DataAccessMySQLi extends dataAccess
 
     }
 
-    public function checkUserLogin($userIn, $pwIn)
+    public function checkUserLogin($userIn)
     {
-        $this->result =@$this->dbConnection->query("SELECT * FROM user WHERE username='$userIn' AND password='$pwIn' LIMIT 1");
+        $this->result =@$this->dbConnection->query("SELECT * FROM user WHERE username='$userIn'LIMIT 1");
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
@@ -647,6 +638,10 @@ class DataAccessMySQLi extends dataAccess
     public function fetchUPermission($row)
     {
         return $row['permissions_id'];
+    }
+    public function fetchUSalt($row)
+    {
+        return $row['password_salt'];
     }
 
 

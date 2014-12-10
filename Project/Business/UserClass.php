@@ -106,7 +106,8 @@ class UserClass
             ,$this->userLastName
             ,$this->wordPass
             ,$this->permisions
-            ,$this->modBy);
+            ,$this->modBy
+            ,$this->wordPassSalt);
 
         $myDataAccess->closeDBConn();
 
@@ -137,8 +138,8 @@ class UserClass
             ,$this->userFirstName
             ,$this->userLastName
             ,$this->wordPass
-            ,$this->permisions
-            ,$this->creator);
+            ,$this->creator
+            ,$this->wordPassSalt);
 
         $myDataAccess->closeDBConn();
 
@@ -155,11 +156,11 @@ class UserClass
         return $rowsAffected . " row(s) affected";
     }
 
-    public function checkLoginInfo($userIn, $pwIn)
+    public function checkLoginInfo($userIn)
     {
         $myDataAccess = DataAccessMySQLi::getInstance();
         $myDataAccess->getDBConn();
-        $myDataAccess->checkUserLogin($userIn, $pwIn);
+        $myDataAccess->checkUserLogin($userIn);
 
         $row = $myDataAccess->fetchUsers();
 
@@ -170,6 +171,7 @@ class UserClass
         $currentUser->wordPass = $myDataAccess->fetchUWordPass($row);
         $currentUser->creator = $myDataAccess->fetchUCreator($row);
         $currentUser->createDate = $myDataAccess->fetchUCreateDate($row);
+        $currentUser->wordPassSalt =$myDataAccess->fetchUSalt($row);
         $currentUser->modBy = $myDataAccess->fetchUModified($row);
         $currentUser->modDate = $myDataAccess->fetchUModDate($row);
         $currentUser->permisions=$myDataAccess->fetchUPermission($row);
@@ -204,7 +206,10 @@ class UserClass
     {
         return $this->wordPass;
     }
-
+    public function getWordPassSalt()
+    {
+        return $this->wordPassSalt;
+    }
     public function getCreatedBy()
     {
         return $this->creator;
@@ -255,6 +260,10 @@ class UserClass
     {
         $this->wordPass = $wordpas_in;
     }
+    public function setWordpassSalt($salt_in)
+    {
+        $this->wordPassSalt = $salt_in;
+    }
 
     public function setCreatedBy($creator_in)
     {
@@ -281,6 +290,19 @@ class UserClass
         $this->permisions = $permission_in;
     }
 
+    public function generateSalt()
+    {
+        $cost = 10;
+
+        $salt = substr(sha1(mt_rand()),0,22);
+        $salt = sprintf("$2a$%02d$", $cost) . $salt;
+        return $salt;
+    }
+    public function generateHash($password, $salt)
+    {
+        $hash = crypt($password, $salt);
+        return $hash;
+    }
 
 
 }//end UserClass
