@@ -18,11 +18,11 @@
     <table>
         <tr>
             <td>Page Name: </td>
-            <td><input type="text" id="pName" name="pName" value="<?php echo $currentPage->getPageTitle(); ?>" /></td>
+            <td><input type="text" id="pName" required name="pName" value="<?php echo $currentPage->getPageTitle(); ?>" /></td>
         </tr>
         <tr>
             <td>Webname: </td>
-            <td><input type="text" id="pWebName" name="pWebName" value="<?php echo $currentPage->getWebName(); ?>" /></td>
+            <td><input type="text" id="pWebName" name="pWebName"  value="<?php echo $currentPage->getWebName(); ?>" /></td>
         </tr>
         <tr>
             <td>Description: </td>

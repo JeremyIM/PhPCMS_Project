@@ -13,11 +13,11 @@
     <table>
         <tr>
             <td>Username: </td>
-            <td><input type="text" id="uUsername" name="uUsername" value="<?php echo $currentUser->getUsername(); ?>" /></td>
+            <td><input type="text" id="uUsername" name="uUsername"  value="<?php echo $currentUser->getUsername(); ?>"  /></td>
         </tr>
         <tr>
             <td>First Name: </td>
-            <td><input type="text" id="uFirstname" name="uFirstname" value="<?php echo $currentUser->getFistName(); ?>" /></td>
+            <td><input type="text" id="uFirstname" name="uFirstname" value="<?php echo $currentUser->getFistName(); ?>"/></td>
         </tr>
         <tr>
             <td>Last Name: </td>
@@ -25,7 +25,7 @@
         </tr>
         <tr>
             <td>Password: </td>
-            <td><input type="text" id="uWordpass" name="uWordpass" value="<?php echo $currentUser->getWordPass(); ?>" /></td>
+            <td><input type="text" id="uWordpass" name="uWordpass"  value="<?php echo $currentUser->getWordPass(); ?>"/></td>
         </tr>
 
 

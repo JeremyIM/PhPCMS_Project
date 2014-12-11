@@ -1,5 +1,4 @@
 <?php //check to make sure user is logged in
-    //TODO: unlock once Login finished, and copy to every relevant page
     require 'isLoggedIn.php';
     checkIfLoggedIn();
 ?>
@@ -248,6 +247,9 @@
     }
     ?>
 
+
+
+<a href="chart.php">Chart City!</a>
 
 </body>
 

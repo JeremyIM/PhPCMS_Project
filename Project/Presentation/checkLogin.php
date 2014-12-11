@@ -17,8 +17,8 @@ require '../Business/UserClass.php';
 
 <?php
 //grab login info passed in
-$login = $_POST['login'];
-$pw = $_POST['pw'];
+$login = strip_tags( trim($_POST['login']));
+$pw = strip_tags( trim($_POST['pw']));
 
 //safety first
 $login = stripslashes($login);
@@ -32,8 +32,9 @@ $pw = stripslashes($pw);
 //$hashedPw = hash("sha1", $pw);
 
 //build sql + get result
-$userObj = UserClass::checkLoginInfo($login, $pw);
+$userObj = UserClass::checkLoginInfo($login);
 
+$test = UserClass::generateHash($pw, $userObj->getWordPassSalt());
 /*
 
 $sql = "SELECT * FROM WebUsers WHERE login='$login' AND pw='$hashedPw'";
@@ -43,21 +44,24 @@ $count = mysqli_num_rows($result);
 
 mysqli_close('$db');
 */
-if ($userObj->getId() > 0): //check that only 1 user was returned
+if ($userObj->getId() > 0 && ($test == $userObj->getWordPass())): //check that only 1 user was returned
     //set session variables
     $_SESSION['login'] = $login;
     $_SESSION['pw'] = $pw;
 
     if((in_array($userObj->getPermission(), [2])))
     {
+        $_SESSION['permission'] = "editor";
         header("location:editorPortal.php");
     }
-    if(in_array($userObj->getPermission(), [0]))
+    if(in_array($userObj->getPermission(), [4]))
     {
+        $_SESSION['permission'] = "admin";
         header("location:adminPortal.php");
     }
     if(in_array($userObj->getPermission(), [1]))
     {
+        $_SESSION['permission'] = "author";
         header("location:index.php");
     }
 ?>
@@ -67,7 +71,7 @@ if ($userObj->getId() > 0): //check that only 1 user was returned
 <?php
 else: //inform user ?>
     <p>"Wrong UserName or Password!</p>
-     "<a href='login.html'>Back</a>";
+     <a href='login.html'>Back</a>
 <?php endif;?>
 
 </body>

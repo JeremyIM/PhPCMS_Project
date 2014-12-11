@@ -129,7 +129,8 @@ class CssClass
         $rowsAffected = $myDataAccess->insertCss($this->cssName
             ,$this->desc
             ,$this->active
-            ,$this->theContent);
+            ,$this->theContent
+            ,$this->creator);
 
         $myDataAccess->closeDBConn();
 
@@ -155,7 +156,8 @@ class CssClass
             ,$this->cssName
             ,$this->desc
             ,$this->active
-            ,$this->theContent);
+            ,$this->theContent
+            ,$this->modBy);
 
         $myDataAccess->closeDBConn();
 

@@ -1,11 +1,9 @@
+<?php //check to make sure user is logged in
+require 'isLoggedIn.php';
+checkIfLoggedIn();
 
-<!-- //pseudo code for admin page
-*
-*        //if currentUser == Admin
-*        //load admin management options
-*            //manage users
-*            //manage user permissions
--->
+//$_SESSION['permission'] = "admin";
+?>
 
 <html>
 <head>

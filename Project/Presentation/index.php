@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php
+session_start();
 require_once '../Database/dbConn.php';
 require_once '../Database/DataAccessMySQLi.php';
 require_once '../Business/PageClass.php';
@@ -10,10 +11,14 @@ require_once '../Business/CssClass.php';
 
 $pageArray = PageClass::retrievePages();
 
+//if user is author, display author editing capabilities
+if($_SESSION['permission'] == "author")
+    $authorFlag = true;
+
 if(isset($_GET['page']))
 {
     $singlePage = PageClass::getSinglePage($_GET['page']);
-    $currentTemplate = CssClass::getSingleTemplate($_GET['page']);
+    $currentTemplate = CssClass::getSingleTemplate($singlePage->getCSS());
 }
 else
 {
@@ -40,12 +45,21 @@ else
                     <?php echo $page->getWebName();?>
                     </a>
                 </li>
-            <?php endforeach;?>
+            <?php
+            endforeach;
+
+            if(isset($authorFlag)): ?>
             <li>
                 <form action="authorEdit.php" method="post">
                     <input type="Submit" id="addArticle" name="addArticle" value="Add Article" />
                 </form>
             </li>
+            <li>
+                <form action="logout.php" method="post">
+                    <input type="Submit" id="logout" name="logout" value="Logout" />
+                </form>
+            </li>
+            <?php endif;?>
         </ul>
     </nav>
     <br />
@@ -75,13 +89,12 @@ else
                 <?php echo $article->getContent();?>
             </p>
             <!-- button for editing current article -->
+            <?php if(isset($authorFlag)): ?>
             <form action="authorEdit.php" method="post">
                 <input type="text" id="editArticleId" name="editArticleId" value="<?php echo $article->getID(); ?>" hidden />
                 <input type="Submit" id="editAuthorArticle" name="editAuthorArticle" value="Edit" />
             </form>
-            <form action="logout.php" method="post">
-                <input type="Submit" id="logout" name="logout" value="Edit" />
-            </form>
+            <?php endif; ?>
 
             </article>
         <?php endforeach; ?>

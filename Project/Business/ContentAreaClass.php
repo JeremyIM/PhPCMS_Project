@@ -151,7 +151,8 @@ class ContentAreaClass
         $rowsAffected = $myDataAccess->insertDiv($this->contentName
             ,$this->divName
             ,$this->pgOrder
-            ,$this->desc);
+            ,$this->desc
+            ,$this->creator);
 
         $myDataAccess->closeDBConn();
 
@@ -177,7 +178,8 @@ class ContentAreaClass
             ,$this->contentName
             ,$this->divName
             ,$this->desc
-            ,$this->pgOrder);
+            ,$this->pgOrder
+            ,$this->modBy);
 
         $myDataAccess->closeDBConn();
 
