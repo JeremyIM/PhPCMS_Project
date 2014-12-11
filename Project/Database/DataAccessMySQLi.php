@@ -316,7 +316,7 @@ class DataAccessMySQLi extends dataAccess
 
         $updateSql .= "all_pages='" . $sallIn . "',";
         $updateSql .= "content_area_id='" . $sdivIn . "',";
-        $updateSql .= "the_content='" . $scontentIn . "' ";
+        $updateSql .= "the_content='" . $scontentIn . "',";
         $updateSql .= "modified_by_id='" . $smodID . "',";
         $updateSql .= "modified_date=NOW()";
         $updateSql .= "WHERE article_id=" . $sidIn;

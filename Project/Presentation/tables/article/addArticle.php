@@ -10,7 +10,7 @@ $userObj = UserClass::checkLoginInfo($_SESSION['login'], $_SESSION['pw']);
 $newArticle->setDesc($_POST['aDesc']);
 $newArticle->setDivContainer($_POST['aDivIn']);
 
-if($_POST[aPageOn] == "all_pages")
+if($_POST['aPageOn'] == "all_pages")
     $newArticle->setAllPagesBool(1);
 
 else //specific page selected from drop down
