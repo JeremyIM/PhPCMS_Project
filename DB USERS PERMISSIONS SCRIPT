@@ -1,0 +1,11 @@
+grant select, insert, update, delete on mydb.user to Admin;
+grant select, insert, update, delete on mydb.user_roles to Admin;
+grant select, insert, update, delete on mydb.permission to Admin;
+
+grant select, insert, update, delete on mydb.article to Editor;
+grant select, insert, update, delete on mydb.content_area to Editor;
+grant select, insert, update, delete on mydb.css to Editor;
+grant select, insert, update, delete on mydb.page to Editor;
+
+
+grant select, insert, update, delete on mydb.article to Author;
