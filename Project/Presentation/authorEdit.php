@@ -6,6 +6,7 @@
     <body>
         <h3>Edit Article</h3>
         <?php
+        session_start();
             require'../Business/ArticleClass.php';
             require'../Business/PageClass.php';
             require'../Business/ContentAreaClass.php';

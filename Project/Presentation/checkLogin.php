@@ -71,7 +71,7 @@ if ($userObj->getId() > 0 && ($test == $userObj->getWordPass())): //check that o
 <?php
 else: //inform user ?>
     <p>"Wrong UserName or Password!</p>
-     "<a href='login.html'>Back</a>";
+     <a href='login.html'>Back</a>
 <?php endif;?>
 
 </body>
