@@ -290,6 +290,8 @@ class UserClass
         $this->permisions = $permission_in;
     }
 
+    //END SETTERS
+
     public function generateSalt()
     {
         $cost = 10;
@@ -300,7 +302,7 @@ class UserClass
     }
     public function generateHash($password, $salt)
     {
-        $hash = crypt($password, $salt);
+        $hash = crypt($password, '$6$rounds=3124' . $salt);
         return $hash;
     }
 

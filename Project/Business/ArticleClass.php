@@ -214,6 +214,46 @@ class ArticleClass
             $currentArticle->desc = $myDataAccess->fetchArticleDesc($row);
             $currentArticle->allPages = $myDataAccess->fetchArticleAllPages($row);
             $currentArticle->pageOn = $myDataAccess->fetchArticlePage($row);
+            $currentArticle->createDate =$myDataAccess->fetchUCreateDate($row);
+            $currentArticle->divContainer = $myDataAccess->fetchArticleContentArea($row);
+            $arrayOfArticleObjects[] = $currentArticle;
+        }
+        $myDataAccess->closeDBConn();
+        return $arrayOfArticleObjects;
+    }
+
+    public function getPageArticlesCount($pageIdIn)
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $myDataAccess->getPageArticlesCount($pageIdIn);
+        while($row = $myDataAccess->fetchArticles())
+        {
+            $currentArticle = new self($myDataAccess->fetchArticleName($row), $myDataAccess->fetchArticleTitle($row), $myDataAccess->fetchArticleContent($row));
+            $currentArticle->articleId = $myDataAccess->fetchArticleID($row);
+            $currentArticle->desc = $myDataAccess->fetchArticleDesc($row);
+            $currentArticle->allPages = $myDataAccess->fetchArticleAllPages($row);
+            $currentArticle->pageOn = $myDataAccess->fetchArticlePage($row);
+            $currentArticle->divContainer = $myDataAccess->fetchArticleContentArea($row);
+            $arrayOfArticleObjects[] = $currentArticle;
+        }
+        $myDataAccess->closeDBConn();
+        return $arrayOfArticleObjects;
+    }
+    public function getUniquePageArticlesCount($pageIdIn)
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $myDataAccess->getUniquePageArticlesCount($pageIdIn);
+        while($row = $myDataAccess->fetchArticles())
+        {
+            $currentArticle = new self($myDataAccess->fetchArticleName($row), $myDataAccess->fetchArticleTitle($row), $myDataAccess->fetchArticleContent($row));
+            $currentArticle->articleId = $myDataAccess->fetchArticleID($row);
+            $currentArticle->desc = $myDataAccess->fetchArticleDesc($row);
+            $currentArticle->allPages = $myDataAccess->fetchArticleAllPages($row);
+            $currentArticle->pageOn = $myDataAccess->fetchArticlePage($row);
             $currentArticle->divContainer = $myDataAccess->fetchArticleContentArea($row);
             $arrayOfArticleObjects[] = $currentArticle;
         }
@@ -240,7 +280,6 @@ class ArticleClass
         $myDataAccess->closeDBConn();
 
         return $currentArticle;
-
 
     }
 

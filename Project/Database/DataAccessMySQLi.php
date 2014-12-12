@@ -36,13 +36,13 @@ class DataAccessMySQLi extends dataAccess
     {
 
         if($_SESSION['permission']=="admin")
-        {$this->dbConnectionAdmin->close();}
+            {$this->dbConnectionAdmin->close();}
         if($_SESSION['permission']=="editor")
-        {$this->dbConnectionEditor->close();}
+            {$this->dbConnectionEditor->close();}
         if($_SESSION['permission']=="author")
-        {$this->dbConnectionAuthor->close();}
+            {$this->dbConnectionAuthor->close();}
         if(!isset($_SESSION['permission']))
-        {$this->dbConnection->close();}
+            {$this->dbConnection->close();}
     }
 
 /////////////////////////////////////////////////////////////
@@ -167,7 +167,12 @@ class DataAccessMySQLi extends dataAccess
     {
         $sId = mysqli_real_escape_string($this->dbConnectionEditor, $idIn);
 
+        //remove all Russell Crowe Associations first
+        //select all articles with page_id = idIn
+        $preSql = "UPDATE article set page_id=NULL WHERE page_id=$sId";
         $deleteSql = "DELETE from page WHERE page_id='$sId'";
+
+        $this->dbConnectionEditor->query($preSql);
 
         $this->result =@$this->dbConnectionEditor->query($deleteSql);
         if(!$this->result)
@@ -368,25 +373,52 @@ class DataAccessMySQLi extends dataAccess
         {
             $spageIdIn= mysqli_real_escape_string($this->dbConnectionAdmin, stripslashes($pageIdIn));
             $scontentIDin= mysqli_real_escape_string($this->dbConnectionAdmin, stripslashes($contentIDin));
-            $this->result =@$this->dbConnectionAdmin->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin'");
+            $this->result =@$this->dbConnectionAdmin->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin'ORDER BY article_id DESC");
         }
         if($_SESSION['permission']=="editor")
         {
             $spageIdIn= mysqli_real_escape_string($this->dbConnectionEditor, stripslashes($pageIdIn));
             $scontentIDin= mysqli_real_escape_string($this->dbConnectionEditor, stripslashes($contentIDin));
-            $this->result =@$this->dbConnectionEditor->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin'");
+            $this->result =@$this->dbConnectionEditor->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin'ORDER BY article_id DESC");
         }
         if($_SESSION['permission']=="author")
         {
             $spageIdIn= mysqli_real_escape_string($this->dbConnectionAuthor, stripslashes($pageIdIn));
             $scontentIDin= mysqli_real_escape_string($this->dbConnectionAuthor, stripslashes($contentIDin));
-            $this->result =@$this->dbConnectionAuthor->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin'");
+            $this->result =@$this->dbConnectionAuthor->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin'ORDER BY article_id DESC");
         }
         if(!isset($_SESSION['permission']))
         {
             $spageIdIn= mysqli_real_escape_string($this->dbConnection, stripslashes($pageIdIn));
             $scontentIDin= mysqli_real_escape_string($this->dbConnection, stripslashes($contentIDin));
-            $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin'");
+            $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin' ORDER BY article_id DESC");
+        }
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
+
+    public function getPageArticlesCount($pageIdIn)
+    {
+        if($_SESSION['permission']=="editor")
+        {
+            $spageIdIn= mysqli_real_escape_string($this->dbConnectionEditor, stripslashes($pageIdIn));
+            $this->result =@$this->dbConnectionEditor->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1)");
+        }
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
+    public function getUniquePageArticlesCount($pageIdIn)
+    {
+        if($_SESSION['permission']=="editor")
+        {
+            $spageIdIn= mysqli_real_escape_string($this->dbConnectionEditor, stripslashes($pageIdIn));
+            $this->result =@$this->dbConnectionEditor->query("SELECT * FROM article WHERE page_id='$spageIdIn'");
         }
         if(!$this->result)
         {
@@ -422,6 +454,8 @@ class DataAccessMySQLi extends dataAccess
             die('Could not retrieve pages from the Database: ' .
                 $this->dbConnection->error);
         }
+
+
     }
 
 /////////////////////////////////////////////////////////////
@@ -496,10 +530,10 @@ class DataAccessMySQLi extends dataAccess
         $updateSql .= "name='" . $snameIn . "',";
         $updateSql .= "div_name='" . $sdivNameIn . "',";
         $updateSql .= "description='" . $sdescIn . "',";
-        $updateSql .= "page_order_pos='" . $sorderIn;
+        $updateSql .= "page_order_pos='" . $sorderIn . "',";
         $updateSql .= "modified_by_id='" . $smodIn ."',";
         $updateSql .= "modified_date=NOW()";
-        $updateSql .= "' WHERE content_id=" . $sidIn;
+        $updateSql .= " WHERE content_id=" . $sidIn;
 
         $this->result =@$this->dbConnectionEditor->query($updateSql);
         if(!$this->result)
@@ -544,6 +578,9 @@ class DataAccessMySQLi extends dataAccess
     {
         $sidIn= mysqli_real_escape_string($this->dbConnectionEditor, $idIn);
 
+        $preSql = "UPDATE article set content_area_id=NULL WHERE content_area_id=$sidIn";
+        $this->dbConnectionEditor->query($preSql);
+
         $deleteSql = "DELETE from content_area WHERE content_id='$sidIn'";
 
         $this->result =@$this->dbConnectionEditor->query($deleteSql);
@@ -583,6 +620,30 @@ class DataAccessMySQLi extends dataAccess
         }
     }//end getContent
 
+    public function getCssActive()
+    {
+        if($_SESSION['permission']=="admin")
+        {
+            $this->result =@$this->dbConnectionAdmin->query("SELECT * FROM css WHERE active_status=1");
+        }
+        if($_SESSION['permission']=="editor")
+        {
+            $this->result =@$this->dbConnectionEditor->query("SELECT * FROM css WHERE active_status=1");
+        }
+        if($_SESSION['permission']=="author")
+        {
+            $this->result =@$this->dbConnectionAuthor->query("SELECT * FROM css WHERE active_status=1");
+        }
+        if(!isset($_SESSION['permission']))
+        {
+            $this->result =@$this->dbConnection->query("SELECT * FROM css WHERE active_status=1");
+        }
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ');
+        }
+    }//end getContent
+
     public function fetchCss()
     {
         if(!$this->result)
@@ -604,7 +665,21 @@ class DataAccessMySQLi extends dataAccess
         $sqlInsert =    "INSERT INTO css (name, description, active_status, style_snippet,created_date, created_by_id)
                         VALUES('$snameIn', '$sdescIn', '$sactiveIn', '$scontentIn',NOW(), '$screatorIn' )";
 
+
         $this->result =@$this->dbConnectionEditor->query($sqlInsert);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnectionEditor->error);
+        }
+        return $this->dbConnectionEditor->affected_rows;
+    }
+
+    public function setActiveCSS($idIn)
+    {
+        $sidIn= mysqli_real_escape_string($this->dbConnectionEditor, $idIn);
+        $updateSql = "UPDATE css SET active_status=0 WHERE css_id!=$sidIn";
+        $this->result =@$this->dbConnectionEditor->query($updateSql);
         if(!$this->result)
         {
             die('Could not retrieve pages from the Database: ' .
@@ -626,10 +701,10 @@ class DataAccessMySQLi extends dataAccess
         $updateSql .= "name='" . $nameIn . "',";
         $updateSql .= "description='" . $descIn . "',";
         $updateSql .= "active_status='" . $activeIn . "',";
-        $updateSql .= "style_snippet='" . $contentIn;
+        $updateSql .= "style_snippet='" . $contentIn . "',";
         $updateSql .= "modified_by_id='" . $modIn . "',";
         $updateSql .= "modified_date=NOW()";
-        $updateSql .= "' WHERE css_id=" . $idIn;
+        $updateSql .= " WHERE css_id=" . $idIn;
 
         $this->result =@$this->dbConnectionEditor->query($updateSql);
         if(!$this->result)
@@ -974,4 +1049,11 @@ class DataAccessMySQLi extends dataAccess
     {
         return $row['description'];
     }
+
+    //Chart SQL
+
+
+
+
+
 }//end class DataAccessMySQLi

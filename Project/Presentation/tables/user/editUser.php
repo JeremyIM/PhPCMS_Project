@@ -1,6 +1,6 @@
 <?php
 require '../Business/UserClass.php';
-$userObj = UserClass::checkLoginInfo($_SESSION['login'], $_SESSION['pw']);
+$userObj = UserClass::checkLoginInfo($_SESSION['login']);
 //TODO When user is updated, permissions are erased. I canZ haZ fix plz?
 //build new article business object
 $newUser = new UserClass($_POST['uUsername']);

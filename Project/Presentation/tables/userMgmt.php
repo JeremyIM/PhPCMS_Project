@@ -6,7 +6,7 @@
         <td>Username</td>
         <td>First Name</td>
         <td>Last Name</td>
-        <td>Password</td>
+        <!-- <td>Password</td> -->
         <td>Created By</td>
         <td>Date Created</td>
         <td>Modified By</td>
@@ -32,7 +32,7 @@
             <td><?php echo $page->getUsername(); ?></td>
             <td><?php echo $page->getFistName(); ?></td>
             <td><?php echo $page->getLastName(); ?></td>
-            <td><?php echo $page->getWordPass(); ?></td>
+            <!-- <td><?php //echo $page->getWordPass(); ?></td> -->
             <td><?php echo $page->getCreatedBy(); ?></td>
             <td><?php echo $page->getCreatedDate(); ?></td>
             <td><?php echo $page->getModifier(); ?></td>

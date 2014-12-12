@@ -6,6 +6,8 @@
 <html>
 <head>
     <title>Editor Portal</title>
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script src="mce.js"></script>
     <style type="text/css">
         ul li {
             float: left;
@@ -247,6 +249,9 @@
     }
     ?>
 
+
+
+<a href="chart.php">Chart City!</a>
 
 </body>
 

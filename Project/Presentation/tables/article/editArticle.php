@@ -1,8 +1,9 @@
 <?php
 
-require_once'../Business/ArticleClass.php';
 require '../Business/UserClass.php';
-$userObj = UserClass::checkLoginInfo($_SESSION['login'], $_SESSION['pw']);
+require_once'../Business/ArticleClass.php';
+$userObj = UserClass::checkLoginInfo($_SESSION['login']);
+
 
 //build new article business object
 $newArticle = new ArticleClass($_POST['aWebName'], $_POST['aTitle'], $_POST['aContent']);

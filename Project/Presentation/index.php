@@ -18,12 +18,13 @@ if($_SESSION['permission'] == "author")
 if(isset($_GET['page']))
 {
     $singlePage = PageClass::getSinglePage($_GET['page']);
-    $currentTemplate = CssClass::getSingleTemplate($_GET['page']);
+    $currentTemplate = CssClass::getActiveCSS();
 }
 else
 {
+    $_GET['page'] = 1;
     $singlePage = PageClass::getSinglePage(1);
-    $currentTemplate = CssClass::getSingleTemplate(1);
+    $currentTemplate = CssClass::getActiveCSS();
 }
 ?>
     <head>
@@ -82,11 +83,13 @@ else
         // and for the current area
         // in REVERSE ORDER of creation date
         $articleArray = ArticleClass::getAreaArticles($_GET['page'], $area->getId());
+
         foreach ($articleArray as $article):?>
 
             <article id="<?php echo $article->getWebName();?>" />
             <p>
                 <?php echo $article->getContent();?>
+                <?php echo $article->createDate();?>
             </p>
             <!-- button for editing current article -->
             <?php if(isset($authorFlag)): ?>
