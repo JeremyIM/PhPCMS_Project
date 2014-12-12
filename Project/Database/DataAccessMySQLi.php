@@ -169,7 +169,10 @@ class DataAccessMySQLi extends dataAccess
 
         //remove all Russell Crowe Associations first
         //select all articles with page_id = idIn
+        $preSql = "UPDATE article set page_id=NULL WHERE page_id=$sId";
         $deleteSql = "DELETE from page WHERE page_id='$sId'";
+
+        $this->dbConnectionEditor->query($preSql);
 
         $this->result =@$this->dbConnectionEditor->query($deleteSql);
         if(!$this->result)
@@ -545,6 +548,9 @@ class DataAccessMySQLi extends dataAccess
     public function deleteDiv($idIn)
     {
         $sidIn= mysqli_real_escape_string($this->dbConnectionEditor, $idIn);
+
+        $preSql = "UPDATE article set content_area_id=NULL WHERE content_area_id=$sidIn";
+        $this->dbConnectionEditor->query($preSql);
 
         $deleteSql = "DELETE from content_area WHERE content_id='$sidIn'";
 

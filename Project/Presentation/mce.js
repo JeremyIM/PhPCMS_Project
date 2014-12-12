@@ -1,6 +1,6 @@
 
 tinymce.init({
-    selector: "textarea",
+    selector: "textarea.the_content",
     theme: "modern",
     plugins: [
     "advlist autolink lists link image charmap print preview hr anchor pagebreak",
