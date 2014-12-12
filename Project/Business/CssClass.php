@@ -121,6 +121,24 @@ class CssClass
         return $currentCss;
     }
 
+    public function getActiveCSS()
+    {
+        $myDataAccess = DataAccessMySQLi::getInstance();
+        $myDataAccess->getDBConn();
+
+        $myDataAccess->getCssActive();
+
+        $row = $myDataAccess->fetchCss();
+
+        $currentCss = new self($myDataAccess->fetchCssName($row), $myDataAccess->fetchCssStyleSnippet($row));
+        $currentCss->cssId = $myDataAccess->fetchCssID($row);
+        $currentCss->desc = $myDataAccess->fetchCssDescription($row);
+        $currentCss->active = $myDataAccess->fetchCssActiveStatus($row);
+
+        $myDataAccess->closeDBConn();
+        return $currentCss;
+    }
+
     public function saveTemplate()
     {
         $myDataAccess = DataAccessMySQLi::getInstance();
@@ -131,6 +149,9 @@ class CssClass
             ,$this->active
             ,$this->theContent
             ,$this->creator);
+
+        if ($this->active == 1)
+            { $myDataAccess->setActiveCSS($this->cssId);}
 
         $myDataAccess->closeDBConn();
 
@@ -151,16 +172,17 @@ class CssClass
     {
         $myDataAccess = DataAccessMySQLi::getInstance();
         $myDataAccess->getDBConn();
-
         $rowsAffected = $myDataAccess->updateCss($this->cssId
             ,$this->cssName
             ,$this->desc
             ,$this->active
             ,$this->theContent
             ,$this->modBy);
-
+        if ($this->active == 1)
+        { $myDataAccess->setActiveCSS($this->cssId);}
         $myDataAccess->closeDBConn();
-
         return $rowsAffected . " row(s) Affected.";
     }
+
+
 }

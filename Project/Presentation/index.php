@@ -18,13 +18,13 @@ if($_SESSION['permission'] == "author")
 if(isset($_GET['page']))
 {
     $singlePage = PageClass::getSinglePage($_GET['page']);
-    $currentTemplate = CssClass::getSingleTemplate($singlePage->getCSS());
+    $currentTemplate = CssClass::getActiveCSS();
 }
 else
 {
     $_GET['page'] = 1;
     $singlePage = PageClass::getSinglePage(1);
-    $currentTemplate = CssClass::getSingleTemplate(1);
+    $currentTemplate = CssClass::getActiveCSS();
 }
 ?>
     <head>
@@ -86,9 +86,10 @@ else
         foreach ($articleArray as $article):?>
 
             <article id="<?php echo $article->getWebName();?>" />
-            <p>
+
                 <?php echo $article->getContent();?>
-            </p>
+                <?php echo $article->createDate();?>
+
             <!-- button for editing current article -->
             <?php if(isset($authorFlag)): ?>
             <form action="authorEdit.php" method="post">

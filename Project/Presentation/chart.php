@@ -115,7 +115,7 @@
         </td>
     </tr>
     <tr>
-        <td>Number of Articles per Page (excluding common articles)/td>
+        <td>Number of Articles per Page (excluding common articles)</td>
         <td></td>
     </tr>
     <tr>

@@ -373,25 +373,25 @@ class DataAccessMySQLi extends dataAccess
         {
             $spageIdIn= mysqli_real_escape_string($this->dbConnectionAdmin, stripslashes($pageIdIn));
             $scontentIDin= mysqli_real_escape_string($this->dbConnectionAdmin, stripslashes($contentIDin));
-            $this->result =@$this->dbConnectionAdmin->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin'");
+            $this->result =@$this->dbConnectionAdmin->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin' ORDER BY article_id DESC");
         }
         if($_SESSION['permission']=="editor")
         {
             $spageIdIn= mysqli_real_escape_string($this->dbConnectionEditor, stripslashes($pageIdIn));
             $scontentIDin= mysqli_real_escape_string($this->dbConnectionEditor, stripslashes($contentIDin));
-            $this->result =@$this->dbConnectionEditor->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin'");
+            $this->result =@$this->dbConnectionEditor->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin' ORDER BY article_id DESC");
         }
         if($_SESSION['permission']=="author")
         {
             $spageIdIn= mysqli_real_escape_string($this->dbConnectionAuthor, stripslashes($pageIdIn));
             $scontentIDin= mysqli_real_escape_string($this->dbConnectionAuthor, stripslashes($contentIDin));
-            $this->result =@$this->dbConnectionAuthor->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin'");
+            $this->result =@$this->dbConnectionAuthor->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin' ORDER BY article_id DESC");
         }
         if(!isset($_SESSION['permission']))
         {
             $spageIdIn= mysqli_real_escape_string($this->dbConnection, stripslashes($pageIdIn));
             $scontentIDin= mysqli_real_escape_string($this->dbConnection, stripslashes($contentIDin));
-            $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin'");
+            $this->result =@$this->dbConnection->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1) and content_area_id='$scontentIDin' ORDER BY article_id DESC");
         }
         if(!$this->result)
         {
@@ -721,6 +721,42 @@ class DataAccessMySQLi extends dataAccess
         }
         return $this->dbConnectionEditor->affected_rows;
 
+    }
+    public function getCssActive()
+    {
+        if($_SESSION['permission']=="admin")
+        {
+            $this->result =@$this->dbConnectionAdmin->query("SELECT * FROM css WHERE active_status=1");
+        }
+        if($_SESSION['permission']=="editor")
+        {
+            $this->result =@$this->dbConnectionEditor->query("SELECT * FROM css WHERE active_status=1");
+        }
+        if($_SESSION['permission']=="author")
+        {
+            $this->result =@$this->dbConnectionAuthor->query("SELECT * FROM css WHERE active_status=1");
+        }
+        if(!isset($_SESSION['permission']))
+        {
+            $this->result =@$this->dbConnection->query("SELECT * FROM css WHERE active_status=1");
+        }
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ');
+        }
+   }//end getContent
+
+    public function setActiveCSS($idIn)
+    {
+        $sidIn= mysqli_real_escape_string($this->dbConnectionEditor, $idIn);
+        $updateSql = "UPDATE css SET active_status=0 WHERE css_id!=$sidIn";
+        $this->result =@$this->dbConnectionEditor->query($updateSql);
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnectionEditor->error);
+        }
+        return $this->dbConnectionEditor->affected_rows;
     }
 
 /////////////////////////////////////////////////////////////
