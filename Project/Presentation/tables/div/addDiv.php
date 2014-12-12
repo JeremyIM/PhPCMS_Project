@@ -2,7 +2,7 @@
 
 require '../Business/ContentAreaClass.php';
 require '../Business/UserClass.php';
-$userObj = UserClass::checkLoginInfo($_SESSION['login'], $_SESSION['pw']);
+$userObj = UserClass::checkLoginInfo($_SESSION['login']);
 
 //build new article business object
 $newDiv = new ContentAreaClass($_POST['dName'], $_POST['dDivName']);

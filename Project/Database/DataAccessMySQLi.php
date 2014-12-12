@@ -498,10 +498,10 @@ class DataAccessMySQLi extends dataAccess
         $updateSql .= "name='" . $snameIn . "',";
         $updateSql .= "div_name='" . $sdivNameIn . "',";
         $updateSql .= "description='" . $sdescIn . "',";
-        $updateSql .= "page_order_pos='" . $sorderIn;
+        $updateSql .= "page_order_pos='" . $sorderIn . "',";
         $updateSql .= "modified_by_id='" . $smodIn ."',";
         $updateSql .= "modified_date=NOW()";
-        $updateSql .= "' WHERE content_id=" . $sidIn;
+        $updateSql .= " WHERE content_id=" . $sidIn;
 
         $this->result =@$this->dbConnectionEditor->query($updateSql);
         if(!$this->result)
@@ -628,10 +628,10 @@ class DataAccessMySQLi extends dataAccess
         $updateSql .= "name='" . $nameIn . "',";
         $updateSql .= "description='" . $descIn . "',";
         $updateSql .= "active_status='" . $activeIn . "',";
-        $updateSql .= "style_snippet='" . $contentIn;
+        $updateSql .= "style_snippet='" . $contentIn . "',";
         $updateSql .= "modified_by_id='" . $modIn . "',";
         $updateSql .= "modified_date=NOW()";
-        $updateSql .= "' WHERE css_id=" . $idIn;
+        $updateSql .= " WHERE css_id=" . $idIn;
 
         $this->result =@$this->dbConnectionEditor->query($updateSql);
         if(!$this->result)

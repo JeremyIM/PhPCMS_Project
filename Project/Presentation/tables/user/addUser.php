@@ -1,7 +1,7 @@
 <?php
 
 require '../Business/UserClass.php';
-$userObj = UserClass::checkLoginInfo($_SESSION['login'], $_SESSION['pw']);
+$userObj = UserClass::checkLoginInfo($_SESSION['login']);
 
 //build new article business object
 $newUser = new UserClass(strip_tags( trim($_POST['uUsername'])));

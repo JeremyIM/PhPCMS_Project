@@ -56,7 +56,7 @@
         </tr>
         <tr>
             <td>Content: </td>
-            <td><textarea id="aContent" name="aContent"><?php echo $currentArticle->getContent(); ?></textarea></td>
+            <td><textarea id="the_content" name="aContent"><?php echo $currentArticle->getContent(); ?></textarea></td>
         </tr>
 
         <tr>

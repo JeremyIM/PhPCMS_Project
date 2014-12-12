@@ -1,7 +1,7 @@
 <?php
 
 require '../Business/UserClass.php';
-$userObj = UserClass::checkLoginInfo($_SESSION['login'], $_SESSION['pw']);
+$userObj = UserClass::checkLoginInfo($_SESSION['login']);
 
 //build new article business object
 if(isset($_POST['userIsAdmin']))

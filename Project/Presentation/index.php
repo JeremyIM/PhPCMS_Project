@@ -22,6 +22,7 @@ if(isset($_GET['page']))
 }
 else
 {
+    $_GET['page'] = 1;
     $singlePage = PageClass::getSinglePage(1);
     $currentTemplate = CssClass::getSingleTemplate(1);
 }

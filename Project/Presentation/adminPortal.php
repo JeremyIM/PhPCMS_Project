@@ -8,6 +8,8 @@ checkIfLoggedIn();
 <html>
 <head>
     <title>Admin Portal</title>
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script src="mce.js"></script>
     <style type="text/css">
         ul li {
             float: left;
