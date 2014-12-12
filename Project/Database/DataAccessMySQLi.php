@@ -36,13 +36,13 @@ class DataAccessMySQLi extends dataAccess
     {
 
         if($_SESSION['permission']=="admin")
-        {$this->dbConnectionAdmin->close();}
+            {$this->dbConnectionAdmin->close();}
         if($_SESSION['permission']=="editor")
-        {$this->dbConnectionEditor->close();}
+            {$this->dbConnectionEditor->close();}
         if($_SESSION['permission']=="author")
-        {$this->dbConnectionAuthor->close();}
+            {$this->dbConnectionAuthor->close();}
         if(!isset($_SESSION['permission']))
-        {$this->dbConnection->close();}
+            {$this->dbConnection->close();}
     }
 
 /////////////////////////////////////////////////////////////
@@ -400,6 +400,33 @@ class DataAccessMySQLi extends dataAccess
         }
     }
 
+    public function getPageArticlesCount($pageIdIn)
+    {
+        if($_SESSION['permission']=="editor")
+        {
+            $spageIdIn= mysqli_real_escape_string($this->dbConnectionEditor, stripslashes($pageIdIn));
+            $this->result =@$this->dbConnectionEditor->query("SELECT * FROM article WHERE (page_id='$spageIdIn' or all_pages=1)");
+        }
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
+    public function getUniquePageArticlesCount($pageIdIn)
+    {
+        if($_SESSION['permission']=="editor")
+        {
+            $spageIdIn= mysqli_real_escape_string($this->dbConnectionEditor, stripslashes($pageIdIn));
+            $this->result =@$this->dbConnectionEditor->query("SELECT * FROM article WHERE page_id='$spageIdIn'");
+        }
+        if(!$this->result)
+        {
+            die('Could not retrieve pages from the Database: ' .
+                $this->dbConnection->error);
+        }
+    }
+
     public function getSingleArticle($articleIdIn)
     {
         if($_SESSION['permission']=="admin")
@@ -427,6 +454,8 @@ class DataAccessMySQLi extends dataAccess
             die('Could not retrieve pages from the Database: ' .
                 $this->dbConnection->error);
         }
+
+
     }
 
 /////////////////////////////////////////////////////////////
@@ -982,4 +1011,11 @@ class DataAccessMySQLi extends dataAccess
     {
         return $row['description'];
     }
+
+    //Chart SQL
+
+
+
+
+
 }//end class DataAccessMySQLi
